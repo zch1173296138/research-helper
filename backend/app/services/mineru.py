@@ -1,5 +1,4 @@
 import json
-import os
 import shutil
 import subprocess
 import time
@@ -7,7 +6,6 @@ import zipfile
 from pathlib import Path
 from urllib.parse import urlparse
 
-import fitz
 import requests
 
 from backend.app.core.config import Settings
@@ -42,28 +40,36 @@ class MinerUClient:
         output_dir.mkdir(parents=True, exist_ok=True)
         self._write_filename_info(output_dir, paper_id, original_filename)
 
-        if self.settings.mineru_mode != "disabled":
-            if self.should_use_api():
-                try:
-                    self._process_api(pdf_path, output_dir, paper_id, is_ocr, enable_formula, enable_table, language)
-                    md_path = self._find_full_markdown(output_dir)
-                    if md_path:
-                        return md_path, "mineru_api"
-                except Exception as exc:
-                    fallback_note = output_dir / "mineru_api_error.txt"
-                    fallback_note.write_text(str(exc), encoding="utf-8")
+        errors: list[str] = []
 
-            if self.should_use_local():
-                try:
-                    self._process_local(pdf_path, output_dir)
-                    md_path = self._find_full_markdown(output_dir)
-                    if md_path:
-                        return md_path, "mineru_local"
-                except Exception as exc:
-                    fallback_note = output_dir / "mineru_local_error.txt"
-                    fallback_note.write_text(str(exc), encoding="utf-8")
+        if self.should_use_api():
+            try:
+                self._process_api(pdf_path, output_dir, paper_id, is_ocr, enable_formula, enable_table, language)
+                md_path = self._find_full_markdown(output_dir)
+                if md_path:
+                    return md_path, "mineru_api"
+                raise MinerUError("MinerU API did not produce Markdown output")
+            except Exception as exc:
+                (output_dir / "mineru_api_error.txt").write_text(str(exc), encoding="utf-8")
+                errors.append(f"MinerU API failed: {exc}")
 
-        return self._process_pymupdf(pdf_path, output_dir, original_filename), "pymupdf_fallback"
+        if self.should_use_local():
+            try:
+                self._process_local(pdf_path, output_dir)
+                md_path = self._find_full_markdown(output_dir)
+                if md_path:
+                    return md_path, "mineru_local"
+                raise MinerUError("Local MinerU did not produce Markdown output")
+            except Exception as exc:
+                (output_dir / "mineru_local_error.txt").write_text(str(exc), encoding="utf-8")
+                errors.append(f"Local MinerU failed: {exc}")
+
+        if errors:
+            raise MinerUError("; ".join(errors))
+        raise MinerUError(
+            "MinerU is not configured. Set MINERU_API_TOKEN for API mode or enable "
+            "MINERU_USE_LOCAL=true with a local MinerU service."
+        )
 
     def _write_filename_info(self, output_dir: Path, paper_id: str, original_filename: str) -> None:
         payload = {
@@ -199,19 +205,6 @@ class MinerUClient:
                         if item.is_file():
                             shutil.copy2(item, target_dir / item.name)
 
-    def _process_pymupdf(self, pdf_path: Path, output_dir: Path, original_filename: str) -> Path:
-        md_path = output_dir / "full.md"
-        doc = fitz.open(pdf_path)
-        parts = [f"# {Path(original_filename).stem}", ""]
-        for index, page in enumerate(doc, start=1):
-            text = page.get_text("text").strip()
-            parts.append(f"<!-- page:{index} -->")
-            parts.append(f"## Page {index}")
-            parts.append(text if text else "_No extractable text on this page._")
-            parts.append("")
-        md_path.write_text("\n".join(parts), encoding="utf-8")
-        return md_path
-
     def _find_full_markdown(self, output_dir: Path) -> Path | None:
         candidates = [output_dir / "full.md", *output_dir.rglob("full.md")]
         for candidate in candidates:
@@ -219,4 +212,3 @@ class MinerUClient:
                 return candidate
         md_files = list(output_dir.rglob("*.md"))
         return md_files[0] if md_files else None
-

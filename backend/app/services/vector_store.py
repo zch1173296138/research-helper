@@ -20,9 +20,12 @@ class RetrievedChunk:
     filename: str
     section_title: str
     text: str
+    section_path: str = ""
+    section_type: str = "unknown"
     score: float = 0.0
     page_start: int | None = None
     page_end: int | None = None
+    retrieval_source: str = "vector"
 
 
 class VectorStore:
@@ -41,6 +44,8 @@ class VectorStore:
 
         records = []
         for chunk, vector in zip(chunks, vectors, strict=True):
+            if chunk.is_reference:
+                continue
             paper = db.get(Paper, chunk.paper_id)
             records.append(
                 {
@@ -49,13 +54,16 @@ class VectorStore:
                     "paper_id": chunk.paper_id,
                     "filename": paper.original_filename if paper else "",
                     "section_title": chunk.section_title or "",
+                    "section_path": chunk.section_path or "",
+                    "section_type": chunk.section_type or "unknown",
                     "text": chunk.text,
                     "page_start": chunk.page_start,
                     "page_end": chunk.page_end,
                     "vector": vector,
                 }
             )
-
+        if not records:
+            return
         Path(self.settings.lancedb_path).mkdir(parents=True, exist_ok=True)
         conn = lancedb.connect(str(self.settings.lancedb_path))
         if self.table_name in conn.table_names():
@@ -89,7 +97,9 @@ class VectorStore:
     ) -> list[RetrievedChunk]:
         if lancedb is not None:
             try:
-                return self._search_lancedb(db, library_id, query, paper_ids, top_k, diversify_by_paper)
+                chunks = self._search_lancedb(db, library_id, query, paper_ids, top_k, diversify_by_paper)
+                if chunks:
+                    return chunks
             except Exception:
                 pass
         return self._search_sqlite(db, library_id, query, paper_ids, top_k, diversify_by_paper)
@@ -120,10 +130,13 @@ class VectorStore:
                 paper_id=row["paper_id"],
                 filename=row.get("filename", ""),
                 section_title=row.get("section_title") or "",
+                section_path=row.get("section_path") or "",
+                section_type=row.get("section_type") or "unknown",
                 text=row["text"],
                 score=float(row.get("_distance", 0.0)),
                 page_start=row.get("page_start"),
                 page_end=row.get("page_end"),
+                retrieval_source="vector",
             )
             for row in rows
         ]
@@ -141,7 +154,7 @@ class VectorStore:
         diversify_by_paper: bool,
     ) -> list[RetrievedChunk]:
         terms = [term.lower() for term in query.split() if len(term) > 1]
-        sql_query = db.query(PaperChunk).filter(PaperChunk.library_id == library_id)
+        sql_query = db.query(PaperChunk).filter(PaperChunk.library_id == library_id, PaperChunk.is_reference.is_(False))
         if paper_ids:
             sql_query = sql_query.filter(PaperChunk.paper_id.in_(paper_ids))
         candidates = sql_query.order_by(PaperChunk.paper_id, PaperChunk.chunk_index).limit(500).all()
@@ -166,10 +179,13 @@ class VectorStore:
                     paper_id=chunk.paper_id,
                     filename=paper.original_filename if paper else "",
                     section_title=chunk.section_title,
+                    section_path=chunk.section_path,
+                    section_type=chunk.section_type,
                     text=chunk.text,
                     score=score,
                     page_start=chunk.page_start,
                     page_end=chunk.page_end,
+                    retrieval_source="keyword_fallback",
                 )
             )
         if diversify_by_paper:
@@ -222,7 +238,7 @@ class VectorStore:
         paper = db.get(Paper, paper_id)
         rows = (
             db.query(PaperChunk)
-            .filter(PaperChunk.paper_id == paper_id)
+            .filter(PaperChunk.paper_id == paper_id, PaperChunk.is_reference.is_(False))
             .order_by(PaperChunk.chunk_index.asc())
             .limit(limit)
             .all()
@@ -233,9 +249,12 @@ class VectorStore:
                 paper_id=chunk.paper_id,
                 filename=paper.original_filename if paper else "",
                 section_title=chunk.section_title,
+                section_path=chunk.section_path,
+                section_type=chunk.section_type,
                 text=chunk.text,
                 page_start=chunk.page_start,
                 page_end=chunk.page_end,
+                retrieval_source="paper_fallback",
             )
             for chunk in rows
         ]
