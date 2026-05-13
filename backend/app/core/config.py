@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     embedding_model: str = "text-embedding-3-small"
     embedding_batch_size: int = 8
 
-    mineru_mode: str = Field(default="auto", pattern="^(auto|api|local|disabled)$")
+    mineru_mode: str = Field(default="auto", pattern="^(auto|api|local)$")
     mineru_api_token: str = ""
     mineru_api_base_url: str = "https://mineru.net/api/v4"
     mineru_use_local: bool = False

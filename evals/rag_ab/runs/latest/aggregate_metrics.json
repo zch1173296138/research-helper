@@ -1,0 +1,214 @@
+{
+  "by_strategy": {
+    "baseline-current": {
+      "case_count": 6,
+      "error_count": 0,
+      "avg_latency_ms": 97.5565,
+      "avg_expected_point_coverage": 0.1333,
+      "missing_evidence_accuracy": 0.0,
+      "avg_candidate_recall": null,
+      "avg_final_context_recall": null,
+      "avg_citation_recall": null,
+      "avg_quote_support_recall": 0.7,
+      "reference_contamination_rate": 0.0,
+      "avg_accepted_evidence_precision": null,
+      "avg_accepted_evidence_recall": null
+    },
+    "current-evidence": {
+      "case_count": 6,
+      "error_count": 0,
+      "avg_latency_ms": 74.5992,
+      "avg_expected_point_coverage": 0.1333,
+      "missing_evidence_accuracy": 0.0,
+      "avg_candidate_recall": null,
+      "avg_final_context_recall": null,
+      "avg_citation_recall": null,
+      "avg_quote_support_recall": 0.9,
+      "reference_contamination_rate": 0.0,
+      "avg_accepted_evidence_precision": null,
+      "avg_accepted_evidence_recall": null
+    }
+  },
+  "by_category": {
+    "comparison": {
+      "baseline-current": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 114.628,
+        "avg_expected_point_coverage": 0.6667,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.5,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 195.178,
+        "avg_expected_point_coverage": 0.6667,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.5,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    },
+    "follow-up-style": {
+      "baseline-current": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 22.074,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 24.115,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 1.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    },
+    "identifier": {
+      "baseline-current": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 15.543,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 1.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 15.783,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 1.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    },
+    "method": {
+      "baseline-current": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 316.021,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 1.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 88.872,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 1.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    },
+    "no-answer": {
+      "baseline-current": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 96.69,
+        "avg_expected_point_coverage": null,
+        "missing_evidence_accuracy": 0.0,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": null,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 103.911,
+        "avg_expected_point_coverage": null,
+        "missing_evidence_accuracy": 0.0,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": null,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    },
+    "result": {
+      "baseline-current": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 20.383,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 1.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 1,
+        "error_count": 0,
+        "avg_latency_ms": 19.736,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 1.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    }
+  }
+}

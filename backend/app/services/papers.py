@@ -9,6 +9,7 @@ from backend.app.core.config import Settings
 from backend.app.db.models import Paper, PaperAsset, PaperChunk, PaperSummary, ReviewMatrix
 from backend.app.services.ids import new_id
 from backend.app.services.markdown import clean_markdown, split_markdown
+from backend.app.services.retrieval import delete_fts_for_paper, sync_fts_for_paper
 from backend.app.services.mineru import MinerUClient
 from backend.app.services.vector_store import RetrievedChunk, VectorStore
 
@@ -114,6 +115,8 @@ class PaperService:
                 paper_id=paper.id,
                 filename=paper.original_filename,
                 section_title=chunk.section_title,
+                section_path=chunk.section_path,
+                section_type=chunk.section_type,
                 text=chunk.text,
                 page_start=chunk.page_start,
                 page_end=chunk.page_end,
@@ -134,6 +137,7 @@ class PaperService:
         output_dir = Path(paper.output_dir)
 
         self.vector_store.delete_paper(paper.id)
+        delete_fts_for_paper(db, paper.id)
         self._remove_paper_from_matrices(db, paper)
         db.delete(paper)
         db.commit()
@@ -153,15 +157,19 @@ class PaperService:
                 paper_id=paper.id,
                 chunk_index=chunk.chunk_index,
                 section_title=chunk.section_title,
+                section_path=chunk.section_path,
+                section_type=chunk.section_type,
                 text=chunk.text,
                 source_md_path=str(md_path),
                 token_count=chunk.token_count,
                 page_start=chunk.page_start,
                 page_end=chunk.page_end,
+                is_reference=chunk.is_reference,
             )
             db.add(record)
             records.append(record)
         db.commit()
+        sync_fts_for_paper(db, paper.id)
         return records
 
     def _sync_assets(self, db: Session, paper: Paper) -> None:

@@ -1,0 +1,16 @@
+{
+  "case_file": "evals\\rag_ab\\starter_cases.jsonl",
+  "output_dir": "evals/rag_ab/runs/latest",
+  "baseline_strategy": "baseline-current",
+  "comparison_strategy": "current-evidence",
+  "mode": "in-process",
+  "current_api_url": null,
+  "old_code_api_url": null,
+  "deterministic_local": true,
+  "top_k": 8,
+  "case_filter": [],
+  "git_revision": "db26bc4eeef2a94a3352edae3a0b79d8cb1891e1",
+  "case_file_sha256": "0c9375c8bcf3f4578b75ede5adff4d44cb530bcd0a6591dfbd97ae77ee77a51c",
+  "timestamp": "2026-05-13T11:33:29.135874+00:00",
+  "notes": ""
+}

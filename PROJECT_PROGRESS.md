@@ -1,6 +1,25 @@
 # Research Helper 项目进度文档
 
-更新日期：2026-05-08
+更新日期：2026-05-10
+
+## 0. 最新更新
+
+更新时间：2026-05-10
+
+- 已按 OpenSpec 变更 `fix-paper-chat-memory` 重构论文问答记忆策略：聊天原始记录继续完整保存，超过窗口的旧消息压缩进 `memory_summary`，并用 `compressed_until_message_id` 记录压缩边界。
+- 已优化 `2504.07378v3 (1).pdf` 等论文问答体验：assistant 回复气泡改为占满消息区宽度，统一 Markdown 段落/列表/引用 chip 排版；概览类回答 prompt 要求覆盖研究问题、方法、关键模块、实验结果和局限性，避免只回一两句。
+- 已再次修复 `2504.07378v3 (1).pdf` 论文问答界面偏短的问题：论文详情右侧 panel 改为“标题行 + 可伸缩内容区”，论文问答面板改用 flex 纵向布局固定 `status / messages / input`，消息列表会持续撑满到输入框上方，不再因内容量、记忆条或错误条条件渲染而塌缩；同时按章节标题兜底过滤 `References/Bibliography/参考文献` chunk，避免旧数据的参考文献片段进入引用。
+- 已修复论文问答偶发返回“未在已导入文献中找到依据”的问题：当 LLM query rewrite 生成文件名式概览查询且 LanceDB/关键词未命中时，检索层会回退到当前论文的 overview chunks；向量检索空结果也会回退到 SQLite。
+- 论文问答上下文已改为“系统规则 → 压缩记忆 → 最近未压缩消息 → 当前问题 → 检索证据”的顺序；记忆只用于理解追问，不能作为论文事实引用来源。
+- 已加入 memory-aware retrieval query rewrite：追问会结合记忆和最近消息改写成独立检索 query，再进入 hybrid retrieval；回答 metadata 会保存原问题、改写 query、rewrite 来源、最近消息 id 和压缩边界。
+- 前端论文问答面板已展示记忆覆盖信息：当 memory 存在时显示摘要、压缩到的消息 id 和更新时间。
+- 已修复 `backend/app/services/embeddings.py` 中阻塞测试导入的非 Python 注释语法。
+- 本次验证结果：`python -m pytest` 28 passed；`npm.cmd run build` passed。
+- 已在论文详情页加入“论文问答”面板：每篇论文使用独立会话，聊天记录保存到 SQLite，支持滚动浏览、历史分页、摘要记忆和引用证据展示。
+- 已升级 RAG：结构化 chunk、hybrid retrieval（向量 + FTS5/BM25/SQLite 关键词 + 章节结构权重）、关键问题二次检索、强制引用校验。
+- 已修复论文问答“发送”按钮无法点击的问题：前端会在本地多个后端端口间自动探测可用 API；session 初始化失败时显示错误和重试按钮；点击发送时会先确保论文 chat session 存在。
+- 已补充 Markdown/聊天回答中的 LaTeX 公式渲染：支持 `$f_{\mathrm{geom}} \in \mathbb{R}^{n\times n\times 7}$`、`$e_{type}$` 等行内公式，并在长公式场景下允许横向滚动。
+- 历史验证结果：`python -m pytest` 18 passed；`npm.cmd run build` passed。
 
 ## 1. 项目概述
 
@@ -10,9 +29,9 @@ Research Helper 是一个本地科研文献综述辅助工具，目标是支持 
 
 | 模块 | 当前实现 |
 | --- | --- |
-| 后端 | FastAPI、SQLAlchemy 2.x、SQLite、LanceDB、PyMuPDF、OpenAI-compatible API |
+| 后端 | FastAPI、SQLAlchemy 2.x、SQLite、LanceDB、PyMuPDF（仅用于 PDF 预览渲染）、OpenAI-compatible API |
 | 前端 | React、TypeScript、Vite、TanStack Query、react-dropzone、react-markdown、lucide-react |
-| 文献解析 | MinerU API / MinerU 本地 CLI / PyMuPDF fallback |
+| 文献解析 | MinerU API / MinerU 本地 CLI |
 | 存储 | 本地 `storage/` 目录、SQLite 数据库、LanceDB 向量库 |
 | 测试 | Pytest、Vitest 配置已存在，当前主要覆盖后端 Markdown 和 LLM fallback 逻辑 |
 
@@ -25,7 +44,7 @@ Research Helper 是一个本地科研文献综述辅助工具，目标是支持 
 | 文库管理 | 已完成 | 支持创建文库、查询文库列表、统计文库中文献数量。 |
 | PDF 上传 | 已完成 | 支持批量上传 PDF，写入本地输入目录，并创建论文记录。 |
 | 论文删除 | 已完成 | 支持在前端删除指定论文，并同步删除 SQLite 论文记录、关联分块/资源/摘要、LanceDB 向量索引、本地 PDF 和解析输出目录。 |
-| PDF 解析 | 已完成 | 优先使用 MinerU API 或本地 MinerU；未配置时自动使用 PyMuPDF 兜底生成 `full.md`。 |
+| PDF 解析 | 已完成 | 使用 MinerU API 或本地 MinerU；未配置或解析失败时标记上传失败，不再生成 PyMuPDF 兜底 `full.md`。 |
 | Markdown 清洗与分块 | 已完成 | 支持清理重复页眉、出版商噪声、引用章节格式化、图片路径重写、按 token 分块。 |
 | 资源同步 | 已完成 | 支持同步解析输出中的图片资源，并通过 API 安全访问。 |
 | 向量索引 | 已完成 | 支持基于 OpenAI embedding 或本地 deterministic fallback embedding 建立索引；LanceDB 不可用时可退回 SQLite 关键词检索。 |
@@ -33,7 +52,7 @@ Research Helper 是一个本地科研文献综述辅助工具，目标是支持 
 | 证据问答 | 已完成 | 支持按文库检索相关分块，并返回答案与引用证据；比较/差异类问题会在多篇论文间均衡取上下文，避免只引用单篇论文。 |
 | 证据矩阵 | 已完成 | 支持基于论文摘要生成 review matrix，并保存到 SQLite。 |
 | Markdown 导出 | 已完成 | 支持导出文库论文列表和证据矩阵内容。 |
-| PDF 在线预览 | 已完成 | 前端可按页渲染 PDF 图片，支持翻页与缩放。 |
+| PDF 在线预览 | 已完成 | 前端通过后端渲染的 PNG 页面预览 PDF，支持翻页、缩放和引用页码跳转。 |
 | 前端工作台 | 已完成 | 已实现文库、论文详情、问答、证据矩阵四个主视图。 |
 | 自动化测试 | 部分完成 | 后端已有 10 个测试用例并通过；前端暂无明确业务测试用例。 |
 
@@ -61,13 +80,13 @@ Research Helper 是一个本地科研文献综述辅助工具，目标是支持 
 | 论文 ID | 文件名 | 状态 | 解析器 | 错误 |
 | --- | --- | --- | --- | --- |
 | `paper_996e95c3e1c5417c` | `tinyos.pdf` | processed | mineru_api | 无 |
-| `paper_53e7ea93e9824241` | `2504.07378v3 (1).pdf` | processed | pymupdf_fallback | 无 |
+| `paper_53e7ea93e9824241` | `2504.07378v3 (1).pdf` | processed | pymupdf_fallback（历史记录） | 无 |
 
 ## 5. 验证结果
 
 | 验证项 | 命令 | 结果 |
 | --- | --- | --- |
-| 后端测试 | `python -m pytest` | 10 passed |
+| 后端测试 | `python -m pytest` | 28 passed |
 | 前端构建 | `npm.cmd run build` | 通过，已生成生产构建到 `frontend/dist/` |
 
 ## 6. 已知问题与风险

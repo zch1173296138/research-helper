@@ -9,6 +9,35 @@ def test_split_markdown_preserves_sections_and_pages() -> None:
     assert chunks
     assert chunks[0].page_start == 1
     assert any(chunk.section_title == "Method" for chunk in chunks)
+    assert any(chunk.section_type == "method" for chunk in chunks)
+
+
+def test_split_markdown_tracks_structure_and_references() -> None:
+    markdown = """# Paper
+
+## Abstract
+
+This paper introduces a system.
+
+## 2. Method
+
+![architecture](fig.png)
+
+Figure 1: System architecture.
+
+The method has three stages.
+
+## References
+
+[1] A reference that should not be searched.
+"""
+    chunks = split_markdown(markdown, Path("full.md"), target_tokens=300, overlap_tokens=0)
+
+    method = next(chunk for chunk in chunks if chunk.section_type == "method")
+    references = next(chunk for chunk in chunks if chunk.section_type == "references")
+    assert method.section_path == "Paper > Method"
+    assert "Figure 1" in method.text
+    assert references.is_reference is True
 
 
 def test_rewrite_image_paths() -> None:

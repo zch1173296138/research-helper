@@ -12,7 +12,7 @@ except Exception:  # pragma: no cover - optional dependency fallback
 HEADER_RE = re.compile(r"^(#{1,6})\s+(.+)$")
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 PAGE_RE = re.compile(r"<!--\s*page:(\d+)\s*-->")
-REFERENCE_HEADING_RE = re.compile(r"^(#{1,6})\s+(?:\d+\.?\s*)?(references|参考文献)\s*$", re.IGNORECASE)
+REFERENCE_HEADING_RE = re.compile(r"^(#{1,6})\s+(?:\d+\.?\s*)?(references|bibliography|参考文献)\s*$", re.IGNORECASE)
 REFERENCE_ENTRY_RE = re.compile(r"^\[(\d+)\]\s*(.*)$")
 NOISE_BLOCK_START_RE = re.compile(
     r"^(?:\*+\s*)?(?:"
@@ -35,10 +35,13 @@ NOISE_LINE_RE = re.compile(
 class Chunk:
     chunk_index: int
     section_title: str
+    section_path: str
+    section_type: str
     text: str
     token_count: int
     page_start: int | None = None
     page_end: int | None = None
+    is_reference: bool = False
 
 
 def count_tokens(text: str) -> int:
@@ -213,38 +216,128 @@ def _collect_references(lines: list[str]) -> list[tuple[int, str]]:
 
 
 def split_markdown(markdown: str, source_path: Path, target_tokens: int = 1000, overlap_tokens: int = 180) -> list[Chunk]:
-    paragraphs = re.split(r"\n\s*\n", markdown)
+    blocks = _split_blocks(markdown)
+    sections = _collect_sections(blocks)
+    chunks: list[Chunk] = []
+
+    for section in sections:
+        section_chunks = _chunk_section(section, len(chunks), target_tokens, overlap_tokens)
+        chunks.extend(section_chunks)
+
+    return chunks
+
+
+def _split_blocks(markdown: str) -> list[str]:
+    blocks: list[str] = []
+    current: list[str] = []
+
+    def flush() -> None:
+        nonlocal current
+        text = "\n".join(current).strip()
+        if text:
+            blocks.append(text)
+        current = []
+
+    for line in markdown.replace("\r\n", "\n").split("\n"):
+        stripped = line.strip()
+        if not stripped:
+            flush()
+            continue
+        if HEADER_RE.match(stripped):
+            flush()
+            blocks.append(stripped)
+            continue
+        if stripped.startswith("|") and current and current[-1].strip().startswith("|"):
+            current.append(line)
+            continue
+        current.append(line)
+
+    flush()
+    return blocks
+
+
+def _collect_sections(blocks: list[str]) -> list[dict]:
+    sections: list[dict] = []
+    stack: list[tuple[int, str]] = []
+    current = _new_section("", "", "unknown")
+    current_page: int | None = None
+
+    def start_section(title: str, path: str, section_type: str) -> None:
+        nonlocal current
+        if current["blocks"]:
+            sections.append(current)
+        current = _new_section(title, path, section_type)
+
+    for block in blocks:
+        page_match = PAGE_RE.search(block)
+        if page_match:
+            current_page = int(page_match.group(1))
+
+        header_match = HEADER_RE.match(block)
+        if header_match:
+            level = len(header_match.group(1))
+            title = _normalize_heading(header_match.group(2))
+            while stack and stack[-1][0] >= level:
+                stack.pop()
+            stack.append((level, title))
+            section_path = " > ".join(item[1] for item in stack)
+            start_section(title, section_path, classify_section(title, section_path))
+
+        current["blocks"].append(block)
+        if current_page is not None:
+            current["pages"].append(current_page)
+
+    if current["blocks"]:
+        sections.append(current)
+    return sections
+
+
+def _new_section(title: str, path: str, section_type: str) -> dict:
+    return {
+        "title": title,
+        "path": path,
+        "type": section_type,
+        "is_reference": section_type == "references",
+        "blocks": [],
+        "pages": [],
+    }
+
+
+def _chunk_section(section: dict, start_index: int, target_tokens: int, overlap_tokens: int) -> list[Chunk]:
     chunks: list[Chunk] = []
     current: list[str] = []
     current_tokens = 0
-    current_section = ""
-    current_page: int | None = None
-    chunk_pages: list[int] = []
+    current_pages: list[int] = []
+    section_pages = list(section["pages"])
 
-    def flush() -> None:
-        nonlocal current, current_tokens, chunk_pages
+    def pages_for_current() -> list[int]:
+        if current_pages:
+            return current_pages
+        return section_pages
+
+    def flush(keep_overlap: bool) -> None:
+        nonlocal current, current_tokens, current_pages
         text = "\n\n".join(part for part in current if part.strip()).strip()
-        if not text:
-            current = []
-            current_tokens = 0
-            chunk_pages = []
-            return
-        pages = sorted(set(chunk_pages))
-        chunks.append(
-            Chunk(
-                chunk_index=len(chunks),
-                section_title=current_section,
-                text=text,
-                token_count=count_tokens(text),
-                page_start=pages[0] if pages else None,
-                page_end=pages[-1] if pages else None,
+        if text:
+            pages = sorted(set(pages_for_current()))
+            chunks.append(
+                Chunk(
+                    chunk_index=start_index + len(chunks),
+                    section_title=section["title"],
+                    section_path=section["path"],
+                    section_type=section["type"],
+                    text=text,
+                    token_count=count_tokens(text),
+                    page_start=pages[0] if pages else None,
+                    page_end=pages[-1] if pages else None,
+                    is_reference=section["is_reference"],
+                )
             )
-        )
 
-        if overlap_tokens <= 0:
+        if not keep_overlap or overlap_tokens <= 0:
             current = []
             current_tokens = 0
-            chunk_pages = []
+            current_pages = []
             return
 
         overlap: list[str] = []
@@ -257,29 +350,48 @@ def split_markdown(markdown: str, source_path: Path, target_tokens: int = 1000, 
             overlap_count += part_tokens
         current = overlap
         current_tokens = overlap_count
-        chunk_pages = pages[-1:] if pages else []
+        pages = sorted(set(pages_for_current()))
+        current_pages = pages[-1:] if pages else []
 
-    for paragraph in paragraphs:
-        paragraph = paragraph.strip()
-        if not paragraph:
-            continue
-
-        page_match = PAGE_RE.search(paragraph)
+    for block in section["blocks"]:
+        block_tokens = count_tokens(block)
+        if current and current_tokens + block_tokens > target_tokens:
+            flush(keep_overlap=True)
+        current.append(block)
+        current_tokens += block_tokens
+        page_match = PAGE_RE.search(block)
         if page_match:
-            current_page = int(page_match.group(1))
+            current_pages.append(int(page_match.group(1)))
 
-        header_match = HEADER_RE.match(paragraph)
-        if header_match:
-            current_section = header_match.group(2).strip()
-
-        paragraph_tokens = count_tokens(paragraph)
-        if current and current_tokens + paragraph_tokens > target_tokens:
-            flush()
-
-        current.append(paragraph)
-        current_tokens += paragraph_tokens
-        if current_page is not None:
-            chunk_pages.append(current_page)
-
-    flush()
+    flush(keep_overlap=False)
     return chunks
+
+
+def _normalize_heading(heading: str) -> str:
+    heading = re.sub(r"\s+", " ", heading).strip(" #")
+    return re.sub(r"^\d+(?:\.\d+)*\.?\s+", "", heading).strip()
+
+
+def classify_section(title: str, section_path: str = "") -> str:
+    text = f"{title} {section_path}".lower()
+    if any(keyword in text for keyword in ("references", "bibliography", "参考文献")):
+        return "references"
+    if any(keyword in text for keyword in ("abstract", "摘要")):
+        return "abstract"
+    if any(keyword in text for keyword in ("introduction", "background", "motivation", "引言", "背景")):
+        return "introduction"
+    if any(keyword in text for keyword in ("related work", "prior work", "literature", "相关工作")):
+        return "related_work"
+    if any(keyword in text for keyword in ("method", "methodology", "approach", "algorithm", "model", "architecture", "方法", "算法", "模型", "架构")):
+        return "method"
+    if any(keyword in text for keyword in ("experiment", "evaluation", "setup", "implementation", "实验", "评估")):
+        return "experiment"
+    if any(keyword in text for keyword in ("result", "finding", "analysis", "performance", "结果", "发现", "性能")):
+        return "results"
+    if any(keyword in text for keyword in ("discussion", "讨论")):
+        return "discussion"
+    if any(keyword in text for keyword in ("limitation", "threat", "局限", "限制")):
+        return "limitations"
+    if any(keyword in text for keyword in ("conclusion", "future", "结论", "未来")):
+        return "conclusion"
+    return "unknown"

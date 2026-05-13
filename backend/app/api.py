@@ -6,22 +6,29 @@ from fastapi.responses import FileResponse, PlainTextResponse, Response
 from sqlalchemy.orm import Session
 
 from backend.app.core.config import Settings, get_settings
-from backend.app.db.models import Library, Paper, PaperChunk, ReviewMatrix
+from backend.app.db.models import ChatMessage, ChatSession, Library, Paper, PaperChunk, ReviewMatrix
 from backend.app.db.session import get_db
 from backend.app.schemas import (
     ChatRequest,
     ChatResponse,
+    ChatMessageRead,
+    ChatSessionRead,
     ExportRequest,
     LibraryCreate,
     LibraryRead,
     MatrixRequest,
     MatrixResponse,
+    PaperChatRequest,
+    PaperChatResponse,
     PaperRead,
 )
 from backend.app.services.ids import new_id, slugify
+from backend.app.services.evidence import EvidenceRagService
+from backend.app.services.enrichment import PaperEnrichmentService
 from backend.app.services.llm import LLMService
 from backend.app.services.markdown import format_markdown_for_display, rewrite_image_paths
 from backend.app.services.papers import PaperService
+from backend.app.services.paper_chat import PaperChatService
 from backend.app.services.vector_store import VectorStore
 
 
@@ -42,6 +49,15 @@ def paper_to_read(paper: Paper) -> PaperRead:
         error=paper.error,
         needs_ocr=paper.needs_ocr,
         md_path=paper.md_path,
+        normalized_title=paper.normalized_title,
+        normalized_authors=paper.normalized_authors or [],
+        normalized_venue=paper.normalized_venue,
+        normalized_year=paper.normalized_year,
+        doi=paper.doi,
+        external_ids=paper.external_ids or {},
+        source_url=paper.source_url,
+        enrichment_status=paper.enrichment_status or "pending",
+        enrichment_metadata=paper.enrichment_metadata or {},
     )
 
 
@@ -50,6 +66,31 @@ def paper_pdf_path(paper: Paper) -> Path:
     if not pdf_path.exists() or pdf_path.suffix.lower() != ".pdf":
         raise HTTPException(status_code=404, detail="Paper PDF not found")
     return pdf_path
+
+
+def chat_session_to_read(session: ChatSession) -> ChatSessionRead:
+    return ChatSessionRead(
+        id=session.id,
+        library_id=session.library_id,
+        paper_id=session.paper_id,
+        title=session.title,
+        memory_summary=session.memory_summary or "",
+        compressed_until_message_id=session.compressed_until_message_id,
+        memory_updated_at=session.memory_updated_at.isoformat() if session.memory_updated_at else None,
+        context_mode=session.context_mode or "hybrid",
+    )
+
+
+def chat_message_to_read(message: ChatMessage) -> ChatMessageRead:
+    return ChatMessageRead(
+        id=message.id,
+        session_id=message.session_id,
+        role=message.role,
+        content=message.content,
+        citations=message.citations or [],
+        retrieval_metadata=message.retrieval_metadata or {},
+        created_at=message.created_at.isoformat(),
+    )
 
 
 def needs_cross_paper_context(question: str) -> bool:
@@ -282,23 +323,94 @@ def summarize_paper(
     return {"paper_id": paper_id, "summary": summary}
 
 
+@router.post("/papers/{paper_id}/enrich", response_model=PaperRead)
+def enrich_paper(
+    paper_id: str,
+    db: Session = Depends(get_db),
+    settings: Settings = Depends(settings_dep),
+) -> PaperRead:
+    paper = db.get(Paper, paper_id)
+    if not paper:
+        raise HTTPException(status_code=404, detail="Paper not found")
+    PaperEnrichmentService(settings).enrich_paper(db, paper)
+    db.refresh(paper)
+    return paper_to_read(paper)
+
+
+@router.get("/papers/{paper_id}/chat/session", response_model=ChatSessionRead)
+def get_paper_chat_session(
+    paper_id: str,
+    db: Session = Depends(get_db),
+    settings: Settings = Depends(settings_dep),
+) -> ChatSessionRead:
+    paper = db.get(Paper, paper_id)
+    if not paper:
+        raise HTTPException(status_code=404, detail="Paper not found")
+    session = PaperChatService(settings).get_or_create_session(db, paper)
+    return chat_session_to_read(session)
+
+
+@router.get("/chat/sessions/{session_id}/messages", response_model=list[ChatMessageRead])
+def list_chat_messages(
+    session_id: str,
+    limit: int = Query(50, ge=1, le=100),
+    before_id: int | None = Query(None, ge=1),
+    db: Session = Depends(get_db),
+    settings: Settings = Depends(settings_dep),
+) -> list[ChatMessageRead]:
+    session = db.get(ChatSession, session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Chat session not found")
+    messages = PaperChatService(settings).list_messages(db, session.id, limit=limit, before_id=before_id)
+    return [chat_message_to_read(message) for message in messages]
+
+
+@router.post("/chat/sessions/{session_id}/messages", response_model=PaperChatResponse)
+def ask_paper_chat(
+    session_id: str,
+    payload: PaperChatRequest,
+    db: Session = Depends(get_db),
+    settings: Settings = Depends(settings_dep),
+) -> PaperChatResponse:
+    session = db.get(ChatSession, session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Chat session not found")
+    try:
+        result = PaperChatService(settings).ask(
+            db,
+            session,
+            payload.question,
+            top_k=payload.top_k,
+            context_mode=payload.context_mode,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return PaperChatResponse(
+        user_message=chat_message_to_read(result["user_message"]),
+        assistant_message=chat_message_to_read(result["assistant_message"]),
+        answer=result["answer"],
+        citations=result["citations"],
+        missing_evidence=result["missing_evidence"],
+        memory_summary=result["memory_summary"],
+        compressed_until_message_id=result["compressed_until_message_id"],
+        memory_updated_at=result["memory_updated_at"],
+        retrieval_metadata=result["retrieval_metadata"],
+    )
+
+
 @router.post("/chat", response_model=ChatResponse)
 def chat(
     payload: ChatRequest,
     db: Session = Depends(get_db),
     settings: Settings = Depends(settings_dep),
 ) -> ChatResponse:
-    paper_count = db.query(Paper).filter(Paper.library_id == payload.library_id).count()
-    diversify = not payload.paper_ids and paper_count > 1 and needs_cross_paper_context(payload.question)
-    chunks = VectorStore(settings).search(
+    result = EvidenceRagService(settings).answer_library_chat(
         db,
         payload.library_id,
         payload.question,
-        payload.paper_ids,
+        payload.paper_ids or None,
         payload.top_k,
-        diversify_by_paper=diversify,
     )
-    result = LLMService(settings).answer_with_citations(payload.question, chunks)
     return ChatResponse(**result)
 
 

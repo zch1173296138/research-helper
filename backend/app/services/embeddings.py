@@ -28,7 +28,7 @@ class EmbeddingService:
 
     def embed_query(self, text: str) -> list[float]:
         return self.embed_texts([text])[0]
-
+    # Local deterministic embedding fallback.
     def _fallback_embedding(self, text: str, dimensions: int = 256) -> list[float]:
         vector = [0.0] * dimensions
         tokens = [token for token in text.lower().split() if token]

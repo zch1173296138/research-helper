@@ -1,0 +1,13 @@
+INFO:     127.0.0.1:56729 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56837 - "GET /api/libraries HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56837 - "GET /api/libraries/library_cc251fc963174eb6/papers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56869 - "GET /api/papers/paper_1d77c9ee3c5f413d/pdf-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56873 - "GET /api/papers/paper_1d77c9ee3c5f413d/pages/1.png?scale=1.60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57104 - "GET /api/libraries HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57104 - "GET /api/libraries/library_cc251fc963174eb6/papers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57532 - "GET /api/libraries HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57532 - "GET /api/libraries/library_cc251fc963174eb6/papers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57532 - "GET /api/papers/paper_0a722d8e689b4f0d/pdf-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57538 - "GET /api/papers/paper_0a722d8e689b4f0d/pages/1.png?scale=1.60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57532 - "GET /api/papers/paper_0a722d8e689b4f0d/chat/session HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57532 - "GET /api/chat/sessions/chat_fe9ff340f1b64111/messages?limit=50 HTTP/1.1" 200 OK
