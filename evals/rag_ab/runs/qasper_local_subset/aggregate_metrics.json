@@ -1,0 +1,124 @@
+{
+  "by_strategy": {
+    "baseline-current": {
+      "case_count": 12,
+      "error_count": 0,
+      "avg_latency_ms": 55.3691,
+      "avg_expected_point_coverage": 0.2917,
+      "missing_evidence_accuracy": null,
+      "avg_candidate_recall": null,
+      "avg_final_context_recall": null,
+      "avg_citation_recall": null,
+      "avg_quote_support_recall": 0.1667,
+      "reference_contamination_rate": 0.0,
+      "avg_accepted_evidence_precision": null,
+      "avg_accepted_evidence_recall": null
+    },
+    "current-evidence": {
+      "case_count": 12,
+      "error_count": 0,
+      "avg_latency_ms": 37.5497,
+      "avg_expected_point_coverage": 0.2917,
+      "missing_evidence_accuracy": null,
+      "avg_candidate_recall": null,
+      "avg_final_context_recall": null,
+      "avg_citation_recall": null,
+      "avg_quote_support_recall": 0.2222,
+      "reference_contamination_rate": 0.0,
+      "avg_accepted_evidence_precision": null,
+      "avg_accepted_evidence_recall": null
+    }
+  },
+  "by_category": {
+    "dataset": {
+      "baseline-current": {
+        "case_count": 4,
+        "error_count": 0,
+        "avg_latency_ms": 124.07,
+        "avg_expected_point_coverage": 0.7917,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 4,
+        "error_count": 0,
+        "avg_latency_ms": 67.925,
+        "avg_expected_point_coverage": 0.7917,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.0,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    },
+    "method": {
+      "baseline-current": {
+        "case_count": 3,
+        "error_count": 0,
+        "avg_latency_ms": 30.8067,
+        "avg_expected_point_coverage": 0.1111,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.1111,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 3,
+        "error_count": 0,
+        "avg_latency_ms": 35.785,
+        "avg_expected_point_coverage": 0.1111,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.1111,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    },
+    "paper-qa": {
+      "baseline-current": {
+        "case_count": 5,
+        "error_count": 0,
+        "avg_latency_ms": 15.1458,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.3333,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      },
+      "current-evidence": {
+        "case_count": 5,
+        "error_count": 0,
+        "avg_latency_ms": 14.3082,
+        "avg_expected_point_coverage": 0.0,
+        "missing_evidence_accuracy": null,
+        "avg_candidate_recall": null,
+        "avg_final_context_recall": null,
+        "avg_citation_recall": null,
+        "avg_quote_support_recall": 0.4667,
+        "reference_contamination_rate": 0.0,
+        "avg_accepted_evidence_precision": null,
+        "avg_accepted_evidence_recall": null
+      }
+    }
+  }
+}

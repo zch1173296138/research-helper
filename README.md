@@ -141,4 +141,13 @@ Run a local comparison between the previous hybrid retrieval answer path and the
   --top-k 8
 ```
 
-The runner writes raw case results, aggregate metrics, a Markdown report, and reproducibility metadata under the selected output directory. Use `--deterministic-local` for repeatable no-LLM smoke runs; omit it when you want to measure the configured model. See `evals/rag_ab/README.md` for the case format and optional `old-code-api` baseline mode.
+The runner writes raw case results, aggregate metrics, a Markdown report, and reproducibility metadata under the selected output directory. Use `--deterministic-local` for repeatable no-LLM smoke runs; omit it when you want to measure the configured model. Add `--llm-judge` only when you want optional model-graded answer checks recorded separately. See `evals/rag_ab/README.md` for the case format and optional `old-code-api` baseline mode.
+
+For a public benchmark-style sample, use `evals/rag_ab/qasper_validation_cases.jsonl`, which contains 30 validation cases converted from Hugging Face `allenai/qasper`. Regenerate it with:
+
+```powershell
+.\.venv\Scripts\python -m backend.app.evaluation.qasper `
+  --output evals/rag_ab/qasper_validation_cases.jsonl `
+  --limit 30 `
+  --no-answer-target 5
+```

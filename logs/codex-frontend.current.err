@@ -1,0 +1,84 @@
+[2m13:55:10[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: E:\python\research-helper\frontend\src\App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (105:12)
+
+[0m [90m 103 |[39m               {item[33m.[39mlabel}
+ [90m 104 |[39m               [33m<[39m[33m/[39m[33mbutton[39m[33m>[39m
+[31m[1m>[22m[39m[90m 105 |[39m             [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m     |[39m             [31m[1m^[22m[39m
+ [90m 106 |[39m           ))}
+ [90m 107 |[39m         [33m<[39m[33m/[39m[33mnav[39m[33m>[39m
+ [90m 108 |[39m       [33m<[39m[33m/[39m[33maside[39m[33m>[39m[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/python/research-helper/frontend/src/App.tsx[39m:105:12
+[33m  109|  
+  110|        <section className="workspace">
+  111|          <header className="topbar">
+     |                ^
+  112|            <div>
+  113|              <h2>{selectedLibrary?.name ?? "创建一个文库开始"}</h2>[39m
+[2m13:56:06[22m [31m[1m[vite][22m[39m [31mInternal server error: E:\python\research-helper\frontend\src\App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (105:12)
+
+[0m [90m 103 |[31m               {item[33m.[31mlabel}
+ [90m 104 |[31m               [33m<[31m[33m/[31m[33mbutton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 105 |[31m             [33m<[31m[33m/[31m[33mdiv[31m[33m>[31m
+ [90m     |[31m             [31m[1m^[22m[31m
+ [90m 106 |[31m           ))}
+ [90m 107 |[31m         [33m<[31m[33m/[31m[33mnav[31m[33m>[31m
+ [90m 108 |[31m       [33m<[31m[33m/[31m[33maside[31m[33m>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mE:/python/research-helper/frontend/src/App.tsx[39m:105:12
+[33m  109|  
+  110|        <section className="workspace">
+  111|          <header className="topbar">
+     |                ^
+  112|            <div>
+  113|              <h2>{selectedLibrary?.name ?? "创建一个文库开始"}</h2>[39m
+      at constructor (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:6616:19)
+      at TypeScriptParserMixin.jsxParseElementAt (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:4754:18)
+      at TypeScriptParserMixin.jsxParseElement (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:4761:17)
+      at TypeScriptParserMixin.parseExprAtom (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:4771:19)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10848:21)
+      at E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:9792:39
+      at TypeScriptParserMixin.tryParse (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:6924:20)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:9792:18)
+      at E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:12510:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11692:28)
+      at TypeScriptParserMixin.parseExprAtom (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:9803:20)
+      at TypeScriptParserMixin.parseFunctionBody (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:12110:24)
+      at TypeScriptParserMixin.parseArrowExpression (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:12092:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11704:12)
+      at TypeScriptParserMixin.parseExprAtom (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:9803:20)
+      at E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (E:\python\research-helper\frontend\node_modules\@babel\parser\lib\index.js:12510:17)

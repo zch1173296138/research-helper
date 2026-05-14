@@ -6,6 +6,8 @@ from backend.app.core.config import Settings
 from backend.app.evaluation.adapters import BaselineCurrentAdapter, CurrentEvidenceAdapter
 from backend.app.evaluation.cases import EvaluationCaseLoadError, load_cases
 from backend.app.evaluation.metrics import score_output
+from backend.app.evaluation.qasper import convert_qasper_rows
+from backend.app.evaluation.qasper_align import ChunkRecord, align_case, support_score
 from backend.app.evaluation.reports import write_reports
 from backend.app.evaluation.runner import execute_cases
 from backend.app.evaluation.types import CaseResult, EvaluationCase, RunConfig, StrategyMetrics, StrategyOutput
@@ -56,6 +58,114 @@ def test_load_cases_preserves_metadata_and_filters(tmp_path: Path) -> None:
     assert cases[0].id == "case-1"
     assert cases[0].paper_ids == ["paper-1"]
     assert cases[0].raw["library_id"] == "library-1"
+
+
+def test_qasper_converter_maps_answerable_and_unanswerable_cases() -> None:
+    rows = [
+        {
+            "id": "paper-arxiv-id",
+            "title": "A QASPER Paper",
+            "qas": {
+                "question": ["Which model is used?", "Is the missing dataset reported?"],
+                "question_id": ["question-answerable", "question-no-answer"],
+                "answers": [
+                    {
+                        "answer": [
+                            {
+                                "unanswerable": False,
+                                "extractive_spans": ["Transformer BIBREF1"],
+                                "yes_no": None,
+                                "free_form_answer": "",
+                                "evidence": ["The paper uses a Transformer BIBREF1 model for sequence labeling."],
+                                "highlighted_evidence": ["The paper uses a Transformer BIBREF1 model."],
+                            }
+                        ],
+                        "annotation_id": ["annotation-answerable"],
+                        "worker_id": ["worker-1"],
+                    },
+                    {
+                        "answer": [
+                            {
+                                "unanswerable": True,
+                                "extractive_spans": [],
+                                "yes_no": None,
+                                "free_form_answer": "",
+                                "evidence": [],
+                                "highlighted_evidence": [],
+                            }
+                        ],
+                        "annotation_id": ["annotation-no-answer"],
+                        "worker_id": ["worker-2"],
+                    },
+                ],
+            },
+        }
+    ]
+
+    cases = convert_qasper_rows(rows, limit=2, no_answer_target=1)
+
+    assert [case["id"] for case in cases] == ["qasper-val-0001", "qasper-val-0002"]
+    assert cases[0]["should_answer"] is True
+    assert cases[0]["expected_points"] == ["Transformer"]
+    assert cases[0]["supporting_quotes"] == [
+        "The paper uses a Transformer BIBREF1 model.",
+        "The paper uses a Transformer BIBREF1 model for sequence labeling.",
+    ]
+    assert cases[0]["supporting_chunk_ids"] == []
+    assert cases[0]["source_dataset"] == "allenai/qasper"
+    assert cases[0]["source_split"] == "validation"
+    assert cases[0]["source_paper_id"] == "paper-arxiv-id"
+    assert cases[0]["source_question_id"] == "question-answerable"
+    assert cases[0]["source_annotation_ids"] == ["annotation-answerable"]
+    assert cases[1]["should_answer"] is False
+    assert cases[1]["expected_points"] == []
+    assert cases[1]["supporting_quotes"] == []
+    assert cases[1]["source_question_id"] == "question-no-answer"
+
+
+def test_checked_in_qasper_cases_load_and_preserve_provenance() -> None:
+    cases = load_cases(Path("evals/rag_ab/qasper_validation_cases.jsonl"))
+
+    assert 20 <= len(cases) <= 50
+    assert any(not case.should_answer for case in cases)
+    assert all(case.raw["source_dataset"] == "allenai/qasper" for case in cases)
+    assert all(case.raw["source_config"] == "qasper" for case in cases)
+    assert all(case.raw["source_split"] == "validation" for case in cases)
+    assert all(case.raw.get("source_paper_id") for case in cases)
+    assert all(case.raw.get("source_question_id") for case in cases)
+    assert all(case.supporting_chunk_ids == [] for case in cases)
+    assert all(case.expected_points and case.supporting_quotes for case in cases if case.should_answer)
+
+
+def test_qasper_alignment_scores_reference_normalized_support() -> None:
+    quote = "Europarl BIBREF31 and MultiUN BIBREF32 contain multi-parallel evaluation data."
+    chunk = "Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010) contain multi-parallel evaluation data."
+
+    assert support_score(quote, chunk) > 0.8
+
+
+def test_qasper_alignment_adds_primary_supporting_chunk_ids() -> None:
+    case = {
+        "id": "qasper-val-test",
+        "supporting_quotes": ["The paper evaluates Stanford NER, spaCy 2.0, and a recurrent CRF model."],
+        "supporting_chunk_ids": [],
+        "tags": ["qasper"],
+    }
+    chunks = [
+        ChunkRecord("paper-1_chunk_1", 1, "Intro", "This section introduces the dataset."),
+        ChunkRecord(
+            "paper-1_chunk_2",
+            2,
+            "Experiments",
+            "The paper evaluates Stanford NER, spaCy 2.0, and a recurrent CRF model on Armenian NER.",
+        ),
+    ]
+
+    aligned, matches = align_case(case, chunks)
+
+    assert aligned["supporting_chunk_ids"] == ["paper-1_chunk_2"]
+    assert "chunk-aligned" in aligned["tags"]
+    assert matches[0]["accepted"] is True
 
 
 def test_score_output_marks_not_applicable_evidence_metrics_for_baseline() -> None:
@@ -255,3 +365,38 @@ def test_execute_cases_keeps_running_when_one_strategy_fails() -> None:
     assert results[0].outputs["current-evidence"].error == "adapter failed"
     assert results[0].metrics["baseline-current"].accepted_evidence_precision is None
     assert results[0].metrics["current-evidence"].error == "adapter failed"
+
+
+def test_execute_cases_records_optional_judge_separately() -> None:
+    case = EvaluationCase(id="case-1", category="method", question="What?", should_answer=True)
+
+    class SuccessfulAdapter:
+        def __init__(self, name: str):
+            self.name = name
+
+        def run(self, *_args: Any, **_kwargs: Any) -> StrategyOutput:
+            return StrategyOutput(strategy=self.name, answer="Answer")
+
+    class FakeJudge:
+        source = "fake-judge"
+
+        def judge(self, case: EvaluationCase, output: StrategyOutput) -> dict[str, Any]:
+            return {"source": self.source, "case_id": case.id, "strategy": output.strategy, "score": 1.0}
+
+    results = execute_cases(
+        [case],
+        SuccessfulAdapter("baseline-current"),
+        SuccessfulAdapter("current-evidence"),
+        db=None,
+        top_k=4,
+        judge=FakeJudge(),
+    )
+
+    metrics = results[0].metrics["baseline-current"]
+    assert metrics.judge_source == "fake-judge"
+    assert metrics.llm_judge == {
+        "source": "fake-judge",
+        "case_id": "case-1",
+        "strategy": "baseline-current",
+        "score": 1.0,
+    }

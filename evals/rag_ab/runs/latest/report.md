@@ -9,11 +9,12 @@
 - Current API URL: `n/a`
 - Old-code API URL: `n/a`
 - Deterministic local: `True`
+- LLM judge: `False`
 - top_k: `8`
 - Output directory: `evals/rag_ab/runs/latest`
 - Case file sha256: `0c9375c8bcf3f4578b75ede5adff4d44cb530bcd0a6591dfbd97ae77ee77a51c`
-- Timestamp: `2026-05-13T11:33:29.135874+00:00`
-- Git revision: `db26bc4eeef2a94a3352edae3a0b79d8cb1891e1`
+- Timestamp: `2026-05-13T11:37:15.433123+00:00`
+- Git revision: `c6697200cb09a73fcf21ab06e7cc824461e0c1bc`
 - Notes: n/a
 
 ## Aggregate Metrics
@@ -24,7 +25,7 @@
 | --- | --- |
 | `case_count` | 6 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 97.5565 |
+| `avg_latency_ms` | 116.5722 |
 | `avg_expected_point_coverage` | 0.1333 |
 | `missing_evidence_accuracy` | 0.0000 |
 | `avg_candidate_recall` | n/a |
@@ -41,7 +42,7 @@
 | --- | --- |
 | `case_count` | 6 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 74.5992 |
+| `avg_latency_ms` | 96.3145 |
 | `avg_expected_point_coverage` | 0.1333 |
 | `missing_evidence_accuracy` | 0.0000 |
 | `avg_candidate_recall` | n/a |
@@ -62,7 +63,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 114.6280 |
+| `avg_latency_ms` | 170.8450 |
 | `avg_expected_point_coverage` | 0.6667 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -79,7 +80,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 195.1780 |
+| `avg_latency_ms` | 253.0690 |
 | `avg_expected_point_coverage` | 0.6667 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -98,7 +99,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 22.0740 |
+| `avg_latency_ms` | 28.1580 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -115,7 +116,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 24.1150 |
+| `avg_latency_ms` | 34.8790 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -134,7 +135,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 15.5430 |
+| `avg_latency_ms` | 24.7360 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -151,7 +152,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 15.7830 |
+| `avg_latency_ms` | 34.1170 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -170,7 +171,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 316.0210 |
+| `avg_latency_ms` | 335.4400 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -187,7 +188,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 88.8720 |
+| `avg_latency_ms` | 111.8030 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -206,7 +207,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 96.6900 |
+| `avg_latency_ms` | 117.0460 |
 | `avg_expected_point_coverage` | n/a |
 | `missing_evidence_accuracy` | 0.0000 |
 | `avg_candidate_recall` | n/a |
@@ -223,7 +224,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 103.9110 |
+| `avg_latency_ms` | 118.4370 |
 | `avg_expected_point_coverage` | n/a |
 | `missing_evidence_accuracy` | 0.0000 |
 | `avg_candidate_recall` | n/a |
@@ -242,7 +243,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 20.3830 |
+| `avg_latency_ms` | 23.2080 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -259,7 +260,7 @@
 | --- | --- |
 | `case_count` | 1 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 19.7360 |
+| `avg_latency_ms` | 25.5820 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -283,7 +284,7 @@
 | `avg_accepted_evidence_precision` | n/a | n/a | n/a |
 | `avg_accepted_evidence_recall` | n/a | n/a | n/a |
 | `reference_contamination_rate` | 0.0000 | 0.0000 | +0.0000 |
-| `avg_latency_ms` | 97.5565 | 74.5992 | -22.9573 |
+| `avg_latency_ms` | 116.5722 | 96.3145 | -20.2577 |
 | `error_count` | 0 | 0 | +0.0000 |
 
 ## Failed Or Weak Cases

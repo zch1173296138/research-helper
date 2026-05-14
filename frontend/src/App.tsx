@@ -19,7 +19,7 @@ import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
-import { api, ChatMessage, Citation, Library, Paper } from "./api";
+import { api, ChatMessage, Citation, EvidenceDecision, EvidenceMetadata, Library, Paper } from "./api";
 
 type Tab = "library" | "paper" | "chat" | "matrix";
 type DetailTab = "summary" | "chat";
@@ -101,8 +101,7 @@ export function App() {
             <button key={item.id} className={tab === item.id ? "active" : ""} onClick={() => setTab(item.id)}>
               <item.icon size={17} />
               {item.label}
-              </button>
-            </div>
+            </button>
           ))}
         </nav>
       </aside>
@@ -261,6 +260,7 @@ function LibraryView({ libraryId, papers, onSelectPaper, onDeletePaper }: Librar
 }
 
 function PaperDetail({ paper }: { paper?: Paper }) {
+  const queryClient = useQueryClient();
   const [summary, setSummary] = useState<Record<string, unknown> | null>(null);
   const [detailTab, setDetailTab] = useState<DetailTab>("summary");
   const [targetPage, setTargetPage] = useState<number | null>(null);
@@ -268,12 +268,22 @@ function PaperDetail({ paper }: { paper?: Paper }) {
     mutationFn: () => api.summarize(paper!.id),
     onSuccess: (result) => setSummary(result.summary),
   });
+  const enrichMutation = useMutation({
+    mutationFn: () => api.enrichPaper(paper!.id),
+    onSuccess: (updatedPaper) => {
+      queryClient.setQueryData<Paper[]>(["papers", updatedPaper.library_id], (current) =>
+        current?.map((existing) => (existing.id === updatedPaper.id ? updatedPaper : existing)),
+      );
+      queryClient.invalidateQueries({ queryKey: ["papers", updatedPaper.library_id] });
+    },
+  });
 
   useEffect(() => {
     setSummary(null);
     setDetailTab("summary");
     setTargetPage(null);
     summarizeMutation.reset();
+    enrichMutation.reset();
   }, [paper?.id]);
 
   if (!paper) return <div className="empty-state fill">请选择一篇论文。</div>;

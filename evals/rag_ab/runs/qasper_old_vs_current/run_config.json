@@ -1,0 +1,17 @@
+{
+  "case_file": "evals\\rag_ab\\qasper_validation_local_subset.jsonl",
+  "output_dir": "evals/rag_ab/runs/qasper_old_vs_current",
+  "baseline_strategy": "old-code-api",
+  "comparison_strategy": "current-evidence",
+  "mode": "in-process",
+  "current_api_url": null,
+  "old_code_api_url": "http://127.0.0.1:8001",
+  "deterministic_local": true,
+  "llm_judge": false,
+  "top_k": 8,
+  "case_filter": [],
+  "git_revision": "c6697200cb09a73fcf21ab06e7cc824461e0c1bc",
+  "case_file_sha256": "2587cca802ce7a459608757b4210d6ef001fe6b978ee424f6d9c903edf2fe7cd",
+  "timestamp": "2026-05-14T06:46:30.319110+00:00",
+  "notes": ""
+}
