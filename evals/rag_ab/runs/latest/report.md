@@ -2,36 +2,36 @@
 
 ## Run Configuration
 
-- Cases: `evals\rag_ab\starter_cases.jsonl`
-- Baseline: `baseline-current`
+- Cases: `evals\rag_ab\qasper_validation_local_subset_chunked.jsonl`
+- Baseline: `old-code-api`
 - Comparison: `current-evidence`
 - Mode: `in-process`
 - Current API URL: `n/a`
-- Old-code API URL: `n/a`
+- Old-code API URL: `http://127.0.0.1:8002`
 - Deterministic local: `True`
 - LLM judge: `False`
 - top_k: `8`
 - Output directory: `evals/rag_ab/runs/latest`
-- Case file sha256: `0c9375c8bcf3f4578b75ede5adff4d44cb530bcd0a6591dfbd97ae77ee77a51c`
-- Timestamp: `2026-05-13T11:37:15.433123+00:00`
-- Git revision: `c6697200cb09a73fcf21ab06e7cc824461e0c1bc`
+- Case file sha256: `61cf3b1bcc5dcab8b69db7462b360b939a984e766cefa4870729045748d7f4a8`
+- Timestamp: `2026-05-14T14:23:02.596194+00:00`
+- Git revision: `89d6a46d8ab1e28abb5623c8d3a1a2c5d020f017`
 - Notes: n/a
 
 ## Aggregate Metrics
 
-### baseline-current
+### old-code-api
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 6 |
+| `case_count` | 12 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 116.5722 |
-| `avg_expected_point_coverage` | 0.1333 |
-| `missing_evidence_accuracy` | 0.0000 |
+| `avg_latency_ms` | 60.1406 |
+| `avg_expected_point_coverage` | 0.2361 |
+| `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 0.7000 |
+| `avg_final_context_recall` | 0.8333 |
+| `avg_citation_recall` | 0.3333 |
+| `avg_quote_support_recall` | 0.0000 |
 | `reference_contamination_rate` | 0.0000 |
 | `avg_accepted_evidence_precision` | n/a |
 | `avg_accepted_evidence_recall` | n/a |
@@ -40,71 +40,35 @@
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 6 |
+| `case_count` | 12 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 96.3145 |
-| `avg_expected_point_coverage` | 0.1333 |
-| `missing_evidence_accuracy` | 0.0000 |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 0.9000 |
+| `avg_latency_ms` | 60.0916 |
+| `avg_expected_point_coverage` | 0.2917 |
+| `missing_evidence_accuracy` | n/a |
+| `avg_candidate_recall` | 1.0000 |
+| `avg_final_context_recall` | 0.7917 |
+| `avg_citation_recall` | 0.2917 |
+| `avg_quote_support_recall` | 0.2222 |
 | `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
+| `avg_accepted_evidence_precision` | 0.1250 |
+| `avg_accepted_evidence_recall` | 0.7917 |
 
 ## Metrics By Category
 
-### comparison
+### dataset
 
-**baseline-current**
-
-| Metric | Value |
-| --- | --- |
-| `case_count` | 1 |
-| `error_count` | 0 |
-| `avg_latency_ms` | 170.8450 |
-| `avg_expected_point_coverage` | 0.6667 |
-| `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 0.5000 |
-| `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
-
-**current-evidence**
+**old-code-api**
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 1 |
+| `case_count` | 4 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 253.0690 |
-| `avg_expected_point_coverage` | 0.6667 |
+| `avg_latency_ms` | 118.4193 |
+| `avg_expected_point_coverage` | 0.6250 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 0.5000 |
-| `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
-
-### follow-up-style
-
-**baseline-current**
-
-| Metric | Value |
-| --- | --- |
-| `case_count` | 1 |
-| `error_count` | 0 |
-| `avg_latency_ms` | 28.1580 |
-| `avg_expected_point_coverage` | 0.0000 |
-| `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
+| `avg_final_context_recall` | 0.8750 |
+| `avg_citation_recall` | 0.6250 |
 | `avg_quote_support_recall` | 0.0000 |
 | `reference_contamination_rate` | 0.0000 |
 | `avg_accepted_evidence_precision` | n/a |
@@ -114,70 +78,34 @@
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 1 |
+| `case_count` | 4 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 34.8790 |
-| `avg_expected_point_coverage` | 0.0000 |
+| `avg_latency_ms` | 130.9195 |
+| `avg_expected_point_coverage` | 0.7917 |
 | `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 1.0000 |
+| `avg_candidate_recall` | 1.0000 |
+| `avg_final_context_recall` | 0.7500 |
+| `avg_citation_recall` | 0.7500 |
+| `avg_quote_support_recall` | 0.0000 |
 | `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
-
-### identifier
-
-**baseline-current**
-
-| Metric | Value |
-| --- | --- |
-| `case_count` | 1 |
-| `error_count` | 0 |
-| `avg_latency_ms` | 24.7360 |
-| `avg_expected_point_coverage` | 0.0000 |
-| `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 1.0000 |
-| `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
-
-**current-evidence**
-
-| Metric | Value |
-| --- | --- |
-| `case_count` | 1 |
-| `error_count` | 0 |
-| `avg_latency_ms` | 34.1170 |
-| `avg_expected_point_coverage` | 0.0000 |
-| `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 1.0000 |
-| `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
+| `avg_accepted_evidence_precision` | 0.1250 |
+| `avg_accepted_evidence_recall` | 0.7500 |
 
 ### method
 
-**baseline-current**
+**old-code-api**
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 1 |
+| `case_count` | 3 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 335.4400 |
-| `avg_expected_point_coverage` | 0.0000 |
+| `avg_latency_ms` | 34.1190 |
+| `avg_expected_point_coverage` | 0.1111 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 1.0000 |
+| `avg_final_context_recall` | 0.6667 |
+| `avg_citation_recall` | 0.0000 |
+| `avg_quote_support_recall` | 0.0000 |
 | `reference_contamination_rate` | 0.0000 |
 | `avg_accepted_evidence_precision` | n/a |
 | `avg_accepted_evidence_recall` | n/a |
@@ -186,34 +114,34 @@
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 1 |
+| `case_count` | 3 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 111.8030 |
-| `avg_expected_point_coverage` | 0.0000 |
+| `avg_latency_ms` | 37.4100 |
+| `avg_expected_point_coverage` | 0.1111 |
 | `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 1.0000 |
+| `avg_candidate_recall` | 1.0000 |
+| `avg_final_context_recall` | 0.6667 |
+| `avg_citation_recall` | 0.0000 |
+| `avg_quote_support_recall` | 0.1111 |
 | `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
+| `avg_accepted_evidence_precision` | 0.1250 |
+| `avg_accepted_evidence_recall` | 0.6667 |
 
-### no-answer
+### paper-qa
 
-**baseline-current**
+**old-code-api**
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 1 |
+| `case_count` | 5 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 117.0460 |
-| `avg_expected_point_coverage` | n/a |
-| `missing_evidence_accuracy` | 0.0000 |
+| `avg_latency_ms` | 29.1306 |
+| `avg_expected_point_coverage` | 0.0000 |
+| `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | n/a |
+| `avg_final_context_recall` | 0.9000 |
+| `avg_citation_recall` | 0.3000 |
+| `avg_quote_support_recall` | 0.0000 |
 | `reference_contamination_rate` | 0.0000 |
 | `avg_accepted_evidence_precision` | n/a |
 | `avg_accepted_evidence_recall` | n/a |
@@ -222,210 +150,305 @@
 
 | Metric | Value |
 | --- | --- |
-| `case_count` | 1 |
+| `case_count` | 5 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 118.4370 |
-| `avg_expected_point_coverage` | n/a |
-| `missing_evidence_accuracy` | 0.0000 |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | n/a |
-| `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
-
-### result
-
-**baseline-current**
-
-| Metric | Value |
-| --- | --- |
-| `case_count` | 1 |
-| `error_count` | 0 |
-| `avg_latency_ms` | 23.2080 |
+| `avg_latency_ms` | 17.0382 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 1.0000 |
+| `avg_candidate_recall` | 1.0000 |
+| `avg_final_context_recall` | 0.9000 |
+| `avg_citation_recall` | 0.1000 |
+| `avg_quote_support_recall` | 0.4667 |
 | `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
-
-**current-evidence**
-
-| Metric | Value |
-| --- | --- |
-| `case_count` | 1 |
-| `error_count` | 0 |
-| `avg_latency_ms` | 25.5820 |
-| `avg_expected_point_coverage` | 0.0000 |
-| `missing_evidence_accuracy` | n/a |
-| `avg_candidate_recall` | n/a |
-| `avg_final_context_recall` | n/a |
-| `avg_citation_recall` | n/a |
-| `avg_quote_support_recall` | 1.0000 |
-| `reference_contamination_rate` | 0.0000 |
-| `avg_accepted_evidence_precision` | n/a |
-| `avg_accepted_evidence_recall` | n/a |
+| `avg_accepted_evidence_precision` | 0.1250 |
+| `avg_accepted_evidence_recall` | 0.9000 |
 
 ## A/B Deltas
 
 | Metric | Baseline | Comparison | Delta |
 | --- | ---: | ---: | ---: |
-| `avg_expected_point_coverage` | 0.1333 | 0.1333 | +0.0000 |
-| `missing_evidence_accuracy` | 0.0000 | 0.0000 | +0.0000 |
-| `avg_candidate_recall` | n/a | n/a | n/a |
-| `avg_final_context_recall` | n/a | n/a | n/a |
-| `avg_citation_recall` | n/a | n/a | n/a |
-| `avg_quote_support_recall` | 0.7000 | 0.9000 | +0.2000 |
-| `avg_accepted_evidence_precision` | n/a | n/a | n/a |
-| `avg_accepted_evidence_recall` | n/a | n/a | n/a |
+| `avg_expected_point_coverage` | 0.2361 | 0.2917 | +0.0556 |
+| `missing_evidence_accuracy` | n/a | n/a | n/a |
+| `avg_candidate_recall` | n/a | 1.0000 | n/a |
+| `avg_final_context_recall` | 0.8333 | 0.7917 | -0.0416 |
+| `avg_citation_recall` | 0.3333 | 0.2917 | -0.0416 |
+| `avg_quote_support_recall` | 0.0000 | 0.2222 | +0.2222 |
+| `avg_accepted_evidence_precision` | n/a | 0.1250 | n/a |
+| `avg_accepted_evidence_recall` | n/a | 0.7917 | n/a |
 | `reference_contamination_rate` | 0.0000 | 0.0000 | +0.0000 |
-| `avg_latency_ms` | 116.5722 | 96.3145 | -20.2577 |
+| `avg_latency_ms` | 60.1406 | 60.0916 | -0.0490 |
 | `error_count` | 0 | 0 | +0.0000 |
 
 ## Failed Or Weak Cases
 
 | Case | Strategy | Reason |
 | --- | --- | --- |
-| `brepmfr-method-001` | `baseline-current` | expected coverage 0 |
-| `brepmfr-method-001` | `current-evidence` | expected coverage 0 |
-| `brepmfr-result-001` | `baseline-current` | expected coverage 0 |
-| `brepmfr-result-001` | `current-evidence` | expected coverage 0 |
-| `brepformer-identifier-001` | `baseline-current` | expected coverage 0 |
-| `brepformer-identifier-001` | `current-evidence` | expected coverage 0 |
-| `brepmfr-followup-style-001` | `baseline-current` | expected coverage 0 |
-| `brepmfr-followup-style-001` | `current-evidence` | expected coverage 0 |
-| `no-answer-training-data-001` | `baseline-current` | no-answer behavior failed |
-| `no-answer-training-data-001` | `current-evidence` | no-answer behavior failed |
+| `qasper-val-0004` | `old-code-api` | expected coverage 0 |
+| `qasper-val-0004` | `current-evidence` | expected coverage 0 |
+| `qasper-val-0008` | `old-code-api` | expected coverage 0 |
+| `qasper-val-0008` | `current-evidence` | expected coverage 0 |
+| `qasper-val-0009` | `old-code-api` | expected coverage 0 |
+| `qasper-val-0009` | `current-evidence` | expected coverage 0 |
+| `qasper-val-0011` | `old-code-api` | expected coverage 0 |
+| `qasper-val-0011` | `current-evidence` | expected coverage 0 |
+| `qasper-val-0017` | `old-code-api` | expected coverage 0 |
+| `qasper-val-0017` | `current-evidence` | expected coverage 0 |
+| `qasper-val-0020` | `old-code-api` | expected coverage 0 |
+| `qasper-val-0020` | `current-evidence` | expected coverage 0 |
+| `qasper-val-0022` | `old-code-api` | expected coverage 0 |
+| `qasper-val-0022` | `current-evidence` | expected coverage 0 |
+| `qasper-val-0024` | `old-code-api` | expected coverage 0 |
 
 ## Case Results
 
-### brepmfr-method-001 (method)
+### qasper-val-0003 (dataset)
 
-Question: What is the core method of BrepMFR?
-
-| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
-| --- | ---: | ---: | ---: | ---: | --- | --- |
-| baseline-current | 0.0000 | 1.0000 | n/a | 1.0000 | n/a |  |
-| current-evidence | 0.0000 | 1.0000 | n/a | 1.0000 | n/a |  |
-
-**baseline-current answer preview:**
-
-根据已导入文献中最相关的片段，问题“What is the core method of BrepMFR?”可从以下证据开始分析：# 4.1. Machining feature type and label The CADSynth dataset encompasses 24 machining features that are the same as those in MFCAD and MFAD++. The geometric shapes and indexes for each machining feature are illustrated in Fig. 7. # 4.2. Dataset generation CADSynth employs a random synthesis algorithm to combine various primitive elements (cuboid, prism, cylinder, cone, and sphere) to form the primary shape of a CAD model. This proc
-
-Representative citation: `paper_0a722d8e689b4f0d_chunk_16` 5.1.2. Dataset
-
-**current-evidence answer preview:**
-
-根据已导入文献中最相关的片段，问题“What is the core method of BrepMFR?”可从以下证据开始分析：# 4.1. Machining feature type and label The CADSynth dataset encompasses 24 machining features that are the same as those in MFCAD and MFAD++. The geometric shapes and indexes for each machining feature are illustrated in Fig. 7. # 4.2. Dataset generation CADSynth employs a random synthesis algorithm to combine various primitive elements (cuboid, prism, cylinder, cone, and sphere) to form the primary shape of a CAD model. This proc
-
-Representative citation: `paper_0a722d8e689b4f0d_chunk_16` 5.1.2. Dataset
-
-### brepmfr-result-001 (result)
-
-Question: What performance does BrepMFR report on machining feature recognition?
+Question: which datasets did they experiment with?
 
 | Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
 | --- | ---: | ---: | ---: | ---: | --- | --- |
-| baseline-current | 0.0000 | 1.0000 | n/a | 1.0000 | n/a |  |
-| current-evidence | 0.0000 | 1.0000 | n/a | 1.0000 | n/a |  |
+| old-code-api | 1.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 1.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
 
-**baseline-current answer preview:**
+**old-code-api answer preview:**
 
-根据已导入文献中最相关的片段，问题“What performance does BrepMFR report on machining feature recognition?”可从以下证据开始分析：# 4.1. Machining feature type and label The CADSynth dataset encompasses 24 machining features that are the same as those in MFCAD and MFAD++. The geometric shapes and indexes for each machining feature are illustrated in Fig. 7. # 4.2. Dataset generation CADSynth employs a random synthesis algorithm to combine various primitive elements (cuboid, prism, cylinder, cone, and sphere) to form the prim
+根据已导入文献中最相关的片段，问题“which datasets did they experiment with?”可从以下证据开始分析：# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance. In all experiments, we use BLEU as the automatic metric for translation evaluation. $^{1}$ Datasets. The statistics of Europarl and MultiUN corpora are summar
 
-Representative citation: `paper_0a722d8e689b4f0d_chunk_16` 5.1.2. Dataset
+Representative citation: `paper_4989cdaf64974840_chunk_11` Setup
 
 **current-evidence answer preview:**
 
-根据已导入文献中最相关的片段，问题“What performance does BrepMFR report on machining feature recognition?”可从以下证据开始分析：# 4.1. Machining feature type and label The CADSynth dataset encompasses 24 machining features that are the same as those in MFCAD and MFAD++. The geometric shapes and indexes for each machining feature are illustrated in Fig. 7. # 4.2. Dataset generation CADSynth employs a random synthesis algorithm to combine various primitive elements (cuboid, prism, cylinder, cone, and sphere) to form the prim
+根据已导入文献中最相关的片段，问题“which datasets did they experiment with?”可从以下证据开始分析：# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance. In all experiments, we use BLEU as the automatic metric for translation evaluation. $^{1}$ Datasets. The statistics of Europarl and MultiUN corpora are summar
 
-Representative citation: `paper_0a722d8e689b4f0d_chunk_16` 5.1.2. Dataset
+Representative citation: `paper_4989cdaf64974840_chunk_11` Setup
 
-### brepformer-identifier-001 (identifier)
+### qasper-val-0004 (paper-qa)
 
-Question: What DOI or arXiv identifier is available for BRepFormer?
+Question: what language pairs are explored?
 
 | Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
 | --- | ---: | ---: | ---: | ---: | --- | --- |
-| baseline-current | 0.0000 | 1.0000 | n/a | 1.0000 | n/a |  |
-| current-evidence | 0.0000 | 1.0000 | n/a | 1.0000 | n/a |  |
+| old-code-api | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.0000 | 1.0000 | 1.0000 | 0.3333 | n/a |  |
 
-**baseline-current answer preview:**
+**old-code-api answer preview:**
 
-根据已导入文献中最相关的片段，问题“What DOI or arXiv identifier is available for BRepFormer?”可从以下证据开始分析：# 1 Introduction Geometric feature recognition serves as a critical link between Computer-Aided Design (CAD) and Computer-Aided Manufacturing (CAM). It is a cornerstone technique for multimedia content-based retrieval and plays a key role in automating manufacturing processes, improving efficiency, and reducing human errors. While traditional rule-based geometric feature recognition methods are widely used in 
+根据已导入文献中最相关的片段，问题“what language pairs are explored?”可从以下证据开始分析：# Introduction Although Neural Machine Translation (NMT) has dominated recent research on translation tasks (Wu et al. 2016; Vaswani et al. 2017; Hassan et al. 2018), NMT heavily relies on large-scale parallel data, resulting in poor performance on low-resource or zero-resource language pairs (Koehn and Knowles 2017). Translation between these low-resource languages (e.g., Arabic→Spanish) is usually accomplished with pivoting through
 
-Representative citation: `paper_1d77c9ee3c5f413d_chunk_5` Introduction
+Representative citation: `paper_4989cdaf64974840_chunk_2` Introduction
 
 **current-evidence answer preview:**
 
-根据已导入文献中最相关的片段，问题“What DOI or arXiv identifier is available for BRepFormer?”可从以下证据开始分析：# 1 Introduction Geometric feature recognition serves as a critical link between Computer-Aided Design (CAD) and Computer-Aided Manufacturing (CAM). It is a cornerstone technique for multimedia content-based retrieval and plays a key role in automating manufacturing processes, improving efficiency, and reducing human errors. While traditional rule-based geometric feature recognition methods are widely used in 
+根据已导入文献中最相关的片段，问题“what language pairs are explored?”可从以下证据开始分析：# Introduction Although Neural Machine Translation (NMT) has dominated recent research on translation tasks (Wu et al. 2016; Vaswani et al. 2017; Hassan et al. 2018), NMT heavily relies on large-scale parallel data, resulting in poor performance on low-resource or zero-resource language pairs (Koehn and Knowles 2017). Translation between these low-resource languages (e.g., Arabic→Spanish) is usually accomplished with pivoting through
 
-Representative citation: `paper_1d77c9ee3c5f413d_chunk_5` Introduction
+Representative citation: `paper_4989cdaf64974840_chunk_2` Introduction
 
-### cross-paper-compare-001 (comparison)
+### qasper-val-0005 (method)
 
-Question: Compare BrepMFR and BRepFormer at a high level.
+Question: what ner models were evaluated?
 
 | Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
 | --- | ---: | ---: | ---: | ---: | --- | --- |
-| baseline-current | 0.6667 | 1.0000 | n/a | 0.5000 | n/a |  |
-| current-evidence | 0.6667 | 1.0000 | n/a | 0.5000 | n/a |  |
+| old-code-api | 0.3333 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.3333 | 1.0000 | 1.0000 | 0.3333 | n/a |  |
 
-**baseline-current answer preview:**
+**old-code-api answer preview:**
 
-根据已导入文献中最相关的片段，问题“Compare BrepMFR and BRepFormer at a high level.”可从以下证据开始分析：5.2.3 Complex Feature Dataset. In our CBF dataset, unlike previous datasets, this dataset requires the model to identify these three distinct geometric features along with the base plate. The experimental results of our model and other mainstream models on this dataset is presented in Table 5. Although our network outperforms other comparative networks in terms of overall accuracy, it performs poorly in the mIoU metric.
+根据已导入文献中最相关的片段，问题“what ner models were evaluated?”可从以下证据开始分析：# VI. DISCUSSION Table III shows the average scores of evaluated models. The highest F1 score was achieved by the recurrent model using a batch size of 8 and Adam optimizer with an initial learning rate of 0.001. Updating word embeddings during training also noticeably improved the performance. GloVe word vector models of four different sizes (50, 100, 200, and 300) were tested, with vectors of size 50 producing the best results (Table
 
-Representative citation: `paper_1d77c9ee3c5f413d_chunk_23` Experimental Datasets
+Representative citation: `paper_18c9a8ee5ba54ec6_chunk_13` VI. DISCUSSION
 
 **current-evidence answer preview:**
 
-根据已导入文献中最相关的片段，问题“Compare BrepMFR and BRepFormer at a high level.”可从以下证据开始分析：5.2.3 Complex Feature Dataset. In our CBF dataset, unlike previous datasets, this dataset requires the model to identify these three distinct geometric features along with the base plate. The experimental results of our model and other mainstream models on this dataset is presented in Table 5. Although our network outperforms other comparative networks in terms of overall accuracy, it performs poorly in the mIoU metric.
+根据已导入文献中最相关的片段，问题“what ner models were evaluated?”可从以下证据开始分析：# VI. DISCUSSION Table III shows the average scores of evaluated models. The highest F1 score was achieved by the recurrent model using a batch size of 8 and Adam optimizer with an initial learning rate of 0.001. Updating word embeddings during training also noticeably improved the performance. GloVe word vector models of four different sizes (50, 100, 200, and 300) were tested, with vectors of size 50 producing the best results (Table
 
-Representative citation: `paper_1d77c9ee3c5f413d_chunk_23` Experimental Datasets
+Representative citation: `paper_18c9a8ee5ba54ec6_chunk_13` VI. DISCUSSION
 
-### brepmfr-followup-style-001 (follow-up-style)
+### qasper-val-0008 (paper-qa)
 
-Question: For the same BrepMFR paper, what network components are used after the B-rep face input features are encoded?
+Question: what are the topics pulled from Reddit?
 
 | Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
 | --- | ---: | ---: | ---: | ---: | --- | --- |
-| baseline-current | 0.0000 | 1.0000 | n/a | 0.0000 | n/a |  |
-| current-evidence | 0.0000 | 1.0000 | n/a | 1.0000 | n/a |  |
+| old-code-api | 0.0000 | 1.0000 | 0.5000 | 0.0000 | n/a |  |
+| current-evidence | 0.0000 | 1.0000 | 0.5000 | 1.0000 | n/a |  |
 
-**baseline-current answer preview:**
+**old-code-api answer preview:**
 
-根据已导入文献中最相关的片段，问题“For the same BrepMFR paper, what network components are used after the B-rep face input features are encoded?”可从以下证据开始分析：# 4.1. Machining feature type and label The CADSynth dataset encompasses 24 machining features that are the same as those in MFCAD and MFAD++. The geometric shapes and indexes for each machining feature are illustrated in Fig. 7. # 4.2. Dataset generation CADSynth employs a random synthesis algorithm to combine various primitive elements (cuboid, prism, cylin
+根据已导入文献中最相关的片段，问题“what are the topics pulled from Reddit?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they can predict the behavior of new, self-guiding AI?” –anonymous “I think an AI would make it easier for Patients to confide their information because by nature, a robot cannot judge them. Win-win? :D” –anonymous Dogmatism describes the tendency to lay down opi
 
-Representative citation: `paper_0a722d8e689b4f0d_chunk_16` 5.1.2. Dataset
+Representative citation: `paper_966b9c5490524541_chunk_2` Introduction
 
 **current-evidence answer preview:**
 
-根据已导入文献中最相关的片段，问题“For the same BrepMFR paper, what network components are used after the B-rep face input features are encoded?”可从以下证据开始分析：# 4.1. Machining feature type and label The CADSynth dataset encompasses 24 machining features that are the same as those in MFCAD and MFAD++. The geometric shapes and indexes for each machining feature are illustrated in Fig. 7. # 4.2. Dataset generation CADSynth employs a random synthesis algorithm to combine various primitive elements (cuboid, prism, cylin
+根据已导入文献中最相关的片段，问题“what are the topics pulled from Reddit?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they can predict the behavior of new, self-guiding AI?” –anonymous “I think an AI would make it easier for Patients to confide their information because by nature, a robot cannot judge them. Win-win? :D” –anonymous Dogmatism describes the tendency to lay down opi
 
-Representative citation: `paper_0a722d8e689b4f0d_chunk_16` 5.1.2. Dataset
+Representative citation: `paper_966b9c5490524541_chunk_2` Introduction
 
-### no-answer-training-data-001 (no-answer)
+### qasper-val-0009 (method)
 
-Question: Does BRepFormer report using the CIFAR-10 image classification dataset?
+Question: What predictive model do they build?
 
 | Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
 | --- | ---: | ---: | ---: | ---: | --- | --- |
-| baseline-current | n/a | 1.0000 | n/a | n/a | no |  |
-| current-evidence | n/a | 1.0000 | n/a | n/a | no |  |
+| old-code-api | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
 
-**baseline-current answer preview:**
+**old-code-api answer preview:**
 
-根据已导入文献中最相关的片段，问题“Does BRepFormer report using the CIFAR-10 image classification dataset?”可从以下证据开始分析：# 5.1 Experimental Environment We trained our network using a single NVIDIA 4090 GPU and PyTorch-Lightning v1.9.0, highlighting its lightweight nature. During training, we used the AdamW optimizer with an initial learning rate of 0.001, and parameters set to $\beta_{1} = 0.9$ , $\beta_{2} = 0.999$ , and $\epsilon = 1 \times 10^{-8}$ for stability. We also employed the ReduceLROn-Plateau [2] learn
+根据已导入文献中最相关的片段，问题“What predictive model do they build?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they can predict the behavior of new, self-guiding AI?” –anonymous “I think an AI would make it easier for Patients to confide their information because by nature, a robot cannot judge them. Win-win? :D” –anonymous Dogmatism describes the tendency to lay down opinio
 
-Representative citation: `paper_1d77c9ee3c5f413d_chunk_21` Experimental Environment
+Representative citation: `paper_966b9c5490524541_chunk_2` Introduction
 
 **current-evidence answer preview:**
 
-根据已导入文献中最相关的片段，问题“Does BRepFormer report using the CIFAR-10 image classification dataset?”可从以下证据开始分析：# 5.1 Experimental Environment We trained our network using a single NVIDIA 4090 GPU and PyTorch-Lightning v1.9.0, highlighting its lightweight nature. During training, we used the AdamW optimizer with an initial learning rate of 0.001, and parameters set to $\beta_{1} = 0.9$ , $\beta_{2} = 0.999$ , and $\epsilon = 1 \times 10^{-8}$ for stability. We also employed the ReduceLROn-Plateau [2] learn
+根据已导入文献中最相关的片段，问题“What predictive model do they build?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they can predict the behavior of new, self-guiding AI?” –anonymous “I think an AI would make it easier for Patients to confide their information because by nature, a robot cannot judge them. Win-win? :D” –anonymous Dogmatism describes the tendency to lay down opinio
 
-Representative citation: `paper_1d77c9ee3c5f413d_chunk_21` Experimental Environment
+Representative citation: `paper_966b9c5490524541_chunk_2` Introduction
+
+### qasper-val-0011 (paper-qa)
+
+Question: How do they match words before reordering them?
+
+| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| old-code-api | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+
+**old-code-api answer preview:**
+
+根据已导入文献中最相关的片段，问题“How do they match words before reordering them?”可从以下证据开始分析：# 3 Proposed Solution Consider the task of translating for an extremely low-resource language pair. The parallel corpus between the two languages, if available may be too small to train an NMT model. Similar to Zoph et al. (2016), we use transfer learning to overcome data sparsity between the source and the target languages. We choose English as the assisting language in all our experiments. In our resource-scarce scena
+
+Representative citation: `paper_ee722d8eebe849f9_chunk_4` Proposed Solution
+
+**current-evidence answer preview:**
+
+根据已导入文献中最相关的片段，问题“How do they match words before reordering them?”可从以下证据开始分析：# 3 Proposed Solution Consider the task of translating for an extremely low-resource language pair. The parallel corpus between the two languages, if available may be too small to train an NMT model. Similar to Zoph et al. (2016), we use transfer learning to overcome data sparsity between the source and the target languages. We choose English as the assisting language in all our experiments. In our resource-scarce scena
+
+Representative citation: `paper_ee722d8eebe849f9_chunk_4` Proposed Solution
+
+### qasper-val-0013 (dataset)
+
+Question: Which dataset(s) do they experiment with?
+
+| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| old-code-api | 0.5000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.5000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+
+**old-code-api answer preview:**
+
+根据已导入文献中最相关的片段，问题“Which dataset(s) do they experiment with?”可从以下证据开始分析：# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. Languages: We experimented with English → Hindi translation as the parent task. English is the assisting source language. Bengali, Gujarati, Marathi, Malayalam and Tamil are the source languages, and translation from these to Hindi constitute the child tasks. Hindi, Bengali, 
+
+Representative citation: `paper_ee722d8eebe849f9_chunk_5` Experimental Setup
+
+**current-evidence answer preview:**
+
+根据已导入文献中最相关的片段，问题“Which dataset(s) do they experiment with?”可从以下证据开始分析：# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. Languages: We experimented with English → Hindi translation as the parent task. English is the assisting source language. Bengali, Gujarati, Marathi, Malayalam and Tamil are the source languages, and translation from these to Hindi constitute the child tasks. Hindi, Bengali, 
+
+Representative citation: `paper_ee722d8eebe849f9_chunk_5` Experimental Setup
+
+### qasper-val-0016 (dataset)
+
+Question: On which benchmarks they achieve the state of the art?
+
+| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| old-code-api | 1.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 1.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+
+**old-code-api answer preview:**
+
+根据已导入文献中最相关的片段，问题“On which benchmarks they achieve the state of the art?”可从以下证据开始分析：# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$ and (2) AMPCNN (Yin et al., 2016), the state-of-the-art on SimpleQuestions. Since these two baselines are specially designed/tuned for one particular dataset, they do not generalize well when applied to the other dataset. In order to highlight the effect of diff
+
+Representative citation: `paper_ad6cad90ed1d41d6_chunk_20` KBQA End-Task Results
+
+**current-evidence answer preview:**
+
+根据已导入文献中最相关的片段，问题“On which benchmarks they achieve the state of the art?”可从以下证据开始分析：# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$ and (2) AMPCNN (Yin et al., 2016), the state-of-the-art on SimpleQuestions. Since these two baselines are specially designed/tuned for one particular dataset, they do not generalize well when applied to the other dataset. In order to highlight the effect of diff
+
+Representative citation: `paper_ad6cad90ed1d41d6_chunk_20` KBQA End-Task Results
+
+### qasper-val-0017 (paper-qa)
+
+Question: What does KBQA abbreviate for
+
+| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| old-code-api | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+
+**old-code-api answer preview:**
+
+根据已导入文献中最相关的片段，问题“What does KBQA abbreviate for”可从以下证据开始分析：# 4.2 Different Abstractions of Questions Representations From Table 1, we can see that different parts of a relation could match different contexts of question texts. Usually relation names could match longer phrases in the question and relation words could match short phrases. Yet different words might match phrases of different lengths. As a result, we hope the question representations could also comprise vectors that summarize variou
+
+Representative citation: `paper_ad6cad90ed1d41d6_chunk_8` Different Abstractions of Questions Representations
+
+**current-evidence answer preview:**
+
+根据已导入文献中最相关的片段，问题“What does KBQA abbreviate for”可从以下证据开始分析：# 4.2 Different Abstractions of Questions Representations From Table 1, we can see that different parts of a relation could match different contexts of question texts. Usually relation names could match longer phrases in the question and relation words could match short phrases. Yet different words might match phrases of different lengths. As a result, we hope the question representations could also comprise vectors that summarize variou
+
+Representative citation: `paper_ad6cad90ed1d41d6_chunk_8` Different Abstractions of Questions Representations
+
+### qasper-val-0020 (paper-qa)
+
+Question: How do they calculate a static embedding for each word?
+
+| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| old-code-api | 0.0000 | 1.0000 | 1.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.0000 | 1.0000 | 1.0000 | 1.0000 | n/a |  |
+
+**old-code-api answer preview:**
+
+根据已导入文献中最相关的片段，问题“How do they calculate a static embedding for each word?”可从以下证据开始分析：# 1 Introduction The application of deep learning methods to NLP is made possible by representing words as vectors in a low-dimensional continuous space. Traditionally, these word embeddings were static: each word had a single vector, regardless of context (Mikolov et al., 2013a; Pennington et al., 2014). This posed several problems, most notably that all senses of a polysemous word had to share the same represe
+
+Representative citation: `paper_f34858cc477d48bb_chunk_2` Introduction
+
+**current-evidence answer preview:**
+
+根据已导入文献中最相关的片段，问题“How do they calculate a static embedding for each word?”可从以下证据开始分析：# 3.1 Contextualizing Models The contextualizing models we study in this paper are ELMo, BERT, and GPT-2 $^{1}$ . We choose the base cased version of BERT because it is most comparable to GPT-2 with respect to number of layers and dimensionality. The models we work with are all pre-trained on their respective language modelling tasks. Although ELMo, BERT, and GPT-2 have 2, 12, and 12 hidden layers respectively, 
+
+Representative citation: `paper_f34858cc477d48bb_chunk_5` Contextualizing Models
+
+### qasper-val-0022 (method)
+
+Question: What are the other algorithms tested?
+
+| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| old-code-api | 0.0000 | 1.0000 | 0.0000 | 0.0000 | n/a |  |
+| current-evidence | 0.0000 | 1.0000 | 0.0000 | 0.0000 | n/a |  |
+
+**old-code-api answer preview:**
+
+根据已导入文献中最相关的片段，问题“What are the other algorithms tested?”可从以下证据开始分析：# 5. Conclusions and Future Work In this work we have briefly introduced the problems related to data privacy protection in clinical domain. We have also described some of the groundbreaking advances on the Natural Language Processing field due to the appearance of Transformers-based deep-learning architectures and transfer learning from very large general-domain multilingual corpora, focusing our attention in one of its most rep
+
+Representative citation: `paper_c23b8432b797410b_chunk_30` Conclusions and Future Work
+
+**current-evidence answer preview:**
+
+根据已导入文献中最相关的片段，问题“What are the other algorithms tested?”可从以下证据开始分析：# 3. Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific task: sensitive data detection and classification in Spanish clinical free text. This section describes the data involved in the experiments and the systems evaluated. Finally, we introduce the experimental setup. [C1] [C2] [C3]
+
+Representative citation: `paper_c23b8432b797410b_chunk_5` Materials and Methods
+
+### qasper-val-0024 (dataset)
+
+Question: What are the clinical datasets used in the paper?
+
+| Strategy | Expected Coverage | Citation Validity | Final Recall | Quote Recall | Missing OK | Error |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| old-code-api | 0.0000 | 1.0000 | 0.5000 | 0.0000 | n/a |  |
+| current-evidence | 0.6667 | 1.0000 | 0.0000 | 0.0000 | n/a |  |
+
+**old-code-api answer preview:**
+
+根据已导入文献中最相关的片段，问题“What are the clinical datasets used in the paper?”可从以下证据开始分析：# 5. Conclusions and Future Work In this work we have briefly introduced the problems related to data privacy protection in clinical domain. We have also described some of the groundbreaking advances on the Natural Language Processing field due to the appearance of Transformers-based deep-learning architectures and transfer learning from very large general-domain multilingual corpora, focusing our attention in one of 
+
+Representative citation: `paper_c23b8432b797410b_chunk_30` Conclusions and Future Work
+
+**current-evidence answer preview:**
+
+根据已导入文献中最相关的片段，问题“What are the clinical datasets used in the paper?”可从以下证据开始分析：# 3.3.1. Experiment A: NUBES-PHI In this experiment set, we evaluate all the systems presented in Section 3.2., namely, the rule-based baseline, the CRF classifier, the spaCy entity tagger, and BERT. The evaluation comprises three scenarios of increasing difficulty: <table><tr><td></td><td colspan="3">Detection</td><td colspan="3">Classification (relaxed)</td><td colspan="3">Classification... [C1] [C2] [C3]
+
+Representative citation: `paper_c23b8432b797410b_chunk_16` Experiment A: NUBES-PHI

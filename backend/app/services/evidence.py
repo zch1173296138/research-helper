@@ -9,6 +9,9 @@ from backend.app.services.retrieval import HybridRetriever
 from backend.app.services.vector_store import RetrievedChunk
 
 
+SUPPORT_LEVEL_PRIORITY = {"direct": 0, "partial": 1, "background": 2, "none": 3}
+
+
 class EvidenceRagService:
     def __init__(
         self,
@@ -41,10 +44,11 @@ class EvidenceRagService:
         candidates = retrieval.chunks
         decisions, judge_source = self._judge(question, candidates, top_k)
         by_id = {chunk.chunk_id: chunk for chunk in candidates}
+        context_decisions = self._context_decisions(decisions, candidates)
         accepted_chunks = [
             by_id[decision.chunk_id]
-            for decision in decisions
-            if decision.decision == "accept" and decision.chunk_id in by_id
+            for decision in context_decisions
+            if decision.chunk_id in by_id
         ]
         final_context_chunks = accepted_chunks[:top_k]
         return EvidenceRagResult(
@@ -193,6 +197,34 @@ class EvidenceRagService:
                     )
                 )
         return normalized
+
+    def _context_decisions(
+        self,
+        decisions: list[EvidenceDecision],
+        candidates: list[RetrievedChunk],
+    ) -> list[EvidenceDecision]:
+        candidate_rank = {chunk.chunk_id: index for index, chunk in enumerate(candidates)}
+        context_decisions = [
+            decision
+            for decision in decisions
+            if decision.chunk_id in candidate_rank and self._include_in_context(decision)
+        ]
+        return sorted(
+            context_decisions,
+            key=lambda decision: (
+                SUPPORT_LEVEL_PRIORITY.get(decision.support_level, SUPPORT_LEVEL_PRIORITY["none"]),
+                candidate_rank[decision.chunk_id],
+            ),
+        )
+
+    def _include_in_context(self, decision: EvidenceDecision) -> bool:
+        if decision.support_level == "none":
+            return False
+        if decision.decision == "accept":
+            return decision.support_level in {"direct", "partial", "background"}
+        if decision.decision == "maybe":
+            return decision.support_level in {"direct", "partial"}
+        return False
 
     def _summary_from_chunk(self, chunk: RetrievedChunk) -> str:
         text = " ".join(chunk.text.split())

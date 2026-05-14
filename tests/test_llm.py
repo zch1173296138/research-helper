@@ -2,6 +2,7 @@ import time
 from types import SimpleNamespace
 
 from backend.app.core.config import Settings
+from backend.app.services.evidence_types import EvidenceDecision
 from backend.app.services.llm import LLMService
 from backend.app.services.vector_store import RetrievedChunk
 
@@ -185,6 +186,29 @@ def test_paper_chat_fallback_forces_citation() -> None:
     assert "[C1]" in result["answer"]
     assert result["citations"][0]["citation_id"] == "C1"
     assert result["missing_evidence"] is False
+
+
+def test_evidence_answer_fallback_returns_top_three_citations() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk(
+            chunk_id=f"chunk-{index}",
+            paper_id="paper-1",
+            filename="paper.pdf",
+            section_title="Method",
+            section_type="method",
+            text=f"Evidence sentence {index}.",
+        )
+        for index in range(1, 5)
+    ]
+    decisions = [EvidenceDecision(chunk.chunk_id, "accept", support_level="partial") for chunk in chunks]
+
+    result = service.answer_with_evidence("What is the method?", chunks, decisions)
+
+    assert "[C1]" in result["answer"]
+    assert "[C2]" in result["answer"]
+    assert "[C3]" in result["answer"]
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2", "C3"]
 
 
 def test_paper_chat_invalid_model_citation_falls_back_to_valid_citation() -> None:

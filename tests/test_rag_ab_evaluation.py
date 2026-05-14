@@ -5,6 +5,7 @@ from typing import Any
 from backend.app.core.config import Settings
 from backend.app.evaluation.adapters import BaselineCurrentAdapter, CurrentEvidenceAdapter
 from backend.app.evaluation.cases import EvaluationCaseLoadError, load_cases
+from backend.app.evaluation.evidence_failure_analysis import analyze_results, classify_failure_stage, main as failure_analysis_main
 from backend.app.evaluation.metrics import score_output
 from backend.app.evaluation.qasper import convert_qasper_rows
 from backend.app.evaluation.qasper_align import ChunkRecord, align_case, support_score
@@ -166,6 +167,77 @@ def test_qasper_alignment_adds_primary_supporting_chunk_ids() -> None:
     assert aligned["supporting_chunk_ids"] == ["paper-1_chunk_2"]
     assert "chunk-aligned" in aligned["tags"]
     assert matches[0]["accepted"] is True
+
+
+def test_evidence_failure_stage_classification() -> None:
+    gold = ["chunk-gold"]
+
+    assert classify_failure_stage(gold, [], [], [], []) == "not_applicable"
+    assert classify_failure_stage(gold, ["chunk-other"], [], [], []) == "retrieval_miss"
+    assert classify_failure_stage(gold, ["chunk-gold"], [], [], []) == "evidence_rejected_gold"
+    assert classify_failure_stage(gold, ["chunk-gold"], ["chunk-gold"], ["chunk-other"], []) == "final_context_truncated_gold"
+    assert classify_failure_stage(gold, ["chunk-gold"], ["chunk-gold"], ["chunk-gold"], []) == "citation_selection_missed_gold"
+    assert classify_failure_stage(gold, ["chunk-gold"], ["chunk-gold"], ["chunk-gold"], ["chunk-gold"]) == "ok"
+
+
+def test_evidence_failure_analysis_writes_json_and_markdown(tmp_path: Path) -> None:
+    input_path = tmp_path / "case_results.jsonl"
+    json_output = tmp_path / "analysis.json"
+    markdown_output = tmp_path / "analysis.md"
+    payload = {
+        "case": {
+            "id": "case-1",
+            "question": "What is the method?",
+            "supporting_chunk_ids": ["chunk-gold"],
+        },
+        "outputs": {
+            "current-evidence": {
+                "candidate_chunk_ids": ["chunk-gold", "chunk-other"],
+                "accepted_chunk_ids": ["chunk-other"],
+                "final_context_chunk_ids": ["chunk-other"],
+                "citations": [{"chunk_id": "chunk-other"}],
+            }
+        },
+    }
+    input_path.write_text(json.dumps(payload) + "\n", encoding="utf-8")
+
+    exit_code = failure_analysis_main(
+        [
+            "--input",
+            str(input_path),
+            "--json-output",
+            str(json_output),
+            "--markdown-output",
+            str(markdown_output),
+        ]
+    )
+
+    assert exit_code == 0
+    rows = json.loads(json_output.read_text(encoding="utf-8"))["rows"]
+    assert rows[0]["failure_stage"] == "evidence_rejected_gold"
+    assert rows[0]["gold_in_candidates"] is True
+    assert rows[0]["gold_in_accepted"] is False
+    assert "`evidence_rejected_gold`" in markdown_output.read_text(encoding="utf-8")
+
+
+def test_evidence_failure_analysis_handles_baseline_without_candidates() -> None:
+    rows = analyze_results(
+        [
+            {
+                "case": {"id": "case-1", "question": "What?", "supporting_chunk_ids": ["chunk-gold"]},
+                "outputs": {
+                    "baseline-current": {
+                        "retrieved_chunk_ids": ["chunk-gold"],
+                        "final_context_chunk_ids": ["chunk-gold"],
+                        "citations": [{"chunk_id": "chunk-other"}],
+                    }
+                },
+            }
+        ]
+    )
+
+    assert rows[0]["gold_in_final_context"] is True
+    assert rows[0]["failure_stage"] == "citation_selection_missed_gold"
 
 
 def test_score_output_marks_not_applicable_evidence_metrics_for_baseline() -> None:

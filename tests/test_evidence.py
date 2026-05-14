@@ -54,6 +54,44 @@ def seed_library(db, tmp_path: Path) -> Paper:
     return paper
 
 
+def make_chunk(chunk_id: str, text: str | None = None) -> RetrievedChunk:
+    return RetrievedChunk(
+        chunk_id=chunk_id,
+        paper_id="paper-1",
+        filename="paper.pdf",
+        section_title="Method",
+        text=text or f"Evidence text for {chunk_id}.",
+    )
+
+
+def gather_with_decisions(decisions: list[EvidenceDecision], top_k: int = 8):
+    chunks = [
+        make_chunk("chunk-background"),
+        make_chunk("chunk-partial"),
+        make_chunk("chunk-direct"),
+        make_chunk("chunk-rejected"),
+        make_chunk("chunk-maybe-background"),
+    ]
+
+    class FakeRetriever:
+        def search(self, *_args, **_kwargs):
+            return SimpleNamespace(chunks=chunks, metadata={"strategy": "fake"})
+
+    class FakeLlm:
+        client = object()
+
+        def judge_evidence(self, *_args):
+            return decisions
+
+    return EvidenceRagService(Settings(openai_api_key=""), retriever=FakeRetriever(), llm=FakeLlm()).gather(
+        db=None,
+        library_id="library-1",
+        question="What is the method?",
+        paper_ids=["paper-1"],
+        top_k=top_k,
+    )
+
+
 def test_evidence_rag_fallback_records_candidates_and_accepts_ranked_chunks(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr("backend.app.services.vector_store.lancedb", None)
     db = make_session()
@@ -69,6 +107,63 @@ def test_evidence_rag_fallback_records_candidates_and_accepts_ranked_chunks(tmp_
     assert metadata["accepted_chunk_ids"] == [result.final_context_chunks[0].chunk_id]
     assert metadata["evidence_decisions"][0]["decision"] == "accept"
     assert all("ref" not in chunk.chunk_id for chunk in result.candidates)
+
+
+def test_evidence_rag_includes_maybe_direct_in_final_context() -> None:
+    result = gather_with_decisions(
+        [
+            EvidenceDecision("chunk-direct", "maybe", support_level="direct"),
+            EvidenceDecision("chunk-rejected", "reject", support_level="none"),
+        ]
+    )
+
+    assert result.final_context_chunk_ids == ["chunk-direct"]
+
+
+def test_evidence_rag_includes_maybe_partial_in_final_context() -> None:
+    result = gather_with_decisions(
+        [
+            EvidenceDecision("chunk-partial", "maybe", support_level="partial"),
+            EvidenceDecision("chunk-rejected", "reject", support_level="none"),
+        ]
+    )
+
+    assert result.final_context_chunk_ids == ["chunk-partial"]
+
+
+def test_evidence_rag_excludes_maybe_background_from_final_context() -> None:
+    result = gather_with_decisions(
+        [
+            EvidenceDecision("chunk-maybe-background", "maybe", support_level="background"),
+            EvidenceDecision("chunk-rejected", "reject", support_level="none"),
+        ]
+    )
+
+    assert result.final_context_chunk_ids == []
+
+
+def test_evidence_rag_excludes_reject_direct_from_final_context() -> None:
+    result = gather_with_decisions(
+        [
+            EvidenceDecision("chunk-rejected", "reject", support_level="direct"),
+            EvidenceDecision("chunk-background", "accept", support_level="none"),
+        ]
+    )
+
+    assert result.final_context_chunk_ids == []
+
+
+def test_evidence_rag_final_context_order_is_support_level_then_retrieval_rank() -> None:
+    result = gather_with_decisions(
+        [
+            EvidenceDecision("chunk-background", "accept", support_level="background"),
+            EvidenceDecision("chunk-partial", "maybe", support_level="partial"),
+            EvidenceDecision("chunk-direct", "accept", support_level="direct"),
+            EvidenceDecision("chunk-rejected", "reject", support_level="direct"),
+        ]
+    )
+
+    assert result.final_context_chunk_ids == ["chunk-direct", "chunk-partial", "chunk-background"]
 
 
 def test_llm_judge_evidence_parses_json_and_rejects_invalid_values() -> None:

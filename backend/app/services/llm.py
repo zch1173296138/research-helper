@@ -222,7 +222,8 @@ class LLMService:
         citations = [self._citation_from_chunk(chunk, citation_id) for citation_id, chunk in citation_map.items()]
         if self.client is None:
             answer = self._extractive_answer(question, chunks)
-            return {"answer": f"{answer} [C1]", "citations": citations[:1], "missing_evidence": False}
+            cited_ids = " ".join(f"[C{index}]" for index in range(1, min(3, len(citations)) + 1))
+            return {"answer": f"{answer} {cited_ids}", "citations": citations[:3], "missing_evidence": False}
 
         messages = self._build_evidence_answer_messages(
             question,
