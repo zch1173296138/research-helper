@@ -39,6 +39,7 @@ class StrategyOutput:
     strategy: str
     answer: str = ""
     citations: list[dict[str, Any]] = field(default_factory=list)
+    answer_source_chunk_ids: list[str] = field(default_factory=list)
     retrieved_chunk_ids: list[str] = field(default_factory=list)
     candidate_chunk_ids: list[str] = field(default_factory=list)
     accepted_chunk_ids: list[str] = field(default_factory=list)
@@ -65,6 +66,8 @@ class StrategyMetrics:
     citation_recall: float | None = None
     citation_precision: float | None = None
     citation_count: int = 0
+    answer_source_recall: float | None = None
+    answer_source_precision: float | None = None
     quote_support_recall: float | None = None
     reference_contamination: bool = False
     accepted_evidence_precision: float | None = None

@@ -1,0 +1,1534 @@
+{
+  "input": "evals\\rag_ab\\runs\\qasper_answer_source_current\\case_results.jsonl",
+  "row_count": 24,
+  "stage_counts": {
+    "answer_source_has_gold_but_citation_missed": 0,
+    "citation_selection_missed_gold": 6,
+    "evidence_rejected_gold": 2,
+    "final_context_has_gold_but_answer_source_missed": 6,
+    "final_context_truncated_gold": 0,
+    "not_applicable": 0,
+    "ok": 8,
+    "retrieval_miss": 2
+  },
+  "rows": [
+    {
+      "case_id": "qasper-val-0003",
+      "strategy": "baseline-current",
+      "question": "which datasets did they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14"
+      ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 1
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“which datasets did they experiment with?”可从以下证据开始分析：# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0003",
+      "strategy": "current-evidence",
+      "question": "which datasets did they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15",
+        "paper_4989cdaf64974840_chunk_17",
+        "paper_4989cdaf64974840_chunk_16",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_20",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_8",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_9",
+        "paper_4989cdaf64974840_chunk_5"
+      ],
+      "accepted_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14"
+      ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 1
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“which datasets did they experiment with?”可从以下证据开始分析：# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0004",
+      "strategy": "baseline-current",
+      "question": "what language pairs are explored?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6"
+      ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 7
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what language pairs are explored?”可从以下证据开始分析：# Introduction Although Neural Machine Translation (NMT) has dominated recent research on translation tasks (Wu et al. 2016; Vaswani et al. 2017; Hassan et al. 2018), NMT...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0004",
+      "strategy": "current-evidence",
+      "question": "what language pairs are explored?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_8",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_5",
+        "paper_4989cdaf64974840_chunk_17",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_20",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_16",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "accepted_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9"
+      ],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2"
+      ],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6"
+      ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 7
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what language pairs are explored?”可从以下证据开始分析：# Introduction Although Neural Machine Translation (NMT) has dominated recent research on translation tasks (Wu et al. 2016; Vaswani et al. 2017; Hassan et al. 2018), NMT...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "final_context_has_gold_but_answer_source_missed"
+    },
+    {
+      "case_id": "qasper-val-0005",
+      "strategy": "baseline-current",
+      "question": "what ner models were evaluated?",
+      "supporting_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7"
+      ],
+      "gold_position_in_final_context": {
+        "paper_18c9a8ee5ba54ec6_chunk_9": 6,
+        "paper_18c9a8ee5ba54ec6_chunk_10": 8
+      },
+      "final_context_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what ner models were evaluated?”可从以下证据开始分析：# VI. DISCUSSION Table III shows the average scores of evaluated models. The highest F1 score was achieved by the recurrent model using a batch size of 8 and Adam optimizer with...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0005",
+      "strategy": "current-evidence",
+      "question": "what ner models were evaluated?",
+      "supporting_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "candidate_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10",
+        "paper_18c9a8ee5ba54ec6_chunk_12",
+        "paper_18c9a8ee5ba54ec6_chunk_8",
+        "paper_18c9a8ee5ba54ec6_chunk_4",
+        "paper_18c9a8ee5ba54ec6_chunk_6",
+        "paper_18c9a8ee5ba54ec6_chunk_5",
+        "paper_18c9a8ee5ba54ec6_chunk_2",
+        "paper_18c9a8ee5ba54ec6_chunk_3"
+      ],
+      "accepted_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "final_context_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13"
+      ],
+      "citation_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7"
+      ],
+      "gold_position_in_final_context": {
+        "paper_18c9a8ee5ba54ec6_chunk_9": 6,
+        "paper_18c9a8ee5ba54ec6_chunk_10": 8
+      },
+      "final_context_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what ner models were evaluated?”可从以下证据开始分析：# VI. DISCUSSION Table III shows the average scores of evaluated models. The highest F1 score was achieved by the recurrent model using a batch size of 8 and Adam optimizer with...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "final_context_has_gold_but_answer_source_missed"
+    },
+    {
+      "case_id": "qasper-val-0008",
+      "strategy": "baseline-current",
+      "question": "what are the topics pulled from Reddit?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_9"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10"
+      ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_3": 2,
+        "paper_966b9c5490524541_chunk_9": null
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what are the topics pulled from Reddit?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0008",
+      "strategy": "current-evidence",
+      "question": "what are the topics pulled from Reddit?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_9"
+      ],
+      "candidate_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1",
+        "paper_966b9c5490524541_chunk_9",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_7",
+        "paper_966b9c5490524541_chunk_4",
+        "paper_966b9c5490524541_chunk_16"
+      ],
+      "accepted_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1"
+      ],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2"
+      ],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10"
+      ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_3": 2,
+        "paper_966b9c5490524541_chunk_9": null
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what are the topics pulled from Reddit?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0009",
+      "strategy": "baseline-current",
+      "question": "What predictive model do they build?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6"
+      ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_8": 4
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What predictive model do they build?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0009",
+      "strategy": "current-evidence",
+      "question": "What predictive model do they build?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "candidate_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_1",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_16",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_9",
+        "paper_966b9c5490524541_chunk_4",
+        "paper_966b9c5490524541_chunk_7",
+        "paper_966b9c5490524541_chunk_0"
+      ],
+      "accepted_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2"
+      ],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6"
+      ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_8": 4
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What predictive model do they build?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "final_context_has_gold_but_answer_source_missed"
+    },
+    {
+      "case_id": "qasper-val-0011",
+      "strategy": "baseline-current",
+      "question": "How do they match words before reordering them?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_7": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they match words before reordering them?”可从以下证据开始分析：# 3 Proposed Solution Consider the task of translating for an extremely low-resource language pair. The parallel corpus between the two languages, if available...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0011",
+      "strategy": "current-evidence",
+      "question": "How do they match words before reordering them?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_12",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_10",
+        "paper_ee722d8eebe849f9_chunk_13"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4"
+      ],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_7": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they match words before reordering them?”可从以下证据开始分析：# 3 Proposed Solution Consider the task of translating for an extremely low-resource language pair. The parallel corpus between the two languages, if available...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "final_context_has_gold_but_answer_source_missed"
+    },
+    {
+      "case_id": "qasper-val-0013",
+      "strategy": "baseline-current",
+      "question": "Which dataset(s) do they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_5": 1
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“Which dataset(s) do they experiment with?”可从以下证据开始分析：# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. Languages: We...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0013",
+      "strategy": "current-evidence",
+      "question": "Which dataset(s) do they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12",
+        "paper_ee722d8eebe849f9_chunk_10",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_13",
+        "paper_ee722d8eebe849f9_chunk_3"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_5": 1
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_source_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "citation_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“Which dataset(s) do they experiment with?”可从以下证据开始分析：# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. Languages: We...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0016",
+      "strategy": "baseline-current",
+      "question": "On which benchmarks they achieve the state of the art?",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_20": 1,
+        "paper_ad6cad90ed1d41d6_chunk_18": 3
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“On which benchmarks they achieve the state of the art?”可从以下证据开始分析：# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0016",
+      "strategy": "current-evidence",
+      "question": "On which benchmarks they achieve the state of the art?",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5",
+        "paper_ad6cad90ed1d41d6_chunk_1",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17",
+        "paper_ad6cad90ed1d41d6_chunk_10",
+        "paper_ad6cad90ed1d41d6_chunk_7",
+        "paper_ad6cad90ed1d41d6_chunk_21",
+        "paper_ad6cad90ed1d41d6_chunk_25",
+        "paper_ad6cad90ed1d41d6_chunk_26",
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_15",
+        "paper_ad6cad90ed1d41d6_chunk_12",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_13",
+        "paper_ad6cad90ed1d41d6_chunk_27",
+        "paper_ad6cad90ed1d41d6_chunk_6",
+        "paper_ad6cad90ed1d41d6_chunk_14"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20"
+      ],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_20": 1,
+        "paper_ad6cad90ed1d41d6_chunk_18": 3
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_source_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20"
+      ],
+      "citation_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“On which benchmarks they achieve the state of the art?”可从以下证据开始分析：# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0017",
+      "strategy": "baseline-current",
+      "question": "What does KBQA abbreviate for",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_2": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What does KBQA abbreviate for”可从以下证据开始分析：# 4.2 Different Abstractions of Questions Representations From Table 1, we can see that different parts of a relation could match different contexts of question texts. Usually...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0017",
+      "strategy": "current-evidence",
+      "question": "What does KBQA abbreviate for",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_5",
+        "paper_ad6cad90ed1d41d6_chunk_1",
+        "paper_ad6cad90ed1d41d6_chunk_21",
+        "paper_ad6cad90ed1d41d6_chunk_26",
+        "paper_ad6cad90ed1d41d6_chunk_10",
+        "paper_ad6cad90ed1d41d6_chunk_12",
+        "paper_ad6cad90ed1d41d6_chunk_0",
+        "paper_ad6cad90ed1d41d6_chunk_15",
+        "paper_ad6cad90ed1d41d6_chunk_7",
+        "paper_ad6cad90ed1d41d6_chunk_25",
+        "paper_ad6cad90ed1d41d6_chunk_6",
+        "paper_ad6cad90ed1d41d6_chunk_13",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_27"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8"
+      ],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3"
+      ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_2": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What does KBQA abbreviate for”可从以下证据开始分析：# 4.2 Different Abstractions of Questions Representations From Table 1, we can see that different parts of a relation could match different contexts of question texts. Usually...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "final_context_has_gold_but_answer_source_missed"
+    },
+    {
+      "case_id": "qasper-val-0020",
+      "strategy": "baseline-current",
+      "question": "How do they calculate a static embedding for each word?",
+      "supporting_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2"
+      ],
+      "gold_position_in_final_context": {
+        "paper_f34858cc477d48bb_chunk_15": 5
+      },
+      "final_context_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they calculate a static embedding for each word?”可从以下证据开始分析：# 3.1 Contextualizing Models The contextualizing models we study in this paper are ELMo, BERT, and GPT-2 $^{1}$ . We choose the base cased version of BERT...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0020",
+      "strategy": "current-evidence",
+      "question": "How do they calculate a static embedding for each word?",
+      "supporting_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "candidate_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11",
+        "paper_f34858cc477d48bb_chunk_1",
+        "paper_f34858cc477d48bb_chunk_13",
+        "paper_f34858cc477d48bb_chunk_8",
+        "paper_f34858cc477d48bb_chunk_9",
+        "paper_f34858cc477d48bb_chunk_21",
+        "paper_f34858cc477d48bb_chunk_18",
+        "paper_f34858cc477d48bb_chunk_14",
+        "paper_f34858cc477d48bb_chunk_16",
+        "paper_f34858cc477d48bb_chunk_7",
+        "paper_f34858cc477d48bb_chunk_12",
+        "paper_f34858cc477d48bb_chunk_6",
+        "paper_f34858cc477d48bb_chunk_17",
+        "paper_f34858cc477d48bb_chunk_0",
+        "paper_f34858cc477d48bb_chunk_22"
+      ],
+      "accepted_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11"
+      ],
+      "final_context_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5"
+      ],
+      "citation_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2"
+      ],
+      "gold_position_in_final_context": {
+        "paper_f34858cc477d48bb_chunk_15": 5
+      },
+      "final_context_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they calculate a static embedding for each word?”可从以下证据开始分析：# 3.1 Contextualizing Models The contextualizing models we study in this paper are ELMo, BERT, and GPT-2 $^{1}$ . We choose the base cased version of BERT...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "final_context_has_gold_but_answer_source_missed"
+    },
+    {
+      "case_id": "qasper-val-0022",
+      "strategy": "baseline-current",
+      "question": "What are the other algorithms tested?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_12",
+        "paper_c23b8432b797410b_chunk_13"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4"
+      ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_12": null,
+        "paper_c23b8432b797410b_chunk_13": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the other algorithms tested?”可从以下证据开始分析：# 3. Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "retrieval_miss"
+    },
+    {
+      "case_id": "qasper-val-0022",
+      "strategy": "current-evidence",
+      "question": "What are the other algorithms tested?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_12",
+        "paper_c23b8432b797410b_chunk_13"
+      ],
+      "candidate_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7",
+        "paper_c23b8432b797410b_chunk_8",
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_9",
+        "paper_c23b8432b797410b_chunk_14",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_10",
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_12",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_11",
+        "paper_c23b8432b797410b_chunk_13",
+        "paper_c23b8432b797410b_chunk_20",
+        "paper_c23b8432b797410b_chunk_3",
+        "paper_c23b8432b797410b_chunk_18",
+        "paper_c23b8432b797410b_chunk_27"
+      ],
+      "accepted_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5"
+      ],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4"
+      ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_12": null,
+        "paper_c23b8432b797410b_chunk_13": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the other algorithms tested?”可从以下证据开始分析：# 3. Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "evidence_rejected_gold"
+    },
+    {
+      "case_id": "qasper-val-0024",
+      "strategy": "baseline-current",
+      "question": "What are the clinical datasets used in the paper?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20",
+        "paper_c23b8432b797410b_chunk_0"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15"
+      ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_6": null,
+        "paper_c23b8432b797410b_chunk_7": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the clinical datasets used in the paper?”可从以下证据开始分析：# 3.3.1. Experiment A: NUBES-PHI In this experiment set, we evaluate all the systems presented in Section 3.2., namely, the rule-based baseline, the CRF...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "retrieval_miss"
+    },
+    {
+      "case_id": "qasper-val-0024",
+      "strategy": "current-evidence",
+      "question": "What are the clinical datasets used in the paper?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "candidate_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_0",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20",
+        "paper_c23b8432b797410b_chunk_18",
+        "paper_c23b8432b797410b_chunk_27",
+        "paper_c23b8432b797410b_chunk_25",
+        "paper_c23b8432b797410b_chunk_28",
+        "paper_c23b8432b797410b_chunk_21",
+        "paper_c23b8432b797410b_chunk_22",
+        "paper_c23b8432b797410b_chunk_23",
+        "paper_c23b8432b797410b_chunk_24",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_14",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_13",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "accepted_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_0",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20"
+      ],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_0",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16"
+      ],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15"
+      ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_6": null,
+        "paper_c23b8432b797410b_chunk_7": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the clinical datasets used in the paper?”可从以下证据开始分析：# 3.3.1. Experiment A: NUBES-PHI In this experiment set, we evaluate all the systems presented in Section 3.2., namely, the rule-based baseline, the CRF...",
+      "answer_source_count": 1,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "evidence_rejected_gold"
+    }
+  ]
+}

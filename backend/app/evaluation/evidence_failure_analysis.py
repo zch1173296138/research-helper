@@ -14,6 +14,8 @@ FAILURE_STAGES = {
     "retrieval_miss",
     "evidence_rejected_gold",
     "final_context_truncated_gold",
+    "final_context_has_gold_but_answer_source_missed",
+    "answer_source_has_gold_but_citation_missed",
     "citation_selection_missed_gold",
     "ok",
     "not_applicable",
@@ -71,14 +73,17 @@ def analyze_strategy(case: dict[str, Any], strategy: str, output: dict[str, Any]
     candidate_chunk_ids = output_ids(output, "candidate_chunk_ids")
     accepted_chunk_ids = output_ids(output, "accepted_chunk_ids")
     final_context_chunk_ids = output_ids(output, "final_context_chunk_ids") or output_ids(output, "retrieved_chunk_ids")
+    answer_source_chunk_ids = output_ids(output, "answer_source_chunk_ids")
     citation_ids = citation_chunk_ids(output)
 
     gold = set(supporting_chunk_ids)
     final_context_hit_ids = ordered_hits(supporting_chunk_ids, final_context_chunk_ids)
+    answer_source_hit_ids = ordered_hits(supporting_chunk_ids, answer_source_chunk_ids)
     citation_hit_ids = ordered_hits(supporting_chunk_ids, citation_ids)
     gold_in_candidates = intersects(gold, candidate_chunk_ids)
     gold_in_accepted = intersects(gold, accepted_chunk_ids)
     gold_in_final_context = intersects(gold, final_context_chunk_ids)
+    gold_in_answer_sources = intersects(gold, answer_source_chunk_ids)
     gold_in_citations = intersects(gold, citation_ids)
 
     return {
@@ -89,22 +94,29 @@ def analyze_strategy(case: dict[str, Any], strategy: str, output: dict[str, Any]
         "candidate_chunk_ids": candidate_chunk_ids,
         "accepted_chunk_ids": accepted_chunk_ids,
         "final_context_chunk_ids": final_context_chunk_ids,
+        "answer_source_chunk_ids": answer_source_chunk_ids,
         "citation_chunk_ids": citation_ids,
         "gold_position_in_final_context": gold_positions(supporting_chunk_ids, final_context_chunk_ids),
         "final_context_hit_ids": final_context_hit_ids,
+        "answer_source_hit_ids": answer_source_hit_ids,
         "citation_hit_ids": citation_hit_ids,
         "answer_preview": answer_preview(output),
+        "answer_source_count": len(answer_source_chunk_ids),
         "citation_count": len(citation_ids),
         "final_context_count": len(final_context_chunk_ids),
         "gold_in_candidates": gold_in_candidates,
         "gold_in_accepted": gold_in_accepted,
         "gold_in_final_context": gold_in_final_context,
+        "gold_in_answer_sources": gold_in_answer_sources,
         "gold_in_citations": gold_in_citations,
+        "gold_in_final_but_not_answer_source": gold_in_final_context and not gold_in_answer_sources,
+        "gold_in_answer_source_but_not_citation": gold_in_answer_sources and not gold_in_citations,
         "failure_stage": classify_failure_stage(
             supporting_chunk_ids=supporting_chunk_ids,
             candidate_chunk_ids=candidate_chunk_ids,
             accepted_chunk_ids=accepted_chunk_ids,
             final_context_chunk_ids=final_context_chunk_ids,
+            answer_source_chunk_ids=answer_source_chunk_ids if has_output_id_field(output, "answer_source_chunk_ids") else None,
             citation_chunk_ids=citation_ids,
         ),
     }
@@ -116,6 +128,7 @@ def classify_failure_stage(
     accepted_chunk_ids: list[str],
     final_context_chunk_ids: list[str],
     citation_chunk_ids: list[str],
+    answer_source_chunk_ids: list[str] | None = None,
 ) -> str:
     gold = set(supporting_chunk_ids)
     if not gold:
@@ -125,6 +138,11 @@ def classify_failure_stage(
     gold_in_accepted = intersects(gold, accepted_chunk_ids)
     gold_in_final_context = intersects(gold, final_context_chunk_ids)
     gold_in_citations = intersects(gold, citation_chunk_ids)
+    gold_in_answer_sources = (
+        intersects(gold, answer_source_chunk_ids)
+        if answer_source_chunk_ids is not None
+        else False
+    )
 
     if candidate_chunk_ids:
         if not gold_in_candidates:
@@ -134,6 +152,10 @@ def classify_failure_stage(
         if not gold_in_final_context:
             return "final_context_truncated_gold"
         if not gold_in_citations:
+            if answer_source_chunk_ids is not None and not gold_in_answer_sources:
+                return "final_context_has_gold_but_answer_source_missed"
+            if answer_source_chunk_ids is not None and gold_in_answer_sources:
+                return "answer_source_has_gold_but_citation_missed"
             return "citation_selection_missed_gold"
         return "ok"
 
@@ -141,6 +163,10 @@ def classify_failure_stage(
         if not gold_in_final_context:
             return "retrieval_miss"
         if not gold_in_citations:
+            if answer_source_chunk_ids is not None and not gold_in_answer_sources:
+                return "final_context_has_gold_but_answer_source_missed"
+            if answer_source_chunk_ids is not None and gold_in_answer_sources:
+                return "answer_source_has_gold_but_citation_missed"
             return "citation_selection_missed_gold"
         return "ok"
 
@@ -155,6 +181,14 @@ def output_ids(output: dict[str, Any], key: str) -> list[str]:
     if isinstance(metadata, dict):
         return string_list(metadata.get(key))
     return []
+
+
+def has_output_id_field(output: dict[str, Any], key: str) -> bool:
+    metadata = output.get("raw_metadata")
+    if isinstance(metadata, dict) and key in metadata:
+        return True
+    value = output.get(key)
+    return isinstance(value, list) and bool(value)
 
 
 def citation_chunk_ids(output: dict[str, Any]) -> list[str]:
@@ -234,8 +268,8 @@ def write_markdown_report(analysis: list[dict[str, Any]], output_path: Path, inp
             "",
             "## Rows",
             "",
-            "| Case | Strategy | Stage | Gold positions | Final hits | Citation hits | Final count | Citation count |",
-            "| --- | --- | --- | --- | --- | --- | ---: | ---: |",
+            "| Case | Strategy | Stage | Gold positions | Final hits | Answer source hits | Citation hits | Final count | Answer source count | Citation count |",
+            "| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: |",
         ]
     )
     for row in analysis:
@@ -248,8 +282,10 @@ def write_markdown_report(analysis: list[dict[str, Any]], output_path: Path, inp
                     f"`{row['failure_stage']}`",
                     format_positions(row["gold_position_in_final_context"]),
                     format_ids(row["final_context_hit_ids"]),
+                    format_ids(row["answer_source_hit_ids"]),
                     format_ids(row["citation_hit_ids"]),
                     str(row["final_context_count"]),
+                    str(row["answer_source_count"]),
                     str(row["citation_count"]),
                 ]
             )

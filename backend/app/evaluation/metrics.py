@@ -26,6 +26,7 @@ def score_output(case: EvaluationCase, output: StrategyOutput, known_chunk_ids: 
     known_chunk_ids = known_chunk_ids or set()
     support_ids = set(case.supporting_chunk_ids)
     citation_ids = citation_chunk_ids(output)
+    answer_source_ids = answer_source_chunk_ids(output)
     final_ids = set(output.final_context_chunk_ids or output.retrieved_chunk_ids)
     candidate_ids = set(output.candidate_chunk_ids)
     accepted_ids = set(output.accepted_chunk_ids)
@@ -44,6 +45,8 @@ def score_output(case: EvaluationCase, output: StrategyOutput, known_chunk_ids: 
     metrics.final_context_recall = recall(support_ids, final_ids) if support_ids and final_ids else None
     metrics.citation_recall = recall(support_ids, citation_ids) if support_ids and citation_ids else None
     metrics.citation_precision = precision(citation_ids, support_ids) if support_ids and citation_ids else None
+    metrics.answer_source_recall = recall(support_ids, answer_source_ids) if support_ids else None
+    metrics.answer_source_precision = precision(answer_source_ids, support_ids) if support_ids and answer_source_ids else None
     metrics.quote_support_recall = quote_support_recall(case, output)
     metrics.reference_contamination = has_reference_contamination(output)
     if output.evidence_decisions:
@@ -71,6 +74,8 @@ def aggregate_metrics(results: list[dict[str, StrategyMetrics]]) -> dict[str, An
             "avg_citation_count": average([float(row.citation_count) for row in rows]),
             "avg_citation_recall": average_not_none([row.citation_recall for row in rows]),
             "avg_citation_precision": average_not_none([row.citation_precision for row in rows]),
+            "avg_answer_source_recall": average_not_none([row.answer_source_recall for row in rows]),
+            "avg_answer_source_precision": average_not_none([row.answer_source_precision for row in rows]),
             "avg_quote_support_recall": average_not_none([row.quote_support_recall for row in rows]),
             "reference_contamination_rate": average([1.0 if row.reference_contamination else 0.0 for row in rows]),
             "avg_accepted_evidence_precision": average_not_none([row.accepted_evidence_precision for row in rows]),
@@ -155,6 +160,14 @@ def has_reference_contamination(output: StrategyOutput) -> bool:
 
 def citation_chunk_ids(output: StrategyOutput) -> set[str]:
     return {str(citation.get("chunk_id")) for citation in output.citations if citation.get("chunk_id")}
+
+
+def answer_source_chunk_ids(output: StrategyOutput) -> set[str]:
+    ids = {str(item).strip() for item in output.answer_source_chunk_ids if str(item).strip()}
+    metadata_value = output.raw_metadata.get("answer_source_chunk_ids")
+    if isinstance(metadata_value, list):
+        ids.update(str(item).strip() for item in metadata_value if str(item).strip())
+    return ids
 
 
 def returned_chunk_metadata(output: StrategyOutput) -> list[dict[str, Any]]:

@@ -87,7 +87,7 @@ class LLMService:
         memory_summary: str = "",
     ) -> dict[str, Any]:
         if not chunks:
-            return {"answer": MISSING, "citations": [], "missing_evidence": True}
+            return {"answer": MISSING, "citations": [], "missing_evidence": True, "answer_source_chunk_ids": []}
 
         citation_map = {f"C{index}": chunk for index, chunk in enumerate(chunks[:8], start=1)}
         citations = [self._citation_from_chunk(chunk, citation_id) for citation_id, chunk in citation_map.items()]
@@ -216,7 +216,7 @@ class LLMService:
         paper_chat: bool,
     ) -> dict[str, Any]:
         if not chunks:
-            return {"answer": MISSING, "citations": [], "missing_evidence": True}
+            return {"answer": MISSING, "citations": [], "missing_evidence": True, "answer_source_chunk_ids": []}
 
         citation_map = {f"C{index}": chunk for index, chunk in enumerate(chunks[:8], start=1)}
         citations = [self._citation_from_chunk(chunk, citation_id) for citation_id, chunk in citation_map.items()]
@@ -230,7 +230,12 @@ class LLMService:
             )
             cited_ids = " ".join(f"[{citation_id}]" for citation_id in selected_ids[:3])
             selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
-            return {"answer": f"{answer} {cited_ids}".strip(), "citations": selected, "missing_evidence": False}
+            return {
+                "answer": f"{answer} {cited_ids}".strip(),
+                "citations": selected,
+                "missing_evidence": False,
+                "answer_source_chunk_ids": answer_source_chunk_ids,
+            }
 
         messages = self._build_evidence_answer_messages(
             question,
@@ -255,7 +260,12 @@ class LLMService:
             answer, answer_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
 
         if MISSING in answer or "insufficient evidence" in answer.lower():
-            return {"answer": answer, "citations": [], "missing_evidence": True}
+            return {
+                "answer": answer,
+                "citations": [],
+                "missing_evidence": True,
+                "answer_source_chunk_ids": answer_source_chunk_ids,
+            }
 
         used_ids = self._valid_citation_ids(answer, set(citation_map))
         selected_ids = self._selected_evidence_citation_ids(
@@ -268,6 +278,7 @@ class LLMService:
             fallback_id = selected_ids[0] if selected_ids else next(iter(citation_map))
             fallback_answer, fallback_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
             answer = f"{fallback_answer} [{fallback_id}]"
+            answer_source_chunk_ids = fallback_source_chunk_ids
             selected_ids = self._selected_evidence_citation_ids(
                 [fallback_id],
                 citation_map,
@@ -275,7 +286,12 @@ class LLMService:
                 answer_source_chunk_ids=fallback_source_chunk_ids,
             )
         selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
-        return {"answer": answer, "citations": selected, "missing_evidence": False}
+        return {
+            "answer": answer,
+            "citations": selected,
+            "missing_evidence": False,
+            "answer_source_chunk_ids": answer_source_chunk_ids,
+        }
 
     def _selected_evidence_citation_ids(
         self,

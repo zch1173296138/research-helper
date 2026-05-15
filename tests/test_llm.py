@@ -209,6 +209,7 @@ def test_evidence_answer_fallback_returns_top_three_citations() -> None:
     assert "[C2]" in result["answer"]
     assert "[C3]" in result["answer"]
     assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2", "C3"]
+    assert result["answer_source_chunk_ids"] == ["chunk-1"]
 
 
 def test_evidence_answer_strict_mode_uses_only_explicit_citations() -> None:

@@ -177,6 +177,21 @@ def test_evidence_failure_stage_classification() -> None:
     assert classify_failure_stage(gold, ["chunk-gold"], [], [], []) == "evidence_rejected_gold"
     assert classify_failure_stage(gold, ["chunk-gold"], ["chunk-gold"], ["chunk-other"], []) == "final_context_truncated_gold"
     assert classify_failure_stage(gold, ["chunk-gold"], ["chunk-gold"], ["chunk-gold"], []) == "citation_selection_missed_gold"
+    assert (
+        classify_failure_stage(gold, ["chunk-gold"], ["chunk-gold"], ["chunk-gold"], [], answer_source_chunk_ids=[])
+        == "final_context_has_gold_but_answer_source_missed"
+    )
+    assert (
+        classify_failure_stage(
+            gold,
+            ["chunk-gold"],
+            ["chunk-gold"],
+            ["chunk-gold"],
+            [],
+            answer_source_chunk_ids=["chunk-gold"],
+        )
+        == "answer_source_has_gold_but_citation_missed"
+    )
     assert classify_failure_stage(gold, ["chunk-gold"], ["chunk-gold"], ["chunk-gold"], ["chunk-gold"]) == "ok"
 
 
@@ -219,7 +234,10 @@ def test_evidence_failure_analysis_writes_json_and_markdown(tmp_path: Path) -> N
     assert rows[0]["gold_in_accepted"] is False
     assert rows[0]["gold_position_in_final_context"] == {"chunk-gold": None}
     assert rows[0]["final_context_hit_ids"] == []
+    assert rows[0]["answer_source_chunk_ids"] == []
+    assert rows[0]["gold_in_answer_sources"] is False
     assert rows[0]["citation_hit_ids"] == []
+    assert rows[0]["answer_source_count"] == 0
     assert rows[0]["citation_count"] == 1
     assert rows[0]["final_context_count"] == 1
     assert "`evidence_rejected_gold`" in markdown_output.read_text(encoding="utf-8")
@@ -243,6 +261,52 @@ def test_evidence_failure_analysis_handles_baseline_without_candidates() -> None
 
     assert rows[0]["gold_in_final_context"] is True
     assert rows[0]["failure_stage"] == "citation_selection_missed_gold"
+
+
+def test_evidence_failure_analysis_identifies_answer_source_miss() -> None:
+    rows = analyze_results(
+        [
+            {
+                "case": {"id": "case-1", "question": "What?", "supporting_chunk_ids": ["chunk-gold"]},
+                "outputs": {
+                    "current-evidence": {
+                        "candidate_chunk_ids": ["chunk-gold"],
+                        "accepted_chunk_ids": ["chunk-gold"],
+                        "final_context_chunk_ids": ["chunk-gold"],
+                        "raw_metadata": {"answer_source_chunk_ids": ["chunk-other"]},
+                        "citations": [{"chunk_id": "chunk-other"}],
+                    }
+                },
+            }
+        ]
+    )
+
+    assert rows[0]["answer_source_chunk_ids"] == ["chunk-other"]
+    assert rows[0]["gold_in_final_but_not_answer_source"] is True
+    assert rows[0]["failure_stage"] == "final_context_has_gold_but_answer_source_missed"
+
+
+def test_evidence_failure_analysis_identifies_citation_miss_after_answer_source() -> None:
+    rows = analyze_results(
+        [
+            {
+                "case": {"id": "case-1", "question": "What?", "supporting_chunk_ids": ["chunk-gold"]},
+                "outputs": {
+                    "current-evidence": {
+                        "candidate_chunk_ids": ["chunk-gold"],
+                        "accepted_chunk_ids": ["chunk-gold"],
+                        "final_context_chunk_ids": ["chunk-gold"],
+                        "answer_source_chunk_ids": ["chunk-gold"],
+                        "citations": [{"chunk_id": "chunk-other"}],
+                    }
+                },
+            }
+        ]
+    )
+
+    assert rows[0]["gold_in_answer_sources"] is True
+    assert rows[0]["gold_in_answer_source_but_not_citation"] is True
+    assert rows[0]["failure_stage"] == "answer_source_has_gold_but_citation_missed"
 
 
 def test_score_output_marks_not_applicable_evidence_metrics_for_baseline() -> None:
@@ -269,6 +333,8 @@ def test_score_output_marks_not_applicable_evidence_metrics_for_baseline() -> No
     assert metrics.citation_precision == 1.0
     assert metrics.citation_count == 1
     assert metrics.citation_validity == 1.0
+    assert metrics.answer_source_recall == 0.0
+    assert metrics.answer_source_precision is None
     assert metrics.accepted_evidence_precision is None
     assert metrics.accepted_evidence_recall is None
 
@@ -299,6 +365,27 @@ def test_score_output_scores_current_evidence_and_reference_contamination() -> N
     assert metrics.accepted_evidence_precision == 1.0
     assert metrics.accepted_evidence_recall == 1.0
     assert metrics.reference_contamination is True
+
+
+def test_score_output_scores_answer_source_metrics() -> None:
+    case = EvaluationCase(
+        id="case-1",
+        category="method",
+        question="What is the method?",
+        should_answer=True,
+        supporting_chunk_ids=["chunk-1", "chunk-2"],
+    )
+    output = StrategyOutput(
+        strategy="current-evidence",
+        answer="Answer.",
+        answer_source_chunk_ids=["chunk-1", "chunk-other"],
+        raw_metadata={"answer_source_chunk_ids": ["chunk-1", "chunk-other"]},
+    )
+
+    metrics = score_output(case, output)
+
+    assert metrics.answer_source_recall == 0.5
+    assert metrics.answer_source_precision == 0.5
 
 
 def test_score_no_answer_behavior() -> None:
@@ -384,6 +471,7 @@ def test_current_evidence_adapter_preserves_evidence_metadata(monkeypatch) -> No
             return {
                 "answer": "The accepted evidence supports the answer.",
                 "citations": [{"chunk_id": "chunk-accepted"}],
+                "answer_source_chunk_ids": ["chunk-accepted"],
                 "missing_evidence": False,
                 "retrieval_metadata": {
                     "candidate_chunk_ids": ["chunk-candidate", "chunk-accepted"],
@@ -405,6 +493,8 @@ def test_current_evidence_adapter_preserves_evidence_metadata(monkeypatch) -> No
     assert output.candidate_chunk_ids == ["chunk-candidate", "chunk-accepted"]
     assert output.accepted_chunk_ids == ["chunk-accepted"]
     assert output.final_context_chunk_ids == ["chunk-accepted"]
+    assert output.answer_source_chunk_ids == ["chunk-accepted"]
+    assert output.raw_metadata["answer_source_chunk_ids"] == ["chunk-accepted"]
     assert output.evidence_decisions == [
         {"chunk_id": "chunk-accepted", "decision": "accept"},
         {"chunk_id": "chunk-candidate", "decision": "reject"},

@@ -45,10 +45,14 @@ class BaselineCurrentAdapter:
             answer = self.llm.answer_with_citations(case.question, retrieval.chunks)
             metadata = dict(retrieval.metadata)
             metadata["returned_chunks"] = [chunk_to_metadata(chunk) for chunk in retrieval.chunks]
+            answer_source_chunk_ids = string_list(answer.get("answer_source_chunk_ids"))
+            if answer_source_chunk_ids:
+                metadata["answer_source_chunk_ids"] = answer_source_chunk_ids
             return StrategyOutput(
                 strategy=self.name,
                 answer=str(answer.get("answer") or ""),
                 citations=list(answer.get("citations") or []),
+                answer_source_chunk_ids=answer_source_chunk_ids,
                 retrieved_chunk_ids=[chunk.chunk_id for chunk in retrieval.chunks],
                 final_context_chunk_ids=[chunk.chunk_id for chunk in retrieval.chunks],
                 missing_evidence=bool(answer.get("missing_evidence")),
@@ -87,10 +91,13 @@ class CurrentEvidenceAdapter:
             accepted_ids = list(metadata.get("accepted_chunk_ids") or [])
             final_ids = list(metadata.get("final_context_chunk_ids") or [])
             decisions = list(metadata.get("evidence_decisions") or [])
+            answer_source_chunk_ids = string_list(result.get("answer_source_chunk_ids"))
+            metadata["answer_source_chunk_ids"] = answer_source_chunk_ids
             return StrategyOutput(
                 strategy=self.name,
                 answer=str(result.get("answer") or ""),
                 citations=list(result.get("citations") or []),
+                answer_source_chunk_ids=answer_source_chunk_ids,
                 retrieved_chunk_ids=final_ids or [citation.get("chunk_id") for citation in result.get("citations", []) if citation.get("chunk_id")],
                 candidate_chunk_ids=candidate_ids,
                 accepted_chunk_ids=accepted_ids,
@@ -191,6 +198,17 @@ def require_library_id(case: EvaluationCase) -> str:
 
 def elapsed_ms(started: float) -> float:
     return round((time.perf_counter() - started) * 1000, 3)
+
+
+def string_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    result: list[str] = []
+    for item in value:
+        text = str(item).strip()
+        if text:
+            result.append(text)
+    return result
 
 
 def chunk_to_metadata(chunk: RetrievedChunk) -> dict[str, Any]:

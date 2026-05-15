@@ -124,6 +124,7 @@ def execute_cases(
             known_ids.update(output.candidate_chunk_ids)
             known_ids.update(output.accepted_chunk_ids)
             known_ids.update(output.final_context_chunk_ids)
+            known_ids.update(output.answer_source_chunk_ids)
         metrics = {
             strategy: score_output(case, output, {str(chunk_id) for chunk_id in known_ids if chunk_id})
             for strategy, output in outputs.items()
