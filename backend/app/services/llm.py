@@ -221,20 +221,24 @@ class LLMService:
         citation_map = {f"C{index}": chunk for index, chunk in enumerate(chunks[:8], start=1)}
         citations = [self._citation_from_chunk(chunk, citation_id) for citation_id, chunk in citation_map.items()]
         if self.client is None:
-            answer, answer_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
-            selected_ids = self._selected_evidence_citation_ids(
-                [],
+            extractive = self._extractive_answer_with_claim_sources(question, chunks, decisions)
+            answer = str(extractive["answer"])
+            answer_source_chunk_ids = list(extractive["answer_source_chunk_ids"])
+            selected_ids = self._selected_claim_citation_ids(
+                list(extractive["claims"]),
                 citation_map,
                 decisions,
-                answer_source_chunk_ids=answer_source_chunk_ids,
             )
-            cited_ids = " ".join(f"[{citation_id}]" for citation_id in selected_ids[:3])
             selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
             return {
-                "answer": f"{answer} {cited_ids}".strip(),
+                "answer": answer,
                 "citations": selected,
                 "missing_evidence": False,
                 "answer_source_chunk_ids": answer_source_chunk_ids,
+                "answer_claims": list(extractive["claims"]),
+                "claim_sources": list(extractive["claims"]),
+                "claim_count": len(extractive["claims"]),
+                "citation_selection_mode": self.settings.rag_citation_selection_mode,
             }
 
         messages = self._build_evidence_answer_messages(
@@ -256,8 +260,12 @@ class LLMService:
             )
             answer = response.choices[0].message.content or MISSING
             answer_source_chunk_ids: list[str] = []
+            answer_claims: list[dict[str, str]] = []
         except (OpenAIError, FutureTimeout):
-            answer, answer_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
+            extractive = self._extractive_answer_with_claim_sources(question, chunks, decisions)
+            answer = str(extractive["answer"])
+            answer_source_chunk_ids = list(extractive["answer_source_chunk_ids"])
+            answer_claims = list(extractive["claims"])
 
         if MISSING in answer or "insufficient evidence" in answer.lower():
             return {
@@ -265,6 +273,10 @@ class LLMService:
                 "citations": [],
                 "missing_evidence": True,
                 "answer_source_chunk_ids": answer_source_chunk_ids,
+                "answer_claims": answer_claims,
+                "claim_sources": answer_claims,
+                "claim_count": len(answer_claims),
+                "citation_selection_mode": self.settings.rag_citation_selection_mode,
             }
 
         used_ids = self._valid_citation_ids(answer, set(citation_map))
@@ -275,15 +287,14 @@ class LLMService:
             answer_source_chunk_ids=answer_source_chunk_ids,
         )
         if not used_ids:
-            fallback_id = selected_ids[0] if selected_ids else next(iter(citation_map))
-            fallback_answer, fallback_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
-            answer = f"{fallback_answer} [{fallback_id}]"
-            answer_source_chunk_ids = fallback_source_chunk_ids
-            selected_ids = self._selected_evidence_citation_ids(
-                [fallback_id],
+            extractive = self._extractive_answer_with_claim_sources(question, chunks, decisions)
+            answer = str(extractive["answer"])
+            answer_source_chunk_ids = list(extractive["answer_source_chunk_ids"])
+            answer_claims = list(extractive["claims"])
+            selected_ids = self._selected_claim_citation_ids(
+                answer_claims,
                 citation_map,
                 decisions,
-                answer_source_chunk_ids=fallback_source_chunk_ids,
             )
         selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
         return {
@@ -291,7 +302,45 @@ class LLMService:
             "citations": selected,
             "missing_evidence": False,
             "answer_source_chunk_ids": answer_source_chunk_ids,
+            "answer_claims": answer_claims,
+            "claim_sources": answer_claims,
+            "claim_count": len(answer_claims),
+            "citation_selection_mode": self.settings.rag_citation_selection_mode,
         }
+
+    def _selected_claim_citation_ids(
+        self,
+        claims: list[dict[str, str]],
+        citation_map: dict[str, RetrievedChunk],
+        decisions: list[EvidenceDecision],
+    ) -> list[str]:
+        claim_ids = [
+            str(claim.get("citation_id") or "").strip()
+            for claim in claims
+            if str(claim.get("citation_id") or "").strip() in citation_map
+        ]
+        claim_ids = self._dedupe_preserve_order(claim_ids)
+        if not claim_ids:
+            return self._selected_evidence_citation_ids([], citation_map, decisions)
+
+        mode = self.settings.rag_citation_selection_mode
+        if mode == "strict":
+            return self._selected_evidence_citation_ids([], citation_map, decisions)
+        if mode == "answer_linked":
+            return claim_ids
+        if mode == "precision":
+            high_confidence = set(self._accepted_direct_partial_citation_ids(citation_map, decisions))
+            return [citation_id for citation_id in claim_ids if citation_id in high_confidence]
+        return self._selected_evidence_citation_ids(
+            claim_ids,
+            citation_map,
+            decisions,
+            answer_source_chunk_ids=[
+                str(claim.get("chunk_id") or "").strip()
+                for claim in claims
+                if str(claim.get("chunk_id") or "").strip()
+            ],
+        )
 
     def _selected_evidence_citation_ids(
         self,
@@ -985,6 +1034,195 @@ class LLMService:
             excerpt = excerpt[:700].rsplit(" ", 1)[0] + "..."
         answer = f"根据已导入文献中最相关的片段，问题“{question}”可从以下证据开始分析：{excerpt}"
         return answer, [first.chunk_id]
+
+    def _extractive_answer_with_claim_sources(
+        self,
+        question: str,
+        chunks: list[RetrievedChunk],
+        decisions: list[EvidenceDecision] | None = None,
+        max_claims: int = 3,
+    ) -> dict[str, Any]:
+        citation_map = {chunk.chunk_id: f"C{index}" for index, chunk in enumerate(chunks[:8], start=1)}
+        decision_by_chunk = {decision.chunk_id: decision for decision in decisions or []}
+        question_terms = self._claim_terms(question)
+        candidates: list[dict[str, Any]] = []
+        seen_sentences: list[str] = []
+
+        for chunk_index, chunk in enumerate(chunks[:8]):
+            if chunk.chunk_id not in citation_map:
+                continue
+            decision = decision_by_chunk.get(chunk.chunk_id)
+            if not self._claim_chunk_is_eligible(decision):
+                continue
+            best_sentence: str | None = None
+            best_score: tuple[float, int] | None = None
+            for sentence_index, sentence in enumerate(self._claim_sentences(chunk.text)):
+                normalized = self._normalize_claim_sentence(sentence)
+                if not normalized or self._is_near_duplicate_claim(normalized, seen_sentences):
+                    continue
+                text_score = self._claim_text_score(sentence, question_terms)
+                if text_score <= 0 and question_terms:
+                    continue
+                score = (self._claim_decision_boost(decision) + text_score, -sentence_index)
+                if best_score is None or score > best_score:
+                    best_score = score
+                    best_sentence = sentence
+            if best_sentence is None or best_score is None:
+                continue
+            seen_sentences.append(self._normalize_claim_sentence(best_sentence))
+            candidates.append(
+                {
+                    "text": self._truncate(best_sentence, 320),
+                    "chunk_id": chunk.chunk_id,
+                    "citation_id": citation_map[chunk.chunk_id],
+                    "score": best_score[0],
+                    "chunk_index": chunk_index,
+                    "decision_rank": self._claim_decision_rank(decision),
+                }
+            )
+
+        candidates.sort(key=lambda item: (-item["decision_rank"], -item["score"], item["chunk_index"]))
+        selected = sorted(candidates[:max_claims], key=lambda item: item["chunk_index"])
+        claims = [
+            {
+                "text": str(item["text"]),
+                "chunk_id": str(item["chunk_id"]),
+                "citation_id": str(item["citation_id"]),
+            }
+            for item in selected
+        ]
+        if not claims:
+            fallback_answer, fallback_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
+            fallback_citation_id = citation_map.get(fallback_source_chunk_ids[0]) if fallback_source_chunk_ids else None
+            if fallback_citation_id:
+                fallback_answer = f"{fallback_answer} [{fallback_citation_id}]"
+                claims = [
+                    {
+                        "text": fallback_answer,
+                        "chunk_id": fallback_source_chunk_ids[0],
+                        "citation_id": fallback_citation_id,
+                    }
+                ]
+            return {
+                "answer": fallback_answer,
+                "claims": claims,
+                "answer_source_chunk_ids": fallback_source_chunk_ids,
+            }
+
+        answer = "\n".join(f"{claim['text']} [{claim['citation_id']}]" for claim in claims)
+        return {
+            "answer": answer,
+            "claims": claims,
+            "answer_source_chunk_ids": self._dedupe_preserve_order([claim["chunk_id"] for claim in claims]),
+        }
+
+    def _claim_chunk_is_eligible(self, decision: EvidenceDecision | None) -> bool:
+        if decision is None:
+            return True
+        if decision.decision == "reject" or decision.support_level == "none":
+            return False
+        return (
+            (decision.decision == "accept" and decision.support_level in {"direct", "partial", "background"})
+            or (decision.decision == "maybe" and decision.support_level == "partial")
+        )
+
+    def _claim_decision_rank(self, decision: EvidenceDecision | None) -> int:
+        if decision is None:
+            return 1
+        if decision.decision == "accept" and decision.support_level == "direct":
+            return 5
+        if decision.decision == "accept" and decision.support_level == "partial":
+            return 4
+        if decision.decision == "maybe" and decision.support_level == "partial":
+            return 3
+        if decision.decision == "accept" and decision.support_level == "background":
+            return 2
+        return 0
+
+    def _claim_decision_boost(self, decision: EvidenceDecision | None) -> float:
+        return float(self._claim_decision_rank(decision) * 10)
+
+    def _claim_sentences(self, text: str) -> list[str]:
+        compact = re.sub(r"\s+", " ", text).strip()
+        if not compact:
+            return []
+        sentences = [
+            sentence.strip(" -")
+            for sentence in re.split(r"(?<=[.!?。！？])\s+|\n+", compact)
+            if sentence.strip(" -")
+        ]
+        if not sentences:
+            sentences = [compact]
+        passages: list[str] = []
+        for sentence in sentences:
+            if len(sentence) <= 360:
+                passages.append(sentence)
+                continue
+            parts = [part.strip(" -") for part in re.split(r";\s+|,\s+(?=[A-Z])", sentence) if part.strip(" -")]
+            passages.extend(part for part in parts if part)
+        return passages or [compact[:360]]
+
+    def _claim_terms(self, question: str) -> set[str]:
+        stopwords = {
+            "what",
+            "which",
+            "when",
+            "where",
+            "were",
+            "with",
+            "that",
+            "this",
+            "they",
+            "does",
+            "did",
+            "the",
+            "and",
+            "are",
+            "for",
+            "how",
+            "why",
+            "paper",
+            "method",
+        }
+        return {
+            term.lower()
+            for term in re.findall(r"[A-Za-z][A-Za-z0-9_.-]{2,}|\d+(?:\.\d+)?%?", question)
+            if term.lower() not in stopwords
+        }
+
+    def _claim_text_score(self, sentence: str, question_terms: set[str]) -> float:
+        normalized = sentence.lower()
+        if not question_terms:
+            return 1.0
+        hits = sum(1 for term in question_terms if term in normalized)
+        return round(hits / max(1, len(question_terms)), 4)
+
+    def _normalize_claim_sentence(self, sentence: str) -> str:
+        return re.sub(r"\W+", " ", sentence).strip().lower()
+
+    def _is_near_duplicate_claim(self, normalized: str, seen: list[str]) -> bool:
+        if not normalized:
+            return True
+        terms = set(normalized.split())
+        if not terms:
+            return True
+        for other in seen:
+            other_terms = set(other.split())
+            if not other_terms:
+                continue
+            overlap = len(terms.intersection(other_terms)) / max(1, min(len(terms), len(other_terms)))
+            if overlap >= 0.88:
+                return True
+        return False
+
+    def _dedupe_preserve_order(self, values: list[str]) -> list[str]:
+        result: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            if value and value not in seen:
+                result.append(value)
+                seen.add(value)
+        return result
 
     def _fallback_summary(self, filename: str, chunks: list[RetrievedChunk]) -> dict[str, Any]:
         content_chunks = self._summary_content_chunks(chunks)

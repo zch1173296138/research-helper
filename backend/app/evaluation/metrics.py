@@ -41,6 +41,7 @@ def score_output(case: EvaluationCase, output: StrategyOutput, known_chunk_ids: 
     metrics.missing_evidence_correct = score_missing_evidence(case, output)
     metrics.citation_validity = citation_validity(output, known_chunk_ids)
     metrics.citation_count = len(citation_ids)
+    metrics.answer_source_count = len(answer_source_ids)
     metrics.candidate_recall = recall(support_ids, candidate_ids) if support_ids and candidate_ids else None
     metrics.final_context_recall = recall(support_ids, final_ids) if support_ids and final_ids else None
     metrics.citation_recall = recall(support_ids, citation_ids) if support_ids and citation_ids else None
@@ -74,6 +75,7 @@ def aggregate_metrics(results: list[dict[str, StrategyMetrics]]) -> dict[str, An
             "avg_citation_count": average([float(row.citation_count) for row in rows]),
             "avg_citation_recall": average_not_none([row.citation_recall for row in rows]),
             "avg_citation_precision": average_not_none([row.citation_precision for row in rows]),
+            "avg_answer_source_count": average([float(row.answer_source_count) for row in rows]),
             "avg_answer_source_recall": average_not_none([row.answer_source_recall for row in rows]),
             "avg_answer_source_precision": average_not_none([row.answer_source_precision for row in rows]),
             "avg_quote_support_recall": average_not_none([row.quote_support_recall for row in rows]),

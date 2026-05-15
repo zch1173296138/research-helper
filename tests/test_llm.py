@@ -209,7 +209,8 @@ def test_evidence_answer_fallback_returns_top_three_citations() -> None:
     assert "[C2]" in result["answer"]
     assert "[C3]" in result["answer"]
     assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2", "C3"]
-    assert result["answer_source_chunk_ids"] == ["chunk-1"]
+    assert result["answer_source_chunk_ids"] == ["chunk-1", "chunk-2", "chunk-3"]
+    assert result["claim_count"] == 3
 
 
 def test_evidence_answer_strict_mode_uses_only_explicit_citations() -> None:
@@ -269,7 +270,113 @@ def test_evidence_answer_answer_linked_mode_uses_extractive_source_only() -> Non
     result = service.answer_with_evidence("What is the method?", chunks, decisions)
 
     assert "[C1]" in result["answer"]
-    assert "[C2]" not in result["answer"]
+    assert "[C2]" in result["answer"]
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2", "C3"]
+
+
+def test_claim_extraction_uses_two_accepted_direct_chunks() -> None:
+    service = LLMService(Settings(openai_api_key="", rag_citation_selection_mode="answer_linked"))
+    chunks = [
+        RetrievedChunk("chunk-1", "paper-1", "paper.pdf", "Method", "The model uses graph encoding for entities."),
+        RetrievedChunk("chunk-2", "paper-1", "paper.pdf", "Method", "The model uses transformer decoding for relations."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-1", "accept", support_level="direct"),
+        EvidenceDecision("chunk-2", "accept", support_level="direct"),
+    ]
+
+    result = service.answer_with_evidence("What model do they use?", chunks, decisions)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-1", "chunk-2"]
+    assert [claim["citation_id"] for claim in result["answer_claims"]] == ["C1", "C2"]
+    assert "[C1]" in result["answer"]
+    assert "[C2]" in result["answer"]
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2"]
+
+
+def test_claim_extraction_accept_direct_beats_accept_background() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-background", "paper-1", "paper.pdf", "Background", "The model background uses graph features."),
+        RetrievedChunk("chunk-direct", "paper-1", "paper.pdf", "Method", "The model directly uses graph neural networks."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-background", "accept", support_level="background"),
+        EvidenceDecision("chunk-direct", "accept", support_level="direct"),
+    ]
+
+    result = service._extractive_answer_with_claim_sources("What model uses graph?", chunks, decisions, max_claims=1)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-direct"]
+    assert result["claims"][0]["citation_id"] == "C2"
+
+
+def test_claim_extraction_ignores_reject_direct() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-reject", "paper-1", "paper.pdf", "Method", "The model uses rejected graph evidence."),
+        RetrievedChunk("chunk-direct", "paper-1", "paper.pdf", "Method", "The model uses accepted graph evidence."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-reject", "reject", support_level="direct"),
+        EvidenceDecision("chunk-direct", "accept", support_level="direct"),
+    ]
+
+    result = service._extractive_answer_with_claim_sources("What model uses graph?", chunks, decisions, max_claims=2)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-direct"]
+    assert [claim["citation_id"] for claim in result["claims"]] == ["C2"]
+
+
+def test_claim_extraction_uses_maybe_partial_when_needed() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-direct", "paper-1", "paper.pdf", "Method", "The model uses direct graph evidence."),
+        RetrievedChunk("chunk-maybe", "paper-1", "paper.pdf", "Method", "The model uses partial graph evidence."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-direct", "accept", support_level="direct"),
+        EvidenceDecision("chunk-maybe", "maybe", support_level="partial"),
+    ]
+
+    result = service._extractive_answer_with_claim_sources("What model uses graph?", chunks, decisions, max_claims=2)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-direct", "chunk-maybe"]
+    assert [claim["citation_id"] for claim in result["claims"]] == ["C1", "C2"]
+
+
+def test_claim_extraction_dedupes_duplicate_sentences() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-1", "paper-1", "paper.pdf", "Method", "The model uses graph evidence."),
+        RetrievedChunk("chunk-2", "paper-1", "paper.pdf", "Method", "The model uses graph evidence."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-1", "accept", support_level="direct"),
+        EvidenceDecision("chunk-2", "accept", support_level="direct"),
+    ]
+
+    result = service._extractive_answer_with_claim_sources("What model uses graph?", chunks, decisions, max_claims=3)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-1"]
+    assert len(result["claims"]) == 1
+
+
+def test_precision_mode_uses_only_high_confidence_claim_sources() -> None:
+    service = LLMService(Settings(openai_api_key="", rag_citation_selection_mode="precision"))
+    chunks = [
+        RetrievedChunk("chunk-direct", "paper-1", "paper.pdf", "Method", "The model uses direct graph evidence."),
+        RetrievedChunk("chunk-maybe", "paper-1", "paper.pdf", "Method", "The model uses partial graph evidence."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-direct", "accept", support_level="direct"),
+        EvidenceDecision("chunk-maybe", "maybe", support_level="partial"),
+    ]
+
+    result = service.answer_with_evidence("What model uses graph?", chunks, decisions)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-direct", "chunk-maybe"]
+    assert [claim["citation_id"] for claim in result["answer_claims"]] == ["C1", "C2"]
     assert [citation["citation_id"] for citation in result["citations"]] == ["C1"]
 
 
@@ -386,7 +493,8 @@ def test_evidence_answer_without_used_citation_falls_back_to_first_high_confiden
     result = service.answer_with_evidence("What is the method?", chunks, decisions)
 
     assert "[C2]" in result["answer"]
-    assert [citation["citation_id"] for citation in result["citations"]] == ["C2"]
+    assert result["answer_source_chunk_ids"] == ["chunk-background", "chunk-direct"]
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2"]
 
 
 def test_paper_chat_invalid_model_citation_falls_back_to_valid_citation() -> None:

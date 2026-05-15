@@ -66,6 +66,7 @@ class StrategyMetrics:
     citation_recall: float | None = None
     citation_precision: float | None = None
     citation_count: int = 0
+    answer_source_count: int = 0
     answer_source_recall: float | None = None
     answer_source_precision: float | None = None
     quote_support_recall: float | None = None

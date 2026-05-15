@@ -386,6 +386,7 @@ def test_score_output_scores_answer_source_metrics() -> None:
 
     assert metrics.answer_source_recall == 0.5
     assert metrics.answer_source_precision == 0.5
+    assert metrics.answer_source_count == 2
 
 
 def test_score_no_answer_behavior() -> None:
@@ -472,6 +473,10 @@ def test_current_evidence_adapter_preserves_evidence_metadata(monkeypatch) -> No
                 "answer": "The accepted evidence supports the answer.",
                 "citations": [{"chunk_id": "chunk-accepted"}],
                 "answer_source_chunk_ids": ["chunk-accepted"],
+                "answer_claims": [{"text": "Claim.", "chunk_id": "chunk-accepted", "citation_id": "C1"}],
+                "claim_sources": [{"text": "Claim.", "chunk_id": "chunk-accepted", "citation_id": "C1"}],
+                "claim_count": 1,
+                "citation_selection_mode": "answer_linked",
                 "missing_evidence": False,
                 "retrieval_metadata": {
                     "candidate_chunk_ids": ["chunk-candidate", "chunk-accepted"],
@@ -495,6 +500,9 @@ def test_current_evidence_adapter_preserves_evidence_metadata(monkeypatch) -> No
     assert output.final_context_chunk_ids == ["chunk-accepted"]
     assert output.answer_source_chunk_ids == ["chunk-accepted"]
     assert output.raw_metadata["answer_source_chunk_ids"] == ["chunk-accepted"]
+    assert output.raw_metadata["answer_claims"] == [{"text": "Claim.", "chunk_id": "chunk-accepted", "citation_id": "C1"}]
+    assert output.raw_metadata["claim_count"] == 1
+    assert output.raw_metadata["citation_selection_mode"] == "answer_linked"
     assert output.evidence_decisions == [
         {"chunk_id": "chunk-accepted", "decision": "accept"},
         {"chunk_id": "chunk-candidate", "decision": "reject"},

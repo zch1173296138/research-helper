@@ -48,6 +48,7 @@ class BaselineCurrentAdapter:
             answer_source_chunk_ids = string_list(answer.get("answer_source_chunk_ids"))
             if answer_source_chunk_ids:
                 metadata["answer_source_chunk_ids"] = answer_source_chunk_ids
+            preserve_answer_metadata(answer, metadata)
             return StrategyOutput(
                 strategy=self.name,
                 answer=str(answer.get("answer") or ""),
@@ -93,6 +94,7 @@ class CurrentEvidenceAdapter:
             decisions = list(metadata.get("evidence_decisions") or [])
             answer_source_chunk_ids = string_list(result.get("answer_source_chunk_ids"))
             metadata["answer_source_chunk_ids"] = answer_source_chunk_ids
+            preserve_answer_metadata(result, metadata)
             return StrategyOutput(
                 strategy=self.name,
                 answer=str(result.get("answer") or ""),
@@ -209,6 +211,12 @@ def string_list(value: Any) -> list[str]:
         if text:
             result.append(text)
     return result
+
+
+def preserve_answer_metadata(result: dict[str, Any], metadata: dict[str, Any]) -> None:
+    for key in ("answer_claims", "claim_sources", "claim_count", "citation_selection_mode"):
+        if key in result:
+            metadata[key] = result[key]
 
 
 def chunk_to_metadata(chunk: RetrievedChunk) -> dict[str, Any]:
