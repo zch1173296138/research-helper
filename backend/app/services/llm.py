@@ -295,6 +295,8 @@ class LLMService:
                 return selected
             linked_ids = self._citation_ids_by_chunk_ids(citation_map, answer_source_chunk_ids or [])
             return linked_ids or fallback_ids[:1]
+        if mode == "precision":
+            return self._precision_evidence_citation_ids(selected, citation_map, decisions, supplemental_limit=1)
 
         return self._current_evidence_citation_ids(selected, citation_map, decisions, supplemental_limit)
 
@@ -317,6 +319,38 @@ class LLMService:
             if len([item for item in selected if item in prioritized]) >= supplemental_limit:
                 break
         return selected
+
+    def _precision_evidence_citation_ids(
+        self,
+        selected: list[str],
+        citation_map: dict[str, RetrievedChunk],
+        decisions: list[EvidenceDecision],
+        supplemental_limit: int = 1,
+    ) -> list[str]:
+        high_confidence = self._accepted_direct_partial_citation_ids(citation_map, decisions)
+        if selected:
+            filtered = [citation_id for citation_id in selected if citation_id in high_confidence]
+            if filtered:
+                return filtered
+            return high_confidence[:supplemental_limit]
+        return high_confidence[:supplemental_limit]
+
+    def _accepted_direct_partial_citation_ids(
+        self,
+        citation_map: dict[str, RetrievedChunk],
+        decisions: list[EvidenceDecision],
+    ) -> list[str]:
+        decision_by_chunk = {decision.chunk_id: decision for decision in decisions}
+        result: list[str] = []
+        for citation_id, chunk in citation_map.items():
+            decision = decision_by_chunk.get(chunk.chunk_id)
+            if (
+                decision
+                and decision.decision == "accept"
+                and decision.support_level in {"direct", "partial"}
+            ):
+                result.append(citation_id)
+        return result
 
     def _fallback_evidence_citation_ids(
         self,

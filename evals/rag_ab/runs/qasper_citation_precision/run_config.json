@@ -1,6 +1,6 @@
 {
   "case_file": "evals\\rag_ab\\qasper_validation_local_subset_chunked.jsonl",
-  "output_dir": "evals/rag_ab/runs/qasper_citation_current",
+  "output_dir": "evals/rag_ab/runs/qasper_citation_precision",
   "baseline_strategy": "old-code-api",
   "comparison_strategy": "current-evidence",
   "mode": "in-process",
@@ -12,6 +12,6 @@
   "case_filter": [],
   "git_revision": "2655def5df71566b7ac3ebc7e31958f8ef7f837a",
   "case_file_sha256": "61cf3b1bcc5dcab8b69db7462b360b939a984e766cefa4870729045748d7f4a8",
-  "timestamp": "2026-05-15T02:54:55.660468+00:00",
-  "notes": "citation_selection_mode=current"
+  "timestamp": "2026-05-15T02:54:51.725555+00:00",
+  "notes": "citation_selection_mode=precision"
 }

@@ -3,7 +3,7 @@
     "old-code-api": {
       "case_count": 12,
       "error_count": 0,
-      "avg_latency_ms": 43.5094,
+      "avg_latency_ms": 74.493,
       "avg_expected_point_coverage": 0.2361,
       "missing_evidence_accuracy": null,
       "avg_candidate_recall": null,
@@ -19,7 +19,7 @@
     "current-evidence": {
       "case_count": 12,
       "error_count": 0,
-      "avg_latency_ms": 67.4944,
+      "avg_latency_ms": 75.5631,
       "avg_expected_point_coverage": 0.2917,
       "missing_evidence_accuracy": null,
       "avg_candidate_recall": 1.0,
@@ -38,7 +38,7 @@
       "old-code-api": {
         "case_count": 4,
         "error_count": 0,
-        "avg_latency_ms": 48.8185,
+        "avg_latency_ms": 144.9187,
         "avg_expected_point_coverage": 0.625,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": null,
@@ -54,7 +54,7 @@
       "current-evidence": {
         "case_count": 4,
         "error_count": 0,
-        "avg_latency_ms": 148.4865,
+        "avg_latency_ms": 157.4045,
         "avg_expected_point_coverage": 0.7917,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": 1.0,
@@ -72,7 +72,7 @@
       "old-code-api": {
         "case_count": 3,
         "error_count": 0,
-        "avg_latency_ms": 38.8853,
+        "avg_latency_ms": 41.189,
         "avg_expected_point_coverage": 0.1111,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": null,
@@ -88,7 +88,7 @@
       "current-evidence": {
         "case_count": 3,
         "error_count": 0,
-        "avg_latency_ms": 43.056,
+        "avg_latency_ms": 55.6273,
         "avg_expected_point_coverage": 0.1111,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": 1.0,
@@ -106,7 +106,7 @@
       "old-code-api": {
         "case_count": 5,
         "error_count": 0,
-        "avg_latency_ms": 42.0366,
+        "avg_latency_ms": 38.1348,
         "avg_expected_point_coverage": 0.0,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": null,
@@ -122,7 +122,7 @@
       "current-evidence": {
         "case_count": 5,
         "error_count": 0,
-        "avg_latency_ms": 17.3638,
+        "avg_latency_ms": 22.0514,
         "avg_expected_point_coverage": 0.0,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": 1.0,

@@ -13,8 +13,8 @@
 - top_k: `8`
 - Output directory: `evals/rag_ab/runs/qasper_citation_answer_linked`
 - Case file sha256: `61cf3b1bcc5dcab8b69db7462b360b939a984e766cefa4870729045748d7f4a8`
-- Timestamp: `2026-05-15T02:19:38.573688+00:00`
-- Git revision: `7f0c20a576bee37ff5734c4ee3d5f0ed7e5ef27f`
+- Timestamp: `2026-05-15T02:54:48.005840+00:00`
+- Git revision: `2655def5df71566b7ac3ebc7e31958f8ef7f837a`
 - Notes: citation_selection_mode=answer_linked
 
 ## Aggregate Metrics
@@ -25,7 +25,7 @@
 | --- | --- |
 | `case_count` | 12 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 48.9270 |
+| `avg_latency_ms` | 41.4475 |
 | `avg_expected_point_coverage` | 0.2361 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -44,7 +44,7 @@
 | --- | --- |
 | `case_count` | 12 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 69.5154 |
+| `avg_latency_ms` | 72.8888 |
 | `avg_expected_point_coverage` | 0.2917 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | 1.0000 |
@@ -67,7 +67,7 @@
 | --- | --- |
 | `case_count` | 4 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 42.3897 |
+| `avg_latency_ms` | 37.1923 |
 | `avg_expected_point_coverage` | 0.6250 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -86,7 +86,7 @@
 | --- | --- |
 | `case_count` | 4 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 149.9838 |
+| `avg_latency_ms` | 154.1600 |
 | `avg_expected_point_coverage` | 0.7917 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | 1.0000 |
@@ -107,7 +107,7 @@
 | --- | --- |
 | `case_count` | 3 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 45.0127 |
+| `avg_latency_ms` | 54.2997 |
 | `avg_expected_point_coverage` | 0.1111 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -126,7 +126,7 @@
 | --- | --- |
 | `case_count` | 3 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 47.0307 |
+| `avg_latency_ms` | 50.7737 |
 | `avg_expected_point_coverage` | 0.1111 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | 1.0000 |
@@ -147,7 +147,7 @@
 | --- | --- |
 | `case_count` | 5 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 56.5054 |
+| `avg_latency_ms` | 37.1404 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | n/a |
@@ -166,7 +166,7 @@
 | --- | --- |
 | `case_count` | 5 |
 | `error_count` | 0 |
-| `avg_latency_ms` | 18.6316 |
+| `avg_latency_ms` | 21.1410 |
 | `avg_expected_point_coverage` | 0.0000 |
 | `missing_evidence_accuracy` | n/a |
 | `avg_candidate_recall` | 1.0000 |
@@ -194,7 +194,7 @@
 | `avg_accepted_evidence_precision` | n/a | 0.1250 | n/a |
 | `avg_accepted_evidence_recall` | n/a | 0.7917 | n/a |
 | `reference_contamination_rate` | 0.0000 | 0.0000 | +0.0000 |
-| `avg_latency_ms` | 48.9270 | 69.5154 | +20.5884 |
+| `avg_latency_ms` | 41.4475 | 72.8888 | +31.4413 |
 | `error_count` | 0 | 0 | +0.0000 |
 
 ## Failed Or Weak Cases

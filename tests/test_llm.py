@@ -189,7 +189,7 @@ def test_paper_chat_fallback_forces_citation() -> None:
 
 
 def test_evidence_answer_fallback_returns_top_three_citations() -> None:
-    service = LLMService(Settings(openai_api_key=""))
+    service = LLMService(Settings(openai_api_key="", rag_citation_selection_mode="current"))
     chunks = [
         RetrievedChunk(
             chunk_id=f"chunk-{index}",
@@ -272,12 +272,59 @@ def test_evidence_answer_answer_linked_mode_uses_extractive_source_only() -> Non
     assert [citation["citation_id"] for citation in result["citations"]] == ["C1"]
 
 
+def test_evidence_answer_precision_mode_allows_accept_direct_and_partial_only() -> None:
+    service = LLMService(Settings(openai_api_key="", rag_citation_selection_mode="precision"))
+    chunks = [
+        RetrievedChunk("chunk-direct", "paper-1", "paper.pdf", "Method", "Direct evidence."),
+        RetrievedChunk("chunk-partial", "paper-1", "paper.pdf", "Method", "Partial evidence."),
+        RetrievedChunk("chunk-background", "paper-1", "paper.pdf", "Background", "Background evidence."),
+        RetrievedChunk("chunk-maybe", "paper-1", "paper.pdf", "Method", "Maybe evidence."),
+        RetrievedChunk("chunk-reject", "paper-1", "paper.pdf", "Method", "Rejected evidence."),
+    ]
+    citation_map = {f"C{index}": chunk for index, chunk in enumerate(chunks, start=1)}
+    decisions = [
+        EvidenceDecision("chunk-direct", "accept", support_level="direct"),
+        EvidenceDecision("chunk-partial", "accept", support_level="partial"),
+        EvidenceDecision("chunk-background", "accept", support_level="background"),
+        EvidenceDecision("chunk-maybe", "maybe", support_level="direct"),
+        EvidenceDecision("chunk-reject", "reject", support_level="direct"),
+    ]
+
+    selected = service._selected_evidence_citation_ids([], citation_map, decisions)
+
+    assert selected == ["C1"]
+    assert service._precision_evidence_citation_ids(["C1"], citation_map, decisions) == ["C1"]
+    assert service._precision_evidence_citation_ids(["C2"], citation_map, decisions) == ["C2"]
+    assert service._precision_evidence_citation_ids(["C3"], citation_map, decisions) == ["C1"]
+    assert service._precision_evidence_citation_ids(["C4"], citation_map, decisions) == ["C1"]
+    assert service._precision_evidence_citation_ids(["C5"], citation_map, decisions) == ["C1"]
+
+
+def test_evidence_answer_precision_mode_does_not_use_arbitrary_fallback() -> None:
+    service = LLMService(Settings(openai_api_key="", rag_citation_selection_mode="precision"))
+    chunks = [
+        RetrievedChunk("chunk-background", "paper-1", "paper.pdf", "Background", "Background evidence."),
+        RetrievedChunk("chunk-maybe", "paper-1", "paper.pdf", "Method", "Maybe evidence."),
+        RetrievedChunk("chunk-reject", "paper-1", "paper.pdf", "Method", "Rejected evidence."),
+    ]
+    citation_map = {f"C{index}": chunk for index, chunk in enumerate(chunks, start=1)}
+    decisions = [
+        EvidenceDecision("chunk-background", "accept", support_level="background"),
+        EvidenceDecision("chunk-maybe", "maybe", support_level="direct"),
+        EvidenceDecision("chunk-reject", "reject", support_level="direct"),
+    ]
+
+    selected = service._selected_evidence_citation_ids([], citation_map, decisions)
+
+    assert selected == []
+
+
 def test_evidence_answer_keeps_used_citations_and_adds_high_confidence_citations() -> None:
     class CitedAnswerCompletions:
         def create(self, **_: object) -> object:
             return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="The answer cites one chunk. [C4]"))])
 
-    service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1))
+    service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1, rag_citation_selection_mode="current"))
     service.client = SimpleNamespace(chat=SimpleNamespace(completions=CitedAnswerCompletions()))
     chunks = [
         RetrievedChunk(f"chunk-{index}", "paper-1", "paper.pdf", "Method", f"Evidence {index}.")
@@ -302,7 +349,7 @@ def test_evidence_answer_uses_background_only_when_no_direct_or_partial() -> Non
         def create(self, **_: object) -> object:
             return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="Background-only answer. [C2]"))])
 
-    service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1))
+    service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1, rag_citation_selection_mode="current"))
     service.client = SimpleNamespace(chat=SimpleNamespace(completions=CitedAnswerCompletions()))
     chunks = [
         RetrievedChunk("chunk-1", "paper-1", "paper.pdf", "Background", "Background evidence 1."),
