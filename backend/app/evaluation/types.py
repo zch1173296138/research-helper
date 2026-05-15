@@ -64,6 +64,7 @@ class StrategyMetrics:
     final_context_recall: float | None = None
     citation_recall: float | None = None
     citation_precision: float | None = None
+    citation_count: int = 0
     quote_support_recall: float | None = None
     reference_contamination: bool = False
     accepted_evidence_precision: float | None = None

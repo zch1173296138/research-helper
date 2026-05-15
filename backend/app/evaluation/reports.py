@@ -103,6 +103,7 @@ def render_markdown_report(results: list[CaseResult], config: RunConfig, aggrega
             "missing_evidence_accuracy",
             "avg_candidate_recall",
             "avg_final_context_recall",
+            "avg_citation_count",
             "avg_citation_recall",
             "avg_citation_precision",
             "avg_quote_support_recall",

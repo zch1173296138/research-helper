@@ -221,8 +221,13 @@ class LLMService:
         citation_map = {f"C{index}": chunk for index, chunk in enumerate(chunks[:8], start=1)}
         citations = [self._citation_from_chunk(chunk, citation_id) for citation_id, chunk in citation_map.items()]
         if self.client is None:
-            answer = self._extractive_answer(question, chunks)
-            selected_ids = self._selected_evidence_citation_ids([], citation_map, decisions)
+            answer, answer_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
+            selected_ids = self._selected_evidence_citation_ids(
+                [],
+                citation_map,
+                decisions,
+                answer_source_chunk_ids=answer_source_chunk_ids,
+            )
             cited_ids = " ".join(f"[{citation_id}]" for citation_id in selected_ids[:3])
             selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
             return {"answer": f"{answer} {cited_ids}".strip(), "citations": selected, "missing_evidence": False}
@@ -245,18 +250,30 @@ class LLMService:
                 )
             )
             answer = response.choices[0].message.content or MISSING
+            answer_source_chunk_ids: list[str] = []
         except (OpenAIError, FutureTimeout):
-            answer = f"{self._extractive_answer(question, chunks)} [C1]"
+            answer, answer_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
 
         if MISSING in answer or "insufficient evidence" in answer.lower():
             return {"answer": answer, "citations": [], "missing_evidence": True}
 
         used_ids = self._valid_citation_ids(answer, set(citation_map))
-        selected_ids = self._selected_evidence_citation_ids(used_ids, citation_map, decisions)
+        selected_ids = self._selected_evidence_citation_ids(
+            used_ids,
+            citation_map,
+            decisions,
+            answer_source_chunk_ids=answer_source_chunk_ids,
+        )
         if not used_ids:
             fallback_id = selected_ids[0] if selected_ids else next(iter(citation_map))
-            answer = f"{self._extractive_answer(question, chunks)} [{fallback_id}]"
-            selected_ids = self._selected_evidence_citation_ids([fallback_id], citation_map, decisions)
+            fallback_answer, fallback_source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
+            answer = f"{fallback_answer} [{fallback_id}]"
+            selected_ids = self._selected_evidence_citation_ids(
+                [fallback_id],
+                citation_map,
+                decisions,
+                answer_source_chunk_ids=fallback_source_chunk_ids,
+            )
         selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
         return {"answer": answer, "citations": selected, "missing_evidence": False}
 
@@ -265,9 +282,29 @@ class LLMService:
         used_ids: list[str],
         citation_map: dict[str, RetrievedChunk],
         decisions: list[EvidenceDecision],
+        answer_source_chunk_ids: list[str] | None = None,
         supplemental_limit: int = 3,
     ) -> list[str]:
         selected = [citation_id for citation_id in used_ids if citation_id in citation_map]
+        mode = self.settings.rag_citation_selection_mode
+        fallback_ids = self._fallback_evidence_citation_ids(citation_map, decisions, supplemental_limit)
+        if mode == "strict":
+            return selected or fallback_ids[:1]
+        if mode == "answer_linked":
+            if selected:
+                return selected
+            linked_ids = self._citation_ids_by_chunk_ids(citation_map, answer_source_chunk_ids or [])
+            return linked_ids or fallback_ids[:1]
+
+        return self._current_evidence_citation_ids(selected, citation_map, decisions, supplemental_limit)
+
+    def _current_evidence_citation_ids(
+        self,
+        selected: list[str],
+        citation_map: dict[str, RetrievedChunk],
+        decisions: list[EvidenceDecision],
+        supplemental_limit: int,
+    ) -> list[str]:
         decision_by_chunk = {decision.chunk_id: decision for decision in decisions}
         prioritized = self._citation_ids_by_support(citation_map, decision_by_chunk, {"direct", "partial"})
         if not prioritized:
@@ -280,6 +317,27 @@ class LLMService:
             if len([item for item in selected if item in prioritized]) >= supplemental_limit:
                 break
         return selected
+
+    def _fallback_evidence_citation_ids(
+        self,
+        citation_map: dict[str, RetrievedChunk],
+        decisions: list[EvidenceDecision],
+        limit: int,
+    ) -> list[str]:
+        decision_by_chunk = {decision.chunk_id: decision for decision in decisions}
+        for support_levels in ({"direct", "partial"}, {"background"}):
+            ids = self._citation_ids_by_support(citation_map, decision_by_chunk, support_levels)
+            if ids:
+                return ids[:limit]
+        return list(citation_map)[:limit]
+
+    def _citation_ids_by_chunk_ids(
+        self,
+        citation_map: dict[str, RetrievedChunk],
+        chunk_ids: list[str],
+    ) -> list[str]:
+        source_ids = set(chunk_ids)
+        return [citation_id for citation_id, chunk in citation_map.items() if chunk.chunk_id in source_ids]
 
     def _citation_ids_by_support(
         self,
@@ -867,11 +925,16 @@ class LLMService:
         return compact[:max_chars].rsplit(" ", 1)[0] + "..."
 
     def _extractive_answer(self, question: str, chunks: list[RetrievedChunk]) -> str:
+        answer, _source_chunk_ids = self._extractive_answer_with_sources(question, chunks)
+        return answer
+
+    def _extractive_answer_with_sources(self, question: str, chunks: list[RetrievedChunk]) -> tuple[str, list[str]]:
         first = chunks[0]
         excerpt = first.text.strip().replace("\n", " ")
         if len(excerpt) > 700:
             excerpt = excerpt[:700].rsplit(" ", 1)[0] + "..."
-        return f"根据已导入文献中最相关的片段，问题“{question}”可从以下证据开始分析：{excerpt}"
+        answer = f"根据已导入文献中最相关的片段，问题“{question}”可从以下证据开始分析：{excerpt}"
+        return answer, [first.chunk_id]
 
     def _fallback_summary(self, filename: str, chunks: list[RetrievedChunk]) -> dict[str, Any]:
         content_chunks = self._summary_content_chunks(chunks)

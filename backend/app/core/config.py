@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     openai_api_key: str = ""
     chat_model: str = "gpt-4o-mini"
     llm_timeout_seconds: int = 60
+    rag_citation_selection_mode: str = Field(default="current", pattern="^(current|strict|answer_linked)$")
     embedding_model: str = "text-embedding-3-small"
     embedding_batch_size: int = 8
 

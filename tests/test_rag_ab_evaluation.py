@@ -267,6 +267,7 @@ def test_score_output_marks_not_applicable_evidence_metrics_for_baseline() -> No
     assert metrics.expected_point_coverage == 1.0
     assert metrics.final_context_recall == 1.0
     assert metrics.citation_precision == 1.0
+    assert metrics.citation_count == 1
     assert metrics.citation_validity == 1.0
     assert metrics.accepted_evidence_precision is None
     assert metrics.accepted_evidence_recall is None
@@ -294,6 +295,7 @@ def test_score_output_scores_current_evidence_and_reference_contamination() -> N
 
     assert metrics.candidate_recall == 1.0
     assert metrics.citation_precision == 0.0
+    assert metrics.citation_count == 1
     assert metrics.accepted_evidence_precision == 1.0
     assert metrics.accepted_evidence_recall == 1.0
     assert metrics.reference_contamination is True
