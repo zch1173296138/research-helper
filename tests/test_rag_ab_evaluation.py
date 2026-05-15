@@ -273,7 +273,13 @@ def test_evidence_failure_analysis_identifies_answer_source_miss() -> None:
                         "candidate_chunk_ids": ["chunk-gold"],
                         "accepted_chunk_ids": ["chunk-gold"],
                         "final_context_chunk_ids": ["chunk-gold"],
-                        "raw_metadata": {"answer_source_chunk_ids": ["chunk-other"]},
+                        "raw_metadata": {
+                            "answer_source_chunk_ids": ["chunk-other"],
+                            "claim_candidates": [
+                                {"chunk_id": "chunk-other", "selected": True},
+                                {"chunk_id": "chunk-gold", "selected": False, "unselected_reason": "score_below_selected"},
+                            ],
+                        },
                         "citations": [{"chunk_id": "chunk-other"}],
                     }
                 },
@@ -283,6 +289,8 @@ def test_evidence_failure_analysis_identifies_answer_source_miss() -> None:
 
     assert rows[0]["answer_source_chunk_ids"] == ["chunk-other"]
     assert rows[0]["gold_in_final_but_not_answer_source"] is True
+    assert rows[0]["unselected_gold_claim_candidates"][0]["unselected_reason"] == "score_below_selected"
+    assert rows[0]["selected_claims"] == [{"chunk_id": "chunk-other", "selected": True}]
     assert rows[0]["failure_stage"] == "final_context_has_gold_but_answer_source_missed"
 
 
@@ -476,6 +484,7 @@ def test_current_evidence_adapter_preserves_evidence_metadata(monkeypatch) -> No
                 "answer_claims": [{"text": "Claim.", "chunk_id": "chunk-accepted", "citation_id": "C1"}],
                 "claim_sources": [{"text": "Claim.", "chunk_id": "chunk-accepted", "citation_id": "C1"}],
                 "claim_count": 1,
+                "claim_candidates": [{"chunk_id": "chunk-accepted", "selected": True}],
                 "citation_selection_mode": "answer_linked",
                 "missing_evidence": False,
                 "retrieval_metadata": {
@@ -502,6 +511,7 @@ def test_current_evidence_adapter_preserves_evidence_metadata(monkeypatch) -> No
     assert output.raw_metadata["answer_source_chunk_ids"] == ["chunk-accepted"]
     assert output.raw_metadata["answer_claims"] == [{"text": "Claim.", "chunk_id": "chunk-accepted", "citation_id": "C1"}]
     assert output.raw_metadata["claim_count"] == 1
+    assert output.raw_metadata["claim_candidates"] == [{"chunk_id": "chunk-accepted", "selected": True}]
     assert output.raw_metadata["citation_selection_mode"] == "answer_linked"
     assert output.evidence_decisions == [
         {"chunk_id": "chunk-accepted", "decision": "accept"},

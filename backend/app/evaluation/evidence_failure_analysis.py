@@ -75,6 +75,8 @@ def analyze_strategy(case: dict[str, Any], strategy: str, output: dict[str, Any]
     final_context_chunk_ids = output_ids(output, "final_context_chunk_ids") or output_ids(output, "retrieved_chunk_ids")
     answer_source_chunk_ids = output_ids(output, "answer_source_chunk_ids")
     citation_ids = citation_chunk_ids(output)
+    claim_candidates = metadata_list(output, "claim_candidates")
+    selected_claims = [candidate for candidate in claim_candidates if candidate.get("selected")]
 
     gold = set(supporting_chunk_ids)
     final_context_hit_ids = ordered_hits(supporting_chunk_ids, final_context_chunk_ids)
@@ -96,6 +98,9 @@ def analyze_strategy(case: dict[str, Any], strategy: str, output: dict[str, Any]
         "final_context_chunk_ids": final_context_chunk_ids,
         "answer_source_chunk_ids": answer_source_chunk_ids,
         "citation_chunk_ids": citation_ids,
+        "selected_claims": selected_claims,
+        "claim_candidates": claim_candidates,
+        "unselected_gold_claim_candidates": unselected_gold_claim_candidates(supporting_chunk_ids, claim_candidates),
         "gold_position_in_final_context": gold_positions(supporting_chunk_ids, final_context_chunk_ids),
         "final_context_hit_ids": final_context_hit_ids,
         "answer_source_hit_ids": answer_source_hit_ids,
@@ -189,6 +194,25 @@ def has_output_id_field(output: dict[str, Any], key: str) -> bool:
         return True
     value = output.get(key)
     return isinstance(value, list) and bool(value)
+
+
+def metadata_list(output: dict[str, Any], key: str) -> list[dict[str, Any]]:
+    values = output.get(key)
+    if not isinstance(values, list):
+        metadata = output.get("raw_metadata")
+        values = metadata.get(key) if isinstance(metadata, dict) else []
+    if not isinstance(values, list):
+        return []
+    return [item for item in values if isinstance(item, dict)]
+
+
+def unselected_gold_claim_candidates(supporting_chunk_ids: list[str], claim_candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    gold = set(supporting_chunk_ids)
+    return [
+        candidate
+        for candidate in claim_candidates
+        if str(candidate.get("chunk_id") or "") in gold and not candidate.get("selected")
+    ]
 
 
 def citation_chunk_ids(output: dict[str, Any]) -> list[str]:

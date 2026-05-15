@@ -238,6 +238,7 @@ class LLMService:
                 "answer_claims": list(extractive["claims"]),
                 "claim_sources": list(extractive["claims"]),
                 "claim_count": len(extractive["claims"]),
+                "claim_candidates": list(extractive.get("claim_candidates") or []),
                 "citation_selection_mode": self.settings.rag_citation_selection_mode,
             }
 
@@ -260,12 +261,14 @@ class LLMService:
             )
             answer = response.choices[0].message.content or MISSING
             answer_source_chunk_ids: list[str] = []
-            answer_claims: list[dict[str, str]] = []
+            answer_claims: list[dict[str, Any]] = []
+            claim_candidates: list[dict[str, Any]] = []
         except (OpenAIError, FutureTimeout):
             extractive = self._extractive_answer_with_claim_sources(question, chunks, decisions)
             answer = str(extractive["answer"])
             answer_source_chunk_ids = list(extractive["answer_source_chunk_ids"])
             answer_claims = list(extractive["claims"])
+            claim_candidates = list(extractive.get("claim_candidates") or [])
 
         if MISSING in answer or "insufficient evidence" in answer.lower():
             return {
@@ -276,6 +279,7 @@ class LLMService:
                 "answer_claims": answer_claims,
                 "claim_sources": answer_claims,
                 "claim_count": len(answer_claims),
+                "claim_candidates": [],
                 "citation_selection_mode": self.settings.rag_citation_selection_mode,
             }
 
@@ -291,6 +295,7 @@ class LLMService:
             answer = str(extractive["answer"])
             answer_source_chunk_ids = list(extractive["answer_source_chunk_ids"])
             answer_claims = list(extractive["claims"])
+            claim_candidates = list(extractive.get("claim_candidates") or [])
             selected_ids = self._selected_claim_citation_ids(
                 answer_claims,
                 citation_map,
@@ -305,6 +310,7 @@ class LLMService:
             "answer_claims": answer_claims,
             "claim_sources": answer_claims,
             "claim_count": len(answer_claims),
+            "claim_candidates": claim_candidates,
             "citation_selection_mode": self.settings.rag_citation_selection_mode,
         }
 
@@ -1045,6 +1051,7 @@ class LLMService:
         citation_map = {chunk.chunk_id: f"C{index}" for index, chunk in enumerate(chunks[:8], start=1)}
         decision_by_chunk = {decision.chunk_id: decision for decision in decisions or []}
         question_terms = self._claim_terms(question)
+        question_intents = self._claim_question_intents(question)
         candidates: list[dict[str, Any]] = []
         seen_sentences: list[str] = []
 
@@ -1055,18 +1062,28 @@ class LLMService:
             if not self._claim_chunk_is_eligible(decision):
                 continue
             best_sentence: str | None = None
-            best_score: tuple[float, int] | None = None
+            best_score: tuple[float, float, int] | None = None
+            best_intent_boosts: dict[str, float] = {}
+            best_text_score = 0.0
             for sentence_index, sentence in enumerate(self._claim_sentences(chunk.text)):
                 normalized = self._normalize_claim_sentence(sentence)
                 if not normalized or self._is_near_duplicate_claim(normalized, seen_sentences):
                     continue
                 text_score = self._claim_text_score(sentence, question_terms)
-                if text_score <= 0 and question_terms:
+                intent_boosts = self._claim_intent_boosts(sentence, question_intents)
+                intent_boost = sum(intent_boosts.values())
+                if text_score <= 0 and intent_boost <= 0 and question_terms:
                     continue
-                score = (self._claim_decision_boost(decision) + text_score, -sentence_index)
+                score = (
+                    self._claim_decision_boost(decision) + text_score + intent_boost,
+                    text_score + intent_boost,
+                    -sentence_index,
+                )
                 if best_score is None or score > best_score:
                     best_score = score
                     best_sentence = sentence
+                    best_intent_boosts = intent_boosts
+                    best_text_score = text_score
             if best_sentence is None or best_score is None:
                 continue
             seen_sentences.append(self._normalize_claim_sentence(best_sentence))
@@ -1076,18 +1093,29 @@ class LLMService:
                     "chunk_id": chunk.chunk_id,
                     "citation_id": citation_map[chunk.chunk_id],
                     "score": best_score[0],
+                    "text_score": best_text_score,
+                    "has_question_overlap": bool(question_terms and best_text_score > 0),
+                    "intent_boosts": best_intent_boosts,
+                    "support_priority": self._claim_decision_rank(decision),
+                    "chunk_rank": chunk_index + 1,
                     "chunk_index": chunk_index,
                     "decision_rank": self._claim_decision_rank(decision),
                 }
             )
 
         candidates.sort(key=lambda item: (-item["decision_rank"], -item["score"], item["chunk_index"]))
-        selected = sorted(candidates[:max_claims], key=lambda item: item["chunk_index"])
+        selected = self._select_claim_candidates(candidates, max_claims)
+        selected = sorted(selected, key=lambda item: item["chunk_index"])
         claims = [
             {
                 "text": str(item["text"]),
                 "chunk_id": str(item["chunk_id"]),
                 "citation_id": str(item["citation_id"]),
+                "score": round(float(item["score"]), 4),
+                "intent_boosts": dict(item.get("intent_boosts") or {}),
+                "support_priority": int(item.get("support_priority") or 0),
+                "chunk_rank": int(item.get("chunk_rank") or 0),
+                "selected_by": str(item.get("selected_by") or "top_score"),
             }
             for item in selected
         ]
@@ -1101,12 +1129,18 @@ class LLMService:
                         "text": fallback_answer,
                         "chunk_id": fallback_source_chunk_ids[0],
                         "citation_id": fallback_citation_id,
+                        "score": 0.0,
+                        "intent_boosts": {},
+                        "support_priority": 0,
+                        "chunk_rank": 1,
+                        "selected_by": "fallback",
                     }
                 ]
             return {
                 "answer": fallback_answer,
                 "claims": claims,
                 "answer_source_chunk_ids": fallback_source_chunk_ids,
+                "claim_candidates": [],
             }
 
         answer = "\n".join(f"{claim['text']} [{claim['citation_id']}]" for claim in claims)
@@ -1114,7 +1148,99 @@ class LLMService:
             "answer": answer,
             "claims": claims,
             "answer_source_chunk_ids": self._dedupe_preserve_order([claim["chunk_id"] for claim in claims]),
+            "claim_candidates": self._claim_candidate_diagnostics(candidates, selected),
         }
+
+    def _select_claim_candidates(self, candidates: list[dict[str, Any]], max_claims: int) -> list[dict[str, Any]]:
+        if max_claims <= 0:
+            return []
+        selected = [dict(item, selected_by="top_score") for item in candidates[:max_claims]]
+        if len(candidates) <= max_claims or max_claims < 2:
+            return selected
+
+        high_confidence = [item for item in candidates if self._claim_is_high_confidence(item)]
+        enough_accept_direct_partial = len([item for item in high_confidence if item["decision_rank"] >= 4]) >= max_claims
+        reserve_pool = [
+            item
+            for item in high_confidence
+            if item["decision_rank"] >= 4 or not enough_accept_direct_partial
+        ]
+        selected_chunk_ids = {str(item["chunk_id"]) for item in selected}
+        selected_sentences = [self._normalize_claim_sentence(str(item["text"])) for item in selected]
+        last_selected = selected[-1]
+        selected_cutoff = float(last_selected["score"])
+        displaced_signal = float(last_selected.get("text_score") or 0.0) + sum(float(value) for value in (last_selected.get("intent_boosts") or {}).values())
+        min_score = max(0.5, selected_cutoff - 0.6)
+
+        reserve: dict[str, Any] | None = None
+        for item in reserve_pool:
+            if str(item["chunk_id"]) in selected_chunk_ids:
+                continue
+            if float(item["score"]) < min_score:
+                continue
+            reserve_signal = float(item.get("text_score") or 0.0) + sum(float(value) for value in (item.get("intent_boosts") or {}).values())
+            if not item.get("intent_boosts"):
+                continue
+            if float(item["score"]) <= selected_cutoff and reserve_signal <= displaced_signal + 0.15 and float(item["score"]) < selected_cutoff - 0.15:
+                continue
+            normalized = self._normalize_claim_sentence(str(item["text"]))
+            if self._is_near_duplicate_claim(normalized, selected_sentences):
+                continue
+            reserve = item
+            break
+        if reserve is None:
+            return selected
+        selected[-1] = dict(reserve, selected_by="reserve_slot")
+        return selected
+
+    def _claim_is_high_confidence(self, item: dict[str, Any]) -> bool:
+        return int(item.get("decision_rank") or 0) >= 3
+
+    def _claim_candidate_diagnostics(
+        self,
+        candidates: list[dict[str, Any]],
+        selected: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        selected_chunks = {str(item["chunk_id"]) for item in selected}
+        selected_scores = [float(item["score"]) for item in selected]
+        cutoff = min(selected_scores) if selected_scores else 0.0
+        diagnostics: list[dict[str, Any]] = []
+        selected_sentences: list[str] = []
+        for item in selected:
+            selected_sentences.append(self._normalize_claim_sentence(str(item["text"])))
+        for item in candidates:
+            chunk_id = str(item["chunk_id"])
+            selected_item = chunk_id in selected_chunks
+            reason = ""
+            if not selected_item:
+                if int(item.get("decision_rank") or 0) < 3:
+                    reason = "low_support"
+                elif self._is_near_duplicate_claim(self._normalize_claim_sentence(str(item["text"])), selected_sentences):
+                    reason = "duplicate"
+                elif float(item["score"]) >= cutoff:
+                    reason = "cut_by_max_claims"
+                else:
+                    reason = "score_below_selected"
+            diagnostics.append(
+                {
+                    "text": str(item["text"]),
+                    "chunk_id": chunk_id,
+                    "citation_id": str(item["citation_id"]),
+                    "score": round(float(item["score"]), 4),
+                    "text_score": round(float(item.get("text_score") or 0.0), 4),
+                    "has_question_overlap": bool(item.get("has_question_overlap")),
+                    "intent_boosts": dict(item.get("intent_boosts") or {}),
+                    "support_priority": int(item.get("support_priority") or 0),
+                    "chunk_rank": int(item.get("chunk_rank") or 0),
+                    "selected": selected_item,
+                    "selected_by": next(
+                        (str(selected_candidate.get("selected_by") or "top_score") for selected_candidate in selected if str(selected_candidate["chunk_id"]) == chunk_id),
+                        "",
+                    ),
+                    "unselected_reason": reason,
+                }
+            )
+        return diagnostics
 
     def _claim_chunk_is_eligible(self, decision: EvidenceDecision | None) -> bool:
         if decision is None:
@@ -1196,6 +1322,58 @@ class LLMService:
             return 1.0
         hits = sum(1 for term in question_terms if term in normalized)
         return round(hits / max(1, len(question_terms)), 4)
+
+    def _claim_question_intents(self, question: str) -> set[str]:
+        normalized = question.lower()
+        intents: set[str] = set()
+        if re.search(r"\b(dataset|datasets|data|corpus|corpora|benchmark|benchmarks|language pairs?)\b", normalized):
+            intents.add("dataset")
+        if re.search(r"\b(model|models|method|methods|approach|approaches|architecture|module|use|uses|used|propose|build|match|reorder|reordering)\b", normalized):
+            intents.add("method")
+        if re.search(r"\b(result|results|performance|metric|accuracy|f1|bleu|score|scores|outperform)\b", normalized):
+            intents.add("result")
+        if re.search(r"\b(how many|number|count|counts|total)\b", normalized):
+            intents.add("count")
+        if re.search(r"\b(compar|difference|differ|unlike|whereas|better|worse|versus|vs\.?)\b", normalized):
+            intents.add("comparison")
+        return intents
+
+    def _claim_intent_boosts(self, sentence: str, intents: set[str]) -> dict[str, float]:
+        if not intents:
+            return {}
+        normalized = sentence.lower()
+        boosts: dict[str, float] = {}
+        if "dataset" in intents:
+            dataset_hits = 0
+            if re.search(r"\b(dataset|datasets|corpus|corpora|benchmark|benchmarks|data|train|training|test|dev|task)\b", normalized):
+                dataset_hits += 1
+            if re.search(r"\b[A-Z][A-Za-z]*(?:-[A-Z][A-Za-z]*)+\b|\b[A-Z][A-Za-z]{2,}[A-Z][A-Za-z]*\b|\b[A-Z][a-z]?\s*[-\u2192]\s*[A-Z][a-z]?\b", sentence):
+                dataset_hits += 1
+            if re.search(r"\b(arabic|english|spanish|russian|french|german|romanian|hindi|bengali|gujarati|marathi|malayalam|tamil)\b", normalized):
+                dataset_hits += 1
+            if dataset_hits:
+                boosts["dataset"] = min(0.45, 0.2 * dataset_hits)
+        if "method" in intents:
+            method_hits = 0
+            if re.search(r"\b(model|method|approach|use|uses|used|propose|architecture|module|system|pre-?order|reorder|reordering|match)\b", normalized):
+                method_hits += 1
+            if re.search(r"\b(algorithm|classifier|baseline|rule|rules|configuration|framework)\b", normalized):
+                method_hits += 1
+            if method_hits:
+                boosts["method"] = min(0.35, 0.18 * method_hits)
+        if "result" in intents:
+            result_hits = 0
+            if re.search(r"\b(accuracy|f1|bleu|score|scores|metric|performance|outperform|result|results)\b", normalized):
+                result_hits += 1
+            if re.search(r"\b\d+(?:\.\d+)?%?\b", normalized):
+                result_hits += 1
+            if result_hits:
+                boosts["result"] = min(0.4, 0.2 * result_hits)
+        if "count" in intents and re.search(r"\b\d+(?:,\d{3})*(?:\.\d+)?%?\b|\b(one|two|three|four|five|six|seven|eight|nine|ten)\b", normalized):
+            boosts["count"] = 0.3
+        if "comparison" in intents and re.search(r"\b(compare|compared|differ|unlike|whereas|better|worse|versus|vs\.?|outperform|than)\b", normalized):
+            boosts["comparison"] = 0.3
+        return boosts
 
     def _normalize_claim_sentence(self, sentence: str) -> str:
         return re.sub(r"\W+", " ", sentence).strip().lower()

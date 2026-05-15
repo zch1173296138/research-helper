@@ -214,7 +214,7 @@ def string_list(value: Any) -> list[str]:
 
 
 def preserve_answer_metadata(result: dict[str, Any], metadata: dict[str, Any]) -> None:
-    for key in ("answer_claims", "claim_sources", "claim_count", "citation_selection_mode"):
+    for key in ("answer_claims", "claim_sources", "claim_count", "claim_candidates", "citation_selection_mode"):
         if key in result:
             metadata[key] = result[key]
 

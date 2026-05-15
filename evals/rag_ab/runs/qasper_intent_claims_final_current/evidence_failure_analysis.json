@@ -1,0 +1,3623 @@
+{
+  "input": "evals\\rag_ab\\runs\\qasper_intent_claims_final_current\\case_results.jsonl",
+  "row_count": 24,
+  "stage_counts": {
+    "answer_source_has_gold_but_citation_missed": 0,
+    "citation_selection_missed_gold": 6,
+    "evidence_rejected_gold": 2,
+    "final_context_has_gold_but_answer_source_missed": 1,
+    "final_context_truncated_gold": 0,
+    "not_applicable": 0,
+    "ok": 13,
+    "retrieval_miss": 2
+  },
+  "rows": [
+    {
+      "case_id": "qasper-val-0003",
+      "strategy": "baseline-current",
+      "question": "which datasets did they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 1
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“which datasets did they experiment with?”可从以下证据开始分析：# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0003",
+      "strategy": "current-evidence",
+      "question": "which datasets did they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15",
+        "paper_4989cdaf64974840_chunk_17",
+        "paper_4989cdaf64974840_chunk_16",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_20",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_8",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_9",
+        "paper_4989cdaf64974840_chunk_5"
+      ],
+      "accepted_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_10",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_18"
+      ],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_18"
+      ],
+      "selected_claims": [
+        {
+          "text": "# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_11",
+          "citation_id": "C1",
+          "score": 40.9,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "In our experiments, we use MLM+TLM, MLM+BRLM to represent this training process.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_13",
+          "citation_id": "C2",
+          "score": 40.9,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Like experimental results on Europarl, MLM+BRLM-SA performs the best among all proposed cross-lingual pretraining based transfer approaches as shown in Table 3.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_18",
+          "citation_id": "C6",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_11",
+          "citation_id": "C1",
+          "score": 40.9,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "In our experiments, we use MLM+TLM, MLM+BRLM to represent this training process.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_13",
+          "citation_id": "C2",
+          "score": 40.9,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "The results show that our approaches consistently outperform other approaches across languages and datasets, especially surpass pivoting, which is a strong baseline in the zero-shot scenario that multilingual NMT systems often fail to beat (Johnson et al.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_14",
+          "citation_id": "C3",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "Like experimental results on Europarl, MLM+BRLM-SA performs the best among all proposed cross-lingual pretraining based transfer approaches as shown in Table 3.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_18",
+          "citation_id": "C6",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Three pivot settings are conducted in our experiments.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_12",
+          "citation_id": "C5",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "We further sample an English-Russian sentence pair from the MultiUN validation sets and visualize the cosine similarity between hidden states of the top encoder layer to further investigate the difference of all cross-lingual pre-training methods.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_19",
+          "citation_id": "C7",
+          "score": 40.45,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.45
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Results on Europarl Dataset.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_15",
+          "citation_id": "C8",
+          "score": 40.2,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 1
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_preview": "# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0004",
+      "strategy": "baseline-current",
+      "question": "what language pairs are explored?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 7
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what language pairs are explored?”可从以下证据开始分析：# Introduction Although Neural Machine Translation (NMT) has dominated recent research on translation tasks (Wu et al. 2016; Vaswani et al. 2017; Hassan et al. 2018), NMT...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0004",
+      "strategy": "current-evidence",
+      "question": "what language pairs are explored?",
+      "supporting_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "candidate_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9",
+        "paper_4989cdaf64974840_chunk_19",
+        "paper_4989cdaf64974840_chunk_8",
+        "paper_4989cdaf64974840_chunk_18",
+        "paper_4989cdaf64974840_chunk_5",
+        "paper_4989cdaf64974840_chunk_17",
+        "paper_4989cdaf64974840_chunk_12",
+        "paper_4989cdaf64974840_chunk_20",
+        "paper_4989cdaf64974840_chunk_13",
+        "paper_4989cdaf64974840_chunk_16",
+        "paper_4989cdaf64974840_chunk_14",
+        "paper_4989cdaf64974840_chunk_15"
+      ],
+      "accepted_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9"
+      ],
+      "final_context_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_6",
+        "paper_4989cdaf64974840_chunk_1",
+        "paper_4989cdaf64974840_chunk_7",
+        "paper_4989cdaf64974840_chunk_3",
+        "paper_4989cdaf64974840_chunk_11",
+        "paper_4989cdaf64974840_chunk_9"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_chunk_ids": [
+        "paper_4989cdaf64974840_chunk_2",
+        "paper_4989cdaf64974840_chunk_4",
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "selected_claims": [
+        {
+          "text": "\\- Multilingual NMT (MNMT) enables training a single model that supports translation from multiple source languages into multiple target languages, even those unseen language pairs (Firat, Cho, and Bengio 2016; Firat et al.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_4",
+          "citation_id": "C2",
+          "score": 41.0667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "2018), NMT heavily relies on large-scale parallel data, resulting in poor performance on low-resource or zero-resource language pairs (Koehn and Knowles 2017).",
+          "chunk_id": "paper_4989cdaf64974840_chunk_2",
+          "citation_id": "C1",
+          "score": 40.8667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "For Europarl corpus, we evaluate on French-English-Spanish (Fr-En-Es), German-English-French (De-En-Fr) and Romanian-English-German (Ro-En-De), where English acts as the pivot language, its left side is the source language, and its right side is the target language.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_11",
+          "citation_id": "C7",
+          "score": 40.7833,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.45
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "\\- Multilingual NMT (MNMT) enables training a single model that supports translation from multiple source languages into multiple target languages, even those unseen language pairs (Firat, Cho, and Bengio 2016; Firat et al.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_4",
+          "citation_id": "C2",
+          "score": 41.0667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "2018), NMT heavily relies on large-scale parallel data, resulting in poor performance on low-resource or zero-resource language pairs (Koehn and Knowles 2017).",
+          "chunk_id": "paper_4989cdaf64974840_chunk_2",
+          "citation_id": "C1",
+          "score": 40.8667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "The BRLM extends MLM (Lample and Conneau 2019) to pairs of parallel sentences and leverages explicit alignment information obtained by external aligner tool or additional attention layer to encourage word representation alignment across different languages.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_6",
+          "citation_id": "C3",
+          "score": 40.8667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "For Europarl corpus, we evaluate on French-English-Spanish (Fr-En-Es), German-English-French (De-En-Fr) and Romanian-English-German (Ro-En-De), where English acts as the pivot language, its left side is the source language, and its right side is the target language.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_11",
+          "citation_id": "C7",
+          "score": 40.7833,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.45
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# Masked and Translation Language Model Pretraining Two existing cross-lingual pre-training methods, Masked Language Modeling (MLM) and Translation Language Modeling (TLM), have shown their effectiveness on XNLI cross-lingual classification task (Lample and Conneau 2019; Huang et al.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_7",
+          "citation_id": "C5",
+          "score": 40.7333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Besides, a novel pre-training method called BRidge Language Modeling (BRLM) is designed to make full use of the source↔pivot bilingual data to obtain a universal encoder for different languages.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_3",
+          "citation_id": "C6",
+          "score": 40.7333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "In the pretraining phase, we first pretrain MLM on monolingual corpora of both source and pivot languages, and continue to pretrain TLM or the proposed BRLM on the available parallel data between source and pivot languages, in order to build a cross-lingual encoder shared by the source and pivot languages.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_9",
+          "citation_id": "C8",
+          "score": 40.7333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "# Abstract Transfer learning between different language pairs has shown its effectiveness for Neural Machine Translation (NMT) in low-resource scenario.",
+          "chunk_id": "paper_4989cdaf64974840_chunk_1",
+          "citation_id": "C4",
+          "score": 40.6667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 7
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_source_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_preview": "2018), NMT heavily relies on large-scale parallel data, resulting in poor performance on low-resource or zero-resource language pairs (Koehn and Knowles 2017). [C1] \\- Multilingual NMT (MNMT) enables training a single model that supports...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0005",
+      "strategy": "baseline-current",
+      "question": "what ner models were evaluated?",
+      "supporting_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_18c9a8ee5ba54ec6_chunk_9": 6,
+        "paper_18c9a8ee5ba54ec6_chunk_10": 8
+      },
+      "final_context_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what ner models were evaluated?”可从以下证据开始分析：# VI. DISCUSSION Table III shows the average scores of evaluated models. The highest F1 score was achieved by the recurrent model using a batch size of 8 and Adam optimizer with...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0005",
+      "strategy": "current-evidence",
+      "question": "what ner models were evaluated?",
+      "supporting_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "candidate_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10",
+        "paper_18c9a8ee5ba54ec6_chunk_12",
+        "paper_18c9a8ee5ba54ec6_chunk_8",
+        "paper_18c9a8ee5ba54ec6_chunk_4",
+        "paper_18c9a8ee5ba54ec6_chunk_6",
+        "paper_18c9a8ee5ba54ec6_chunk_5",
+        "paper_18c9a8ee5ba54ec6_chunk_2",
+        "paper_18c9a8ee5ba54ec6_chunk_3"
+      ],
+      "accepted_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "final_context_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_13",
+        "paper_18c9a8ee5ba54ec6_chunk_11",
+        "paper_18c9a8ee5ba54ec6_chunk_7",
+        "paper_18c9a8ee5ba54ec6_chunk_15",
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_0",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "citation_chunk_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_1",
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10",
+        "paper_18c9a8ee5ba54ec6_chunk_13"
+      ],
+      "selected_claims": [
+        {
+          "text": "We trained and evaluated Stanford NER $^{4}$ , spaCy 2.0 $^{5}$ , and a recurrent model similar to [14], [15] that uses bidirectional LSTM cells for character-based feature extraction and CRF, described in Guillaume Genthial's Sequence Tagging with Tensorflow blog post [16].",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_9",
+          "citation_id": "C6",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Models Stanford NER is conditional random fields (CRF) classifier based on lexical and contextual features such as the current word, character-level n-grams of up to length 6 at its beginning and the end, previous and next words, word shape and sequence features [17].",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_10",
+          "citation_id": "C8",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Klesti Hoxha and Artur Baxhaku employ gazetteers extracted from Wikipedia to generate an annotated corpus for Albanian [4], and Weber and Pötzl propose a rule-based system for German that leverages the information from Wikipedia [5].",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_1",
+          "citation_id": "C5",
+          "score": 40.6833,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.35
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "We trained and evaluated Stanford NER $^{4}$ , spaCy 2.0 $^{5}$ , and a recurrent model similar to [14], [15] that uses bidirectional LSTM cells for character-based feature extraction and CRF, described in Guillaume Genthial's Sequence Tagging with Tensorflow blog post [16].",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_9",
+          "citation_id": "C6",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Models Stanford NER is conditional random fields (CRF) classifier based on lexical and contextual features such as the current word, character-level n-grams of up to length 6 at its beginning and the end, previous and next words, word shape and sequence features [17].",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_10",
+          "citation_id": "C8",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Klesti Hoxha and Artur Baxhaku employ gazetteers extracted from Wikipedia to generate an annotated corpus for Albanian [4], and Weber and Pötzl propose a rule-based system for German that leverages the information from Wikipedia [5].",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_1",
+          "citation_id": "C5",
+          "score": 40.6833,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.35
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "DISCUSSION Table III shows the average scores of evaluated models.",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_13",
+          "citation_id": "C1",
+          "score": 40.6667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "CONCLUSION We release two named-entity annotated datasets for the Armenian language: a silver-standard corpus for training NER models, and a gold-standard corpus for testing.",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_15",
+          "citation_id": "C4",
+          "score": 40.6667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "We randomly selected 80% of generated annotated sentences for training and used the other 20% as a development set.",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_11",
+          "citation_id": "C2",
+          "score": 40.5133,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Russia Email: { $^{1}$ tsggukasyan, $^{2}$ garnik.davtyan, $^{3}$ karavet, $^{4}$ ivan.andrianov}@ispras.ru Abstract—In this work, we tackle the problem of Armenian named entity recognition, providing silver- and gold-standard datasets as well as establishing baseline results on popular models.",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_0",
+          "citation_id": "C7",
+          "score": 40.5133,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "<table><tr><td>Test set</td><td>Tokens</td><td>LOC</td><td>ORG</td><td>PER</td></tr><tr><td>Armenian</td><td>53453</td><td>1306</td><td>1337</td><td>1274</td></tr><tr><td>English CoNLL03</td><td>46435</td><td>1668</td><td>1661</td><td>1617</td></tr><tr><td>German...",
+          "chunk_id": "paper_18c9a8ee5ba54ec6_chunk_7",
+          "citation_id": "C3",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_18c9a8ee5ba54ec6_chunk_9": 6,
+        "paper_18c9a8ee5ba54ec6_chunk_10": 8
+      },
+      "final_context_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_source_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "citation_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "answer_preview": "Klesti Hoxha and Artur Baxhaku employ gazetteers extracted from Wikipedia to generate an annotated corpus for Albanian [4], and Weber and Pötzl propose a rule-based system for German that leverages the information from Wikipedia [5]. [C5]...",
+      "answer_source_count": 3,
+      "citation_count": 4,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0008",
+      "strategy": "baseline-current",
+      "question": "what are the topics pulled from Reddit?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_9"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_3": 2,
+        "paper_966b9c5490524541_chunk_9": null
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what are the topics pulled from Reddit?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0008",
+      "strategy": "current-evidence",
+      "question": "what are the topics pulled from Reddit?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_9"
+      ],
+      "candidate_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1",
+        "paper_966b9c5490524541_chunk_9",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_7",
+        "paper_966b9c5490524541_chunk_4",
+        "paper_966b9c5490524541_chunk_16"
+      ],
+      "accepted_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1"
+      ],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_1"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10"
+      ],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_10"
+      ],
+      "selected_claims": [
+        {
+          "text": "$^{1}$ Posts on Reddit capture discussion and debate across a diverse set of domains and topics – users talk about everything from climate change and abortion, to world news and relationship advice, to the future of artificial intelligence.",
+          "chunk_id": "paper_966b9c5490524541_chunk_2",
+          "citation_id": "C1",
+          "score": 40.75,
+          "text_score": 0.75,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 2 Dogmatism data Posts on Reddit capture debate and discussion across a diverse set of topics, making them a natural starting point for untangling domain-independent linguistic features of dogmatism.",
+          "chunk_id": "paper_966b9c5490524541_chunk_3",
+          "citation_id": "C2",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "For example, we might expect to see that subreddits oriented around topics such as abortion or climate change are more dogmatic, and subreddits about cooking are less so.",
+          "chunk_id": "paper_966b9c5490524541_chunk_10",
+          "citation_id": "C3",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "$^{1}$ Posts on Reddit capture discussion and debate across a diverse set of domains and topics – users talk about everything from climate change and abortion, to world news and relationship advice, to the future of artificial intelligence.",
+          "chunk_id": "paper_966b9c5490524541_chunk_2",
+          "citation_id": "C1",
+          "score": 40.75,
+          "text_score": 0.75,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 2 Dogmatism data Posts on Reddit capture debate and discussion across a diverse set of topics, making them a natural starting point for untangling domain-independent linguistic features of dogmatism.",
+          "chunk_id": "paper_966b9c5490524541_chunk_3",
+          "citation_id": "C2",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "For example, we might expect to see that subreddits oriented around topics such as abortion or climate change are more dogmatic, and subreddits about cooking are less so.",
+          "chunk_id": "paper_966b9c5490524541_chunk_10",
+          "citation_id": "C3",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Our model is based on a corpus of Reddit posts, collected across a diverse set of conversational topics and annotated via paid crowdsourcing.",
+          "chunk_id": "paper_966b9c5490524541_chunk_1",
+          "citation_id": "C8",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "From a behavioral standpoint, dogmatic people solve problems differently, spending less time framing a problem and expressing more certainty in their solution (Lohman, 2010).",
+          "chunk_id": "paper_966b9c5490524541_chunk_15",
+          "citation_id": "C4",
+          "score": 40.25,
+          "text_score": 0.25,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Here we use Reddit as a lens to examine this idea more closely.",
+          "chunk_id": "paper_966b9c5490524541_chunk_11",
+          "citation_id": "C5",
+          "score": 40.25,
+          "text_score": 0.25,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "A predictive model further validates our feature sets, and also allows us to analyze dogmatism in millions of other Reddit comments in a scalable way, with multiple uses in ongoing, downstream analyses.",
+          "chunk_id": "paper_966b9c5490524541_chunk_8",
+          "citation_id": "C6",
+          "score": 40.25,
+          "text_score": 0.25,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Drawing comparisons or qualifying something as relative to something else conveys a nuance that is absent from traditionally dogmatic language.",
+          "chunk_id": "paper_966b9c5490524541_chunk_6",
+          "citation_id": "C7",
+          "score": 40.25,
+          "text_score": 0.25,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_3": 2,
+        "paper_966b9c5490524541_chunk_9": null
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "citation_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_preview": "$^{1}$ Posts on Reddit capture discussion and debate across a diverse set of domains and topics – users talk about everything from climate change and abortion, to world news and relationship advice, to the future of artificial...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0009",
+      "strategy": "baseline-current",
+      "question": "What predictive model do they build?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_8": 4
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What predictive model do they build?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0009",
+      "strategy": "current-evidence",
+      "question": "What predictive model do they build?",
+      "supporting_chunk_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "candidate_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3",
+        "paper_966b9c5490524541_chunk_11",
+        "paper_966b9c5490524541_chunk_1",
+        "paper_966b9c5490524541_chunk_15",
+        "paper_966b9c5490524541_chunk_16",
+        "paper_966b9c5490524541_chunk_10",
+        "paper_966b9c5490524541_chunk_9",
+        "paper_966b9c5490524541_chunk_4",
+        "paper_966b9c5490524541_chunk_7",
+        "paper_966b9c5490524541_chunk_0"
+      ],
+      "accepted_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "final_context_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_6",
+        "paper_966b9c5490524541_chunk_8",
+        "paper_966b9c5490524541_chunk_5",
+        "paper_966b9c5490524541_chunk_14",
+        "paper_966b9c5490524541_chunk_12",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "citation_chunk_ids": [
+        "paper_966b9c5490524541_chunk_2",
+        "paper_966b9c5490524541_chunk_13",
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "selected_claims": [
+        {
+          "text": "First, we validate psychological theories by examining the predictive power of feature sets that guide the model's predictions.",
+          "chunk_id": "paper_966b9c5490524541_chunk_2",
+          "citation_id": "C1",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Positive coefficients in this model are positively predictive of dogmatism, while negative coefficients are negatively predictive.",
+          "chunk_id": "paper_966b9c5490524541_chunk_13",
+          "citation_id": "C2",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Building a useful computational model requires labeled training data.",
+          "chunk_id": "paper_966b9c5490524541_chunk_3",
+          "citation_id": "C8",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "First, we validate psychological theories by examining the predictive power of feature sets that guide the model's predictions.",
+          "chunk_id": "paper_966b9c5490524541_chunk_2",
+          "citation_id": "C1",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Positive coefficients in this model are positively predictive of dogmatism, while negative coefficients are negatively predictive.",
+          "chunk_id": "paper_966b9c5490524541_chunk_13",
+          "citation_id": "C2",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "A predictive model further validates our feature sets, and also allows us to analyze dogmatism in millions of other Reddit comments in a scalable way, with multiple uses in ongoing, downstream analyses.",
+          "chunk_id": "paper_966b9c5490524541_chunk_8",
+          "citation_id": "C4",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "Building a useful computational model requires labeled training data.",
+          "chunk_id": "paper_966b9c5490524541_chunk_3",
+          "citation_id": "C8",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Concretely, we model the impact of dogmatism on these conversations through a linear regression.",
+          "chunk_id": "paper_966b9c5490524541_chunk_14",
+          "citation_id": "C6",
+          "score": 40.5133,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "↑ means the feature is positively predictive with dogmatism, and ↓ means the feature is negatively predictive.",
+          "chunk_id": "paper_966b9c5490524541_chunk_12",
+          "citation_id": "C7",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "\\* indicates significance (p < 0.05) after correction with Holmes method.",
+          "chunk_id": "paper_966b9c5490524541_chunk_6",
+          "citation_id": "C3",
+          "score": 40.18,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [
+        {
+          "text": "A predictive model further validates our feature sets, and also allows us to analyze dogmatism in millions of other Reddit comments in a scalable way, with multiple uses in ongoing, downstream analyses.",
+          "chunk_id": "paper_966b9c5490524541_chunk_8",
+          "citation_id": "C4",
+          "score": 40.8467,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        }
+      ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_8": 4
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "First, we validate psychological theories by examining the predictive power of feature sets that guide the model's predictions. [C1] Positive coefficients in this model are positively predictive of dogmatism, while negative coefficients...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "final_context_has_gold_but_answer_source_missed"
+    },
+    {
+      "case_id": "qasper-val-0011",
+      "strategy": "baseline-current",
+      "question": "How do they match words before reordering them?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_7": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they match words before reordering them?”可从以下证据开始分析：# 3 Proposed Solution Consider the task of translating for an extremely low-resource language pair. The parallel corpus between the two languages, if available...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0011",
+      "strategy": "current-evidence",
+      "question": "How do they match words before reordering them?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_12",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_10",
+        "paper_ee722d8eebe849f9_chunk_13"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_3",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "selected_claims": [
+        {
+          "text": "<table><tr><td>Before Reordering</td><td>After Reordering</td></tr><tr><td><img src=\"images/8b823142d78335bf9c31d193aa8ed12331a33d08101cf8ad6678553f7e1bb6e7.jpg\"/></td><td><img src=\"images/d492c8af2f577cc04d3200737b86afb2df7956f19c6de98af9ed683511e0a539.jpg\"/></td></tr><tr><td><img...",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_4",
+          "citation_id": "C1",
+          "score": 40.58,
+          "text_score": 0.4,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "It contains two pre-ordering configurations: (1) generic rules (G) that apply to all Indian languages (Ramanathan et al., 2008), and (2) hindi-tuned rules (HT) which improves generic rules by incorporating improvements found through error analysis of English-Hindi reordering (Patel et al., 2013).",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_7",
+          "citation_id": "C5",
+          "score": 40.55,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.35
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "To address the word order divergence, we propose to pre-order the assisting language sentences (SVO) to match the word order of the source language (SOV).",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_2",
+          "citation_id": "C3",
+          "score": 40.38,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "<table><tr><td>Before Reordering</td><td>After Reordering</td></tr><tr><td><img src=\"images/8b823142d78335bf9c31d193aa8ed12331a33d08101cf8ad6678553f7e1bb6e7.jpg\"/></td><td><img src=\"images/d492c8af2f577cc04d3200737b86afb2df7956f19c6de98af9ed683511e0a539.jpg\"/></td></tr><tr><td><img...",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_4",
+          "citation_id": "C1",
+          "score": 40.58,
+          "text_score": 0.4,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "It contains two pre-ordering configurations: (1) generic rules (G) that apply to all Indian languages (Ramanathan et al., 2008), and (2) hindi-tuned rules (HT) which improves generic rules by incorporating improvements found through error analysis of English-Hindi reordering (Patel et al., 2013).",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_7",
+          "citation_id": "C5",
+          "score": 40.55,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.35
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "The approach does not show any significant improvements, possibly because the divergence has to be addressed before/during construction of the contextual embeddings in the Bi-LSTM layer.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_3",
+          "citation_id": "C2",
+          "score": 40.38,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "To address the word order divergence, we propose to pre-order the assisting language sentences (SVO) to match the word order of the source language (SOV).",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_2",
+          "citation_id": "C3",
+          "score": 40.38,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        },
+        {
+          "text": "We show that pre-ordering the assisting language to match the word order of the source language significantly improves translation quality in an extremely low-resource setting.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_11",
+          "citation_id": "C4",
+          "score": 40.38,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "To bridge this divergence, we propose to pre-order the assisting language sentences to match the word order of the source language and train the parent model.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_1",
+          "citation_id": "C7",
+          "score": 40.38,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "We observe that both the pre-ordering models significantly improve the translation quality over the no-preordering models for all the language pairs.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_9",
+          "citation_id": "C8",
+          "score": 40.2,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "<table><tr><td>English</td><td colspan=\"9\">the treatment of migraine is done in two ways</td></tr><tr><td>Gujarati (Original)</td><td>भाधिक्रेननी</td><td>आरपार</td><td>मे</td><td>शीते</td><td>डरी</td><td>शाङ्गाथ</td><td>छे.</td><td></td><td></td></tr><tr><td>Gujarati (Word...",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_8",
+          "citation_id": "C6",
+          "score": 40.18,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_7": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "answer_source_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "citation_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "answer_preview": "<table><tr><td>Before Reordering</td><td>After Reordering</td></tr><tr><td><img src=\"images/8b823142d78335bf9c31d193aa8ed12331a33d08101cf8ad6678553f7e1bb6e7.jpg\"/></td><td><img...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0013",
+      "strategy": "baseline-current",
+      "question": "Which dataset(s) do they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_5": 1
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“Which dataset(s) do they experiment with?”可从以下证据开始分析：# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. Languages: We...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0013",
+      "strategy": "current-evidence",
+      "question": "Which dataset(s) do they experiment with?",
+      "supporting_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12",
+        "paper_ee722d8eebe849f9_chunk_10",
+        "paper_ee722d8eebe849f9_chunk_2",
+        "paper_ee722d8eebe849f9_chunk_4",
+        "paper_ee722d8eebe849f9_chunk_13",
+        "paper_ee722d8eebe849f9_chunk_3"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_6",
+        "paper_ee722d8eebe849f9_chunk_7",
+        "paper_ee722d8eebe849f9_chunk_1",
+        "paper_ee722d8eebe849f9_chunk_11",
+        "paper_ee722d8eebe849f9_chunk_9",
+        "paper_ee722d8eebe849f9_chunk_12"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "citation_chunk_ids": [
+        "paper_ee722d8eebe849f9_chunk_5",
+        "paper_ee722d8eebe849f9_chunk_8",
+        "paper_ee722d8eebe849f9_chunk_9"
+      ],
+      "selected_claims": [
+        {
+          "text": "# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_5",
+          "citation_id": "C1",
+          "score": 41.2,
+          "text_score": 1.0,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 5 Results We experiment with two scenarios: (a) an extremely resource scarce scenario with no parallel corpus for child tasks, (b) varying amounts of parallel corpora available for child task.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_8",
+          "citation_id": "C2",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 5.1 No Parallel Corpus for Child Task The results from our experiments are presented in the Table 2.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_9",
+          "citation_id": "C7",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_5",
+          "citation_id": "C1",
+          "score": 41.2,
+          "text_score": 1.0,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 5 Results We experiment with two scenarios: (a) an extremely resource scarce scenario with no parallel corpus for child tasks, (b) varying amounts of parallel corpora available for child task.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_8",
+          "citation_id": "C2",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 5.1 No Parallel Corpus for Child Task The results from our experiments are presented in the Table 2.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_9",
+          "citation_id": "C7",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "We do not want bilingual embeddings quality or bilingual dictionary coverage to influence the experiments, rendering our conclusions unreliable.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_6",
+          "citation_id": "C3",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Our experiments on many language pairs show that bridging the word order gap leads to major improvements in the translation quality in extremely low-resource scenarios.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_1",
+          "citation_id": "C5",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "<table><tr><td rowspan=\"2\">Corpus Size</td><td rowspan=\"2\">No Transfer Learning</td><td rowspan=\"2\">No Pre-Order</td><td...",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_12",
+          "citation_id": "C8",
+          "score": 40.45,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.45
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Pre-ordering: We use CFILT-preorder $^{3}$ for pre-reordering English sentences.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_7",
+          "citation_id": "C4",
+          "score": 40.4,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "If pre-ordering is not possible, fine-tuning on a small source-target parallel corpus is sufficient to overcome word order divergence.",
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_11",
+          "citation_id": "C6",
+          "score": 40.2,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_5": 1
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_source_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "citation_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_preview": "# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. [C1] # 5 Results We experiment with two scenarios: (a) an extremely resource scarce...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0016",
+      "strategy": "baseline-current",
+      "question": "On which benchmarks they achieve the state of the art?",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_20": 1,
+        "paper_ad6cad90ed1d41d6_chunk_18": 3
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“On which benchmarks they achieve the state of the art?”可从以下证据开始分析：# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0016",
+      "strategy": "current-evidence",
+      "question": "On which benchmarks they achieve the state of the art?",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5",
+        "paper_ad6cad90ed1d41d6_chunk_1",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17",
+        "paper_ad6cad90ed1d41d6_chunk_10",
+        "paper_ad6cad90ed1d41d6_chunk_7",
+        "paper_ad6cad90ed1d41d6_chunk_21",
+        "paper_ad6cad90ed1d41d6_chunk_25",
+        "paper_ad6cad90ed1d41d6_chunk_26",
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_15",
+        "paper_ad6cad90ed1d41d6_chunk_12",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_13",
+        "paper_ad6cad90ed1d41d6_chunk_27",
+        "paper_ad6cad90ed1d41d6_chunk_6",
+        "paper_ad6cad90ed1d41d6_chunk_14"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_16",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_5"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_3"
+      ],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_3"
+      ],
+      "selected_claims": [
+        {
+          "text": "Note that in contrast to previous KBQA systems, our system does not use joint-inference or feature-based re-ranking step, nevertheless it still achieves better or comparable results to the state-of-the-art.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_20",
+          "citation_id": "C1",
+          "score": 40.95,
+          "text_score": 0.75,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Our main contributions include: (i) An improved relation detection model by hierarchical matching between questions and relations with residual learning; (ii) We demonstrate that the improved relation detector enables our simple KBQA system to achieve state-of-the-art results on both single-relation and multi-relation...",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_3",
+          "citation_id": "C5",
+          "score": 40.95,
+          "text_score": 0.75,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "The AMPCNN result is from (Yin et al., 2016), which yielded state-of-the-art scores by outperforming several attention-based methods.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_18",
+          "citation_id": "C3",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "Note that in contrast to previous KBQA systems, our system does not use joint-inference or feature-based re-ranking step, nevertheless it still achieves better or comparable results to the state-of-the-art.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_20",
+          "citation_id": "C1",
+          "score": 40.95,
+          "text_score": 0.75,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Our main contributions include: (i) An improved relation detection model by hierarchical matching between questions and relations with residual learning; (ii) We demonstrate that the improved relation detector enables our simple KBQA system to achieve state-of-the-art results on both single-relation and multi-relation...",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_3",
+          "citation_id": "C5",
+          "score": 40.95,
+          "text_score": 0.75,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "The AMPCNN result is from (Yin et al., 2016), which yielded state-of-the-art scores by outperforming several attention-based methods.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_18",
+          "citation_id": "C3",
+          "score": 40.7,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Analysis Next, we present empirical evidences, which show why our HR-BiLSTM model achieves the best scores.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_19",
+          "citation_id": "C2",
+          "score": 40.45,
+          "text_score": 0.25,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Relation Detection in KBQA Systems Relation detection for KBQA also starts with feature-rich approaches (Yao and Van Durme, 2014; Bast and Haussmann, 2015) towards usages of deep networks (Yih et al., 2015; Xu et al., 2016; Dai et al., 2016) and attention models (Yin et al., 2016; Golub and He, 2016).",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_4",
+          "citation_id": "C6",
+          "score": 40.45,
+          "text_score": 0.25,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Although general relation detection $^{1}$ methods are well studied in the NLP community, such studies usually do not take the end task of KBQA into consideration.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_2",
+          "citation_id": "C7",
+          "score": 40.4,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.4
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "The problem with this approach is that it suffers from the low relation coverage due to limited amount of training data, thus cannot generalize well to large number of open-domain relations.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_5",
+          "citation_id": "C8",
+          "score": 40.2,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.2
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_20": 1,
+        "paper_ad6cad90ed1d41d6_chunk_18": 3
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_source_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "citation_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_preview": "Note that in contrast to previous KBQA systems, our system does not use joint-inference or feature-based re-ranking step, nevertheless it still achieves better or comparable results to the state-of-the-art. [C1] The AMPCNN result is from...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0017",
+      "strategy": "baseline-current",
+      "question": "What does KBQA abbreviate for",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_2": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What does KBQA abbreviate for”可从以下证据开始分析：# 4.2 Different Abstractions of Questions Representations From Table 1, we can see that different parts of a relation could match different contexts of question texts. Usually...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0017",
+      "strategy": "current-evidence",
+      "question": "What does KBQA abbreviate for",
+      "supporting_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "candidate_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17",
+        "paper_ad6cad90ed1d41d6_chunk_19",
+        "paper_ad6cad90ed1d41d6_chunk_5",
+        "paper_ad6cad90ed1d41d6_chunk_1",
+        "paper_ad6cad90ed1d41d6_chunk_21",
+        "paper_ad6cad90ed1d41d6_chunk_26",
+        "paper_ad6cad90ed1d41d6_chunk_10",
+        "paper_ad6cad90ed1d41d6_chunk_12",
+        "paper_ad6cad90ed1d41d6_chunk_0",
+        "paper_ad6cad90ed1d41d6_chunk_15",
+        "paper_ad6cad90ed1d41d6_chunk_7",
+        "paper_ad6cad90ed1d41d6_chunk_25",
+        "paper_ad6cad90ed1d41d6_chunk_6",
+        "paper_ad6cad90ed1d41d6_chunk_13",
+        "paper_ad6cad90ed1d41d6_chunk_18",
+        "paper_ad6cad90ed1d41d6_chunk_27"
+      ],
+      "accepted_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17"
+      ],
+      "final_context_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_8",
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_9",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_4",
+        "paper_ad6cad90ed1d41d6_chunk_11",
+        "paper_ad6cad90ed1d41d6_chunk_17"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "citation_chunk_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_3",
+        "paper_ad6cad90ed1d41d6_chunk_2",
+        "paper_ad6cad90ed1d41d6_chunk_8"
+      ],
+      "selected_claims": [
+        {
+          "text": "# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$ and (2) AMPCNN (Yin et al., 2016), the state-of-the-art on SimpleQuestions.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_20",
+          "citation_id": "C2",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "![](images/9045bf810b97306f3cd9164cfec30e865fec708d5142880f0a3eb85137c462b5.jpg) <details> <summary>flowchart</summary> ```mermaid graph TD A[\"Question: what episode was mike kelley the writer of\"] --> B[\"Entity Linking\"] B --> C[\"Mike Kelley\"] C --> D[\"episodes_written\"] D --> E[\"?\"] F[\"Question: what tv show did...",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_3",
+          "citation_id": "C3",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 1 Introduction Knowledge Base Question Answering (KBQA) systems answer questions by obtaining information from KB tuples (Berant et al., 2013; Yao et al., 2014; Bordes et al., 2015; Bast and Haussmann, 2015; Yih et al., 2015; Xu et al., 2016).",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_2",
+          "citation_id": "C5",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$ and (2) AMPCNN (Yin et al., 2016), the state-of-the-art on SimpleQuestions.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_20",
+          "citation_id": "C2",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "![](images/9045bf810b97306f3cd9164cfec30e865fec708d5142880f0a3eb85137c462b5.jpg) <details> <summary>flowchart</summary> ```mermaid graph TD A[\"Question: what episode was mike kelley the writer of\"] --> B[\"Entity Linking\"] B --> C[\"Mike Kelley\"] C --> D[\"episodes_written\"] D --> E[\"?\"] F[\"Question: what tv show did...",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_3",
+          "citation_id": "C3",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# 1 Introduction Knowledge Base Question Answering (KBQA) systems answer questions by obtaining information from KB tuples (Berant et al., 2013; Yao et al., 2014; Bordes et al., 2015; Bast and Haussmann, 2015; Yih et al., 2015; Xu et al., 2016).",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_2",
+          "citation_id": "C5",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "All are much fewer than thousands of relations in KBQA.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_4",
+          "citation_id": "C6",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "# 5 KBQA Enhanced by Relation Detection This section describes our KBQA pipeline system.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_11",
+          "citation_id": "C7",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "Hence we can directly evaluate relation detection performance independently as well as evaluate on the KBQA end task.",
+          "chunk_id": "paper_ad6cad90ed1d41d6_chunk_17",
+          "citation_id": "C8",
+          "score": 40.5,
+          "text_score": 0.5,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_2": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "answer_source_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "citation_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "answer_preview": "# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$ and (2) AMPCNN (Yin et al., 2016), the state-of-the-art on SimpleQuestions. [C2]...",
+      "answer_source_count": 3,
+      "citation_count": 4,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0020",
+      "strategy": "baseline-current",
+      "question": "How do they calculate a static embedding for each word?",
+      "supporting_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_f34858cc477d48bb_chunk_15": 5
+      },
+      "final_context_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they calculate a static embedding for each word?”可从以下证据开始分析：# 3.1 Contextualizing Models The contextualizing models we study in this paper are ELMo, BERT, and GPT-2 $^{1}$ . We choose the base cased version of BERT...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": true,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "citation_selection_missed_gold"
+    },
+    {
+      "case_id": "qasper-val-0020",
+      "strategy": "current-evidence",
+      "question": "How do they calculate a static embedding for each word?",
+      "supporting_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "candidate_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11",
+        "paper_f34858cc477d48bb_chunk_1",
+        "paper_f34858cc477d48bb_chunk_13",
+        "paper_f34858cc477d48bb_chunk_8",
+        "paper_f34858cc477d48bb_chunk_9",
+        "paper_f34858cc477d48bb_chunk_21",
+        "paper_f34858cc477d48bb_chunk_18",
+        "paper_f34858cc477d48bb_chunk_14",
+        "paper_f34858cc477d48bb_chunk_16",
+        "paper_f34858cc477d48bb_chunk_7",
+        "paper_f34858cc477d48bb_chunk_12",
+        "paper_f34858cc477d48bb_chunk_6",
+        "paper_f34858cc477d48bb_chunk_17",
+        "paper_f34858cc477d48bb_chunk_0",
+        "paper_f34858cc477d48bb_chunk_22"
+      ],
+      "accepted_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11"
+      ],
+      "final_context_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_5",
+        "paper_f34858cc477d48bb_chunk_4",
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_20",
+        "paper_f34858cc477d48bb_chunk_19",
+        "paper_f34858cc477d48bb_chunk_11"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "citation_chunk_ids": [
+        "paper_f34858cc477d48bb_chunk_2",
+        "paper_f34858cc477d48bb_chunk_3",
+        "paper_f34858cc477d48bb_chunk_15",
+        "paper_f34858cc477d48bb_chunk_5"
+      ],
+      "selected_claims": [
+        {
+          "text": "Traditionally, these word embeddings were static: each word had a single vector, regardless of context (Mikolov et al., 2013a; Pennington et al., 2014).",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_2",
+          "citation_id": "C3",
+          "score": 40.8,
+          "text_score": 0.8,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Because they create a single representation for each word, a notable problem with static word embeddings is that all senses of a polysemous word must share a single vector.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_3",
+          "citation_id": "C4",
+          "score": 40.8,
+          "text_score": 0.8,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "As noted earlier, we can create static embeddings for each word by taking the first principal component (PC) of its contextualized representations in a given layer.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_15",
+          "citation_id": "C5",
+          "score": 40.8,
+          "text_score": 0.8,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "Traditionally, these word embeddings were static: each word had a single vector, regardless of context (Mikolov et al., 2013a; Pennington et al., 2014).",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_2",
+          "citation_id": "C3",
+          "score": 40.8,
+          "text_score": 0.8,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Because they create a single representation for each word, a notable problem with static word embeddings is that all senses of a polysemous word must share a single vector.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_3",
+          "citation_id": "C4",
+          "score": 40.8,
+          "text_score": 0.8,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "As noted earlier, we can create static embeddings for each word by taking the first principal component (PC) of its contextualized representations in a given layer.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_15",
+          "citation_id": "C5",
+          "score": 40.8,
+          "text_score": 0.8,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "(2018) found that making static embeddings more isotropic – by subtracting their mean from each embedding – leads to surprisingly large improvements in performance on downstream tasks.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_20",
+          "citation_id": "C6",
+          "score": 40.6,
+          "text_score": 0.6,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Table 1: The performance of various static embeddings on word embedding benchmark tasks.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_19",
+          "citation_id": "C7",
+          "score": 40.6,
+          "text_score": 0.6,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Isotropy has both theoretical and empirical benefits for static word embeddings.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_11",
+          "citation_id": "C8",
+          "score": 40.6,
+          "text_score": 0.6,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "Although ELMo, BERT, and GPT-2 have 2, 12, and 12 hidden layers respectively, we also include the input layer of each contextualizing model as its 0 $^{th}$ layer.",
+          "chunk_id": "paper_f34858cc477d48bb_chunk_5",
+          "citation_id": "C1",
+          "score": 40.2,
+          "text_score": 0.2,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_f34858cc477d48bb_chunk_15": 5
+      },
+      "final_context_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "answer_source_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "citation_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "answer_preview": "Traditionally, these word embeddings were static: each word had a single vector, regardless of context (Mikolov et al., 2013a; Pennington et al., 2014). [C3] Because they create a single representation for each word, a notable problem with...",
+      "answer_source_count": 3,
+      "citation_count": 4,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": true,
+      "gold_in_final_context": true,
+      "gold_in_answer_sources": true,
+      "gold_in_citations": true,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "ok"
+    },
+    {
+      "case_id": "qasper-val-0022",
+      "strategy": "baseline-current",
+      "question": "What are the other algorithms tested?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_12",
+        "paper_c23b8432b797410b_chunk_13"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_12": null,
+        "paper_c23b8432b797410b_chunk_13": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the other algorithms tested?”可从以下证据开始分析：# 3. Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "retrieval_miss"
+    },
+    {
+      "case_id": "qasper-val-0022",
+      "strategy": "current-evidence",
+      "question": "What are the other algorithms tested?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_12",
+        "paper_c23b8432b797410b_chunk_13"
+      ],
+      "candidate_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7",
+        "paper_c23b8432b797410b_chunk_8",
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_9",
+        "paper_c23b8432b797410b_chunk_14",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_10",
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_12",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_11",
+        "paper_c23b8432b797410b_chunk_13",
+        "paper_c23b8432b797410b_chunk_20",
+        "paper_c23b8432b797410b_chunk_3",
+        "paper_c23b8432b797410b_chunk_18",
+        "paper_c23b8432b797410b_chunk_27"
+      ],
+      "accepted_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_1"
+      ],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_5",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_1"
+      ],
+      "selected_claims": [
+        {
+          "text": "Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific task: sensitive data detection and classification in Spanish clinical free text.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_5",
+          "citation_id": "C1",
+          "score": 40.6667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "We also compare BERT to other algorithms.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_1",
+          "citation_id": "C5",
+          "score": 40.6667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "We have compared this BERT-based sequence labelling against other methods and systems.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_30",
+          "citation_id": "C2",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific task: sensitive data detection and classification in Spanish clinical free text.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_5",
+          "citation_id": "C1",
+          "score": 40.6667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "We also compare BERT to other algorithms.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_1",
+          "citation_id": "C5",
+          "score": 40.6667,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "We have compared this BERT-based sequence labelling against other methods and systems.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_30",
+          "citation_id": "C2",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "It substituted the widely used recurrent and convolutional neural network architectures by another approach based solely on self-attention, obtaining an impressive performance gain.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_4",
+          "citation_id": "C3",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "Some of these systems rely on rules, patterns and dictionaries, while others use more advanced techniques related to machine learning and, more recently, deep learning.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_2",
+          "citation_id": "C4",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "Last, the category ‘Other’ is completely leaked by all the compared systems, most likely due to its almost total lack of support in both training and evaluation datasets.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_26",
+          "citation_id": "C6",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "On the other hand, the recall, which directly depends on the coverage provided by the rules and resources, drops to 0.469.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_19",
+          "citation_id": "C7",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "The least frequent sensitive information types, which account for $\\sim 10\\%$ of the remaining annotations, consist of the patient's sex, job, and kinship, and locations other than healthcare facilities ('Location').",
+          "chunk_id": "paper_c23b8432b797410b_chunk_7",
+          "citation_id": "C8",
+          "score": 40.3333,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {},
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_12": null,
+        "paper_c23b8432b797410b_chunk_13": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific task: sensitive data detection and classification in Spanish clinical free...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "evidence_rejected_gold"
+    },
+    {
+      "case_id": "qasper-val-0024",
+      "strategy": "baseline-current",
+      "question": "What are the clinical datasets used in the paper?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "candidate_chunk_ids": [],
+      "accepted_chunk_ids": [],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20",
+        "paper_c23b8432b797410b_chunk_0"
+      ],
+      "answer_source_chunk_ids": [],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15"
+      ],
+      "selected_claims": [],
+      "claim_candidates": [],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_6": null,
+        "paper_c23b8432b797410b_chunk_7": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the clinical datasets used in the paper?”可从以下证据开始分析：# 3.3.1. Experiment A: NUBES-PHI In this experiment set, we evaluate all the systems presented in Section 3.2., namely, the rule-based baseline, the CRF...",
+      "answer_source_count": 0,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": false,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "retrieval_miss"
+    },
+    {
+      "case_id": "qasper-val-0024",
+      "strategy": "current-evidence",
+      "question": "What are the clinical datasets used in the paper?",
+      "supporting_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "candidate_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_0",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20",
+        "paper_c23b8432b797410b_chunk_18",
+        "paper_c23b8432b797410b_chunk_27",
+        "paper_c23b8432b797410b_chunk_25",
+        "paper_c23b8432b797410b_chunk_28",
+        "paper_c23b8432b797410b_chunk_21",
+        "paper_c23b8432b797410b_chunk_22",
+        "paper_c23b8432b797410b_chunk_23",
+        "paper_c23b8432b797410b_chunk_24",
+        "paper_c23b8432b797410b_chunk_30",
+        "paper_c23b8432b797410b_chunk_2",
+        "paper_c23b8432b797410b_chunk_1",
+        "paper_c23b8432b797410b_chunk_14",
+        "paper_c23b8432b797410b_chunk_4",
+        "paper_c23b8432b797410b_chunk_6",
+        "paper_c23b8432b797410b_chunk_13",
+        "paper_c23b8432b797410b_chunk_7"
+      ],
+      "accepted_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_0",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20"
+      ],
+      "final_context_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15",
+        "paper_c23b8432b797410b_chunk_0",
+        "paper_c23b8432b797410b_chunk_19",
+        "paper_c23b8432b797410b_chunk_26",
+        "paper_c23b8432b797410b_chunk_29",
+        "paper_c23b8432b797410b_chunk_20"
+      ],
+      "answer_source_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15"
+      ],
+      "citation_chunk_ids": [
+        "paper_c23b8432b797410b_chunk_16",
+        "paper_c23b8432b797410b_chunk_17",
+        "paper_c23b8432b797410b_chunk_15"
+      ],
+      "selected_claims": [
+        {
+          "text": "Experimental design We have conducted experiments with BERT in the two datasets of Spanish clinical narrative presented in Section 3.1.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_15",
+          "citation_id": "C3",
+          "score": 41.1167,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.45
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Experiment B: MEDDOCAN In this experiment set, our BERT implementation is compared to several systems that participated in the MEDDO-CAN challenge: a CRF classifier (Perez et al., 2019), a spaCy entity recogniser (Perez et al., 2019), and NLNDE (Lange et al., 2019), the winner of the shared task and current state of...",
+          "chunk_id": "paper_c23b8432b797410b_chunk_17",
+          "citation_id": "C2",
+          "score": 40.9633,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.45,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Detecting entity types correctly is important if a system is going to be used to replace sensitive data by fake data of the same type (e.g., random people names).",
+          "chunk_id": "paper_c23b8432b797410b_chunk_16",
+          "citation_id": "C1",
+          "score": 40.7133,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        }
+      ],
+      "claim_candidates": [
+        {
+          "text": "Experimental design We have conducted experiments with BERT in the two datasets of Spanish clinical narrative presented in Section 3.1.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_15",
+          "citation_id": "C3",
+          "score": 41.1167,
+          "text_score": 0.6667,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.45
+          },
+          "support_priority": 4,
+          "chunk_rank": 3,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "Experiment B: MEDDOCAN In this experiment set, our BERT implementation is compared to several systems that participated in the MEDDO-CAN challenge: a CRF classifier (Perez et al., 2019), a spaCy entity recogniser (Perez et al., 2019), and NLNDE (Lange et al., 2019), the winner of the shared task and current state of...",
+          "chunk_id": "paper_c23b8432b797410b_chunk_17",
+          "citation_id": "C2",
+          "score": 40.9633,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.45,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 2,
+          "selected": true,
+          "selected_by": "top_score",
+          "unselected_reason": ""
+        },
+        {
+          "text": "# Sensitive Data Detection and Classification in Spanish Clinical Text: Experiments with BERT Aitor García-Pablos, Naiara Perez, Montse Cuadros SNLT group at Vicomtech Foundation, Basque Research and Technology Alliance (BRTA) Donostia/San-Sebastián, 20009, Spain {agarciap, nperez, mcuadros}@vicomtech.org",
+          "chunk_id": "paper_c23b8432b797410b_chunk_0",
+          "citation_id": "C4",
+          "score": 40.7833,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.45
+          },
+          "support_priority": 4,
+          "chunk_rank": 4,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "Detecting entity types correctly is important if a system is going to be used to replace sensitive data by fake data of the same type (e.g., random people names).",
+          "chunk_id": "paper_c23b8432b797410b_chunk_16",
+          "citation_id": "C1",
+          "score": 40.7133,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 1,
+          "selected": true,
+          "selected_by": "reserve_slot",
+          "unselected_reason": ""
+        },
+        {
+          "text": "We also show the results of Mao and Liu (2019) who, despite of having used a BERT-based system, achieve lower scores than our models.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_29",
+          "citation_id": "C7",
+          "score": 40.7133,
+          "text_score": 0.3333,
+          "has_question_overlap": true,
+          "intent_boosts": {
+            "dataset": 0.2,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 7,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "cut_by_max_claims"
+        },
+        {
+          "text": "However, the BERT-based model is the most robust to training-data reduction, showing an steadily low performance loss.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_26",
+          "citation_id": "C6",
+          "score": 40.58,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.4,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 6,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "The included baseline serves to give a quick insight about how challenging the data is.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_19",
+          "citation_id": "C5",
+          "score": 40.38,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.2,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 5,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        },
+        {
+          "text": "The conclusions are very similar to those extracted previously, with BERT gaining 2.1 points of F1-score over the CRF based approach.",
+          "chunk_id": "paper_c23b8432b797410b_chunk_20",
+          "citation_id": "C8",
+          "score": 40.38,
+          "text_score": 0.0,
+          "has_question_overlap": false,
+          "intent_boosts": {
+            "dataset": 0.2,
+            "method": 0.18
+          },
+          "support_priority": 4,
+          "chunk_rank": 8,
+          "selected": false,
+          "selected_by": "",
+          "unselected_reason": "score_below_selected"
+        }
+      ],
+      "unselected_gold_claim_candidates": [],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_6": null,
+        "paper_c23b8432b797410b_chunk_7": null
+      },
+      "final_context_hit_ids": [],
+      "answer_source_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "Detecting entity types correctly is important if a system is going to be used to replace sensitive data by fake data of the same type (e.g., random people names). [C1] Experiment B: MEDDOCAN In this experiment set, our BERT implementation...",
+      "answer_source_count": 3,
+      "citation_count": 3,
+      "final_context_count": 8,
+      "gold_in_candidates": true,
+      "gold_in_accepted": false,
+      "gold_in_final_context": false,
+      "gold_in_answer_sources": false,
+      "gold_in_citations": false,
+      "gold_in_final_but_not_answer_source": false,
+      "gold_in_answer_source_but_not_citation": false,
+      "failure_stage": "evidence_rejected_gold"
+    }
+  ]
+}

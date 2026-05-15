@@ -362,6 +362,95 @@ def test_claim_extraction_dedupes_duplicate_sentences() -> None:
     assert len(result["claims"]) == 1
 
 
+def test_claim_extraction_result_intent_boosts_numeric_metric_sentence() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-method", "paper-1", "paper.pdf", "Method", "BERT uses a transformer encoder for the task."),
+        RetrievedChunk("chunk-result", "paper-1", "paper.pdf", "Results", "BERT obtains an F1 score of 0.97 on the task."),
+    ]
+    decisions = [EvidenceDecision(chunk.chunk_id, "accept", support_level="partial") for chunk in chunks]
+
+    result = service._extractive_answer_with_claim_sources("What is the performance of BERT on the task?", chunks, decisions, max_claims=1)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-result"]
+    assert result["claims"][0]["intent_boosts"]["result"] > 0
+
+
+def test_claim_extraction_dataset_intent_boosts_corpus_sentence() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-method", "paper-1", "paper.pdf", "Method", "The model uses multilingual pre-training."),
+        RetrievedChunk("chunk-data", "paper-1", "paper.pdf", "Data", "We evaluate on the Europarl corpus and MultiUN benchmark data."),
+    ]
+    decisions = [EvidenceDecision(chunk.chunk_id, "accept", support_level="partial") for chunk in chunks]
+
+    result = service._extractive_answer_with_claim_sources("Which datasets do they experiment with?", chunks, decisions, max_claims=1)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-data"]
+    assert result["claims"][0]["intent_boosts"]["dataset"] > 0
+
+
+def test_claim_extraction_method_intent_boosts_model_sentence() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-result", "paper-1", "paper.pdf", "Results", "The results improve by 2 BLEU points."),
+        RetrievedChunk("chunk-method", "paper-1", "paper.pdf", "Method", "The method uses a graph neural model architecture."),
+    ]
+    decisions = [EvidenceDecision(chunk.chunk_id, "accept", support_level="partial") for chunk in chunks]
+
+    result = service._extractive_answer_with_claim_sources("What method do they use?", chunks, decisions, max_claims=1)
+
+    assert result["answer_source_chunk_ids"] == ["chunk-method"]
+    assert result["claims"][0]["intent_boosts"]["method"] > 0
+
+
+def test_claim_extraction_reserve_slot_keeps_distinct_high_confidence_claim() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-1", "paper-1", "paper.pdf", "Method", "The model uses graph evidence for the method."),
+        RetrievedChunk("chunk-2", "paper-1", "paper.pdf", "Method", "The model uses transformer evidence for the method."),
+        RetrievedChunk("chunk-3", "paper-1", "paper.pdf", "Method", "The model uses encoder evidence for the method."),
+        RetrievedChunk("chunk-4", "paper-1", "paper.pdf", "Method", "The method uses alignment evidence and reports corpus details."),
+    ]
+    decisions = [EvidenceDecision(chunk.chunk_id, "accept", support_level="direct") for chunk in chunks]
+
+    result = service._extractive_answer_with_claim_sources("What method uses evidence and corpus?", chunks, decisions, max_claims=3)
+
+    assert len(result["claims"]) == 3
+    assert "chunk-4" in result["answer_source_chunk_ids"]
+    assert [claim for claim in result["claims"] if claim["chunk_id"] == "chunk-4"][0]["selected_by"] in {"reserve_slot", "top_score"}
+
+
+def test_claim_extraction_near_duplicate_reserve_candidate_is_not_selected() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk("chunk-1", "paper-1", "paper.pdf", "Method", "The model uses graph evidence for the method."),
+        RetrievedChunk("chunk-2", "paper-1", "paper.pdf", "Method", "The model uses transformer evidence for the method."),
+        RetrievedChunk("chunk-3", "paper-1", "paper.pdf", "Method", "The model uses encoder evidence for the method."),
+        RetrievedChunk("chunk-dup", "paper-1", "paper.pdf", "Method", "The model uses graph evidence for the method."),
+    ]
+    decisions = [EvidenceDecision(chunk.chunk_id, "accept", support_level="direct") for chunk in chunks]
+
+    result = service._extractive_answer_with_claim_sources("What model method uses evidence?", chunks, decisions, max_claims=3)
+
+    assert len(result["claims"]) == 3
+    assert "chunk-dup" not in result["answer_source_chunk_ids"]
+
+
+def test_claim_extraction_max_claims_remains_three() -> None:
+    service = LLMService(Settings(openai_api_key=""))
+    chunks = [
+        RetrievedChunk(f"chunk-{index}", "paper-1", "paper.pdf", "Method", f"The method uses evidence item {index}.")
+        for index in range(1, 6)
+    ]
+    decisions = [EvidenceDecision(chunk.chunk_id, "accept", support_level="direct") for chunk in chunks]
+
+    result = service._extractive_answer_with_claim_sources("What method uses evidence?", chunks, decisions, max_claims=3)
+
+    assert len(result["claims"]) == 3
+    assert len(result["answer_source_chunk_ids"]) == 3
+
+
 def test_precision_mode_uses_only_high_confidence_claim_sources() -> None:
     service = LLMService(Settings(openai_api_key="", rag_citation_selection_mode="precision"))
     chunks = [
