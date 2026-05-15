@@ -209,7 +209,7 @@ def test_answer_with_evidence_cites_only_accepted_chunks() -> None:
     service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1))
     service.client = SimpleNamespace(chat=SimpleNamespace(completions=BadCitationCompletions()))
     chunks = [RetrievedChunk("chunk-1", "paper-1", "paper.pdf", "Method", "The method uses staged screening.")]
-    decisions = [EvidenceDecision("chunk-1", "accept", concise_summary="The method uses staged screening.")]
+    decisions = [EvidenceDecision("chunk-1", "accept", support_level="direct", concise_summary="The method uses staged screening.")]
 
     result = service.answer_with_evidence("What is the method?", chunks, decisions)
 

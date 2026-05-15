@@ -92,6 +92,34 @@ Outputs:
 - `report.md`: human-readable comparison report.
 - `run_config.json`: reproducibility metadata.
 
+## Current Citation Mode
+
+`precision` is the default `rag_citation_selection_mode`. It keeps citations tied to claim-level answer sources and filters them to high-confidence accepted direct/partial evidence. On the 12-case chunk-aligned QASPER subset it matches `answer_linked` on citation F1 while preserving a stricter confidence requirement.
+
+The other modes remain available for ablation:
+
+- `answer_linked`: cites the selected claim source chunks directly. It has the same aggregate QASPER citation F1 as `precision`, but less filtering.
+- `strict`: remains conservative and can return only one fallback citation, which lowers citation recall.
+- `current`: can include slightly broader supplemental evidence, but its lower precision makes it unsuitable as the default.
+
+Claim-level answer-source attribution now selects up to three extracted claims from distinct final-context chunks. The selector scores candidate sentences with question overlap, modest answer-intent boosts, evidence support priority, and a guarded reserve slot for close high-confidence claims. Current-evidence metadata preserves `answer_source_chunk_ids`, `answer_claims`/`claim_sources`, `claim_count`, `claim_candidates`, and `citation_selection_mode`.
+
+Latest 12-case chunked QASPER results:
+
+| mode | avg_citation_count | avg_citation_recall | avg_citation_precision | citation F1 | avg_answer_source_count | avg_answer_source_recall | avg_answer_source_precision | avg_final_context_recall | avg_expected_point_coverage | avg_quote_support_recall | error_count |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| strict | 1.0000 | 0.2083 | 0.2500 | 0.2273 | 3.0000 | 0.7083 | 0.3055 | 0.7917 | 0.3194 | 0.2222 | 0 |
+| answer_linked | 3.0000 | 0.7083 | 0.3055 | 0.4269 | 3.0000 | 0.7083 | 0.3055 | 0.7917 | 0.3194 | 0.2222 | 0 |
+| precision | 3.0000 | 0.7083 | 0.3055 | 0.4269 | 3.0000 | 0.7083 | 0.3055 | 0.7917 | 0.3194 | 0.2222 | 0 |
+| current | 3.2500 | 0.7083 | 0.2778 | 0.3991 | 3.0000 | 0.7083 | 0.3055 | 0.7917 | 0.3194 | 0.2222 | 0 |
+
+Known remaining issues:
+
+- `qasper-val-0022` and `qasper-val-0024`: gold evidence is absent from final context because the evidence judge rejected or ranked it outside the accepted context.
+- `qasper-val-0009`: one answer-source regression from the claim selector remains and should be inspected separately.
+
+Recommended follow-ups are to inspect the `qasper-val-0009` regression and, later, consider a conservative evidence-judge rescue path for `qasper-val-0022` and `qasper-val-0024`.
+
 ## Regenerate QASPER Cases
 
 The QASPER conversion command uses the Hugging Face Dataset Viewer API and selects cases deterministically by validation row order. It prefers answerable questions with non-empty text evidence, excludes figure/table-only support, includes no-answer coverage when available, and writes stable ids such as `qasper-val-0001`.

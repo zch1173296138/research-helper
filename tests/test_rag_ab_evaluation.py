@@ -424,7 +424,11 @@ def test_write_reports_creates_all_outputs(tmp_path: Path) -> None:
 
     assert Path(paths["raw_results"]).exists()
     assert Path(paths["aggregate_metrics"]).exists()
-    assert Path(paths["report"]).read_text(encoding="utf-8").startswith("# RAG A/B Evaluation Report")
+    aggregate = json.loads(Path(paths["aggregate_metrics"]).read_text(encoding="utf-8"))
+    report = Path(paths["report"]).read_text(encoding="utf-8")
+    assert aggregate["by_strategy"]["baseline-current"]["avg_citation_f1"] is None
+    assert report.startswith("# RAG A/B Evaluation Report")
+    assert "avg_citation_f1" in report
     assert Path(paths["run_config"]).exists()
 
 

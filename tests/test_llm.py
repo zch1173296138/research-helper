@@ -14,6 +14,10 @@ def test_answer_without_evidence_refuses() -> None:
     assert "未在已导入文献中找到依据" in result["answer"]
 
 
+def test_default_citation_selection_mode_is_precision() -> None:
+    assert Settings(openai_api_key="").rag_citation_selection_mode == "precision"
+
+
 def test_summarize_falls_back_when_llm_times_out() -> None:
     class SlowCompletions:
         def create(self, **_: object) -> object:
@@ -563,7 +567,7 @@ def test_evidence_answer_uses_background_only_when_no_direct_or_partial() -> Non
     assert [citation["citation_id"] for citation in result["citations"]] == ["C2", "C1"]
 
 
-def test_evidence_answer_without_used_citation_falls_back_to_first_high_confidence_id() -> None:
+def test_evidence_answer_default_precision_uses_high_confidence_claim_citations() -> None:
     class UncitedAnswerCompletions:
         def create(self, **_: object) -> object:
             return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="The answer has no citation."))])
@@ -583,7 +587,7 @@ def test_evidence_answer_without_used_citation_falls_back_to_first_high_confiden
 
     assert "[C2]" in result["answer"]
     assert result["answer_source_chunk_ids"] == ["chunk-background", "chunk-direct"]
-    assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2"]
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C2"]
 
 
 def test_paper_chat_invalid_model_citation_falls_back_to_valid_citation() -> None:

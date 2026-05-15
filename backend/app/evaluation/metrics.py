@@ -64,7 +64,7 @@ def aggregate_metrics(results: list[dict[str, StrategyMetrics]]) -> dict[str, An
 
     aggregate: dict[str, Any] = {}
     for strategy, rows in by_strategy.items():
-        aggregate[strategy] = {
+        metrics = {
             "case_count": len(rows),
             "error_count": sum(1 for row in rows if row.error),
             "avg_latency_ms": average([row.latency_ms for row in rows]),
@@ -83,6 +83,8 @@ def aggregate_metrics(results: list[dict[str, StrategyMetrics]]) -> dict[str, An
             "avg_accepted_evidence_precision": average_not_none([row.accepted_evidence_precision for row in rows]),
             "avg_accepted_evidence_recall": average_not_none([row.accepted_evidence_recall for row in rows]),
         }
+        metrics["avg_citation_f1"] = f1_score(metrics["avg_citation_recall"], metrics["avg_citation_precision"])
+        aggregate[strategy] = metrics
     return aggregate
 
 
@@ -187,6 +189,15 @@ def recall(expected: set[str], observed: set[str]) -> float:
 
 def precision(observed: set[str], expected: set[str]) -> float:
     return ratio(len(expected.intersection(observed)), len(observed))
+
+
+def f1_score(recall_value: float | None, precision_value: float | None) -> float | None:
+    if recall_value is None or precision_value is None:
+        return None
+    denominator = recall_value + precision_value
+    if denominator <= 0:
+        return 0.0
+    return round(2 * recall_value * precision_value / denominator, 4)
 
 
 def ratio(numerator: int, denominator: int) -> float | None:

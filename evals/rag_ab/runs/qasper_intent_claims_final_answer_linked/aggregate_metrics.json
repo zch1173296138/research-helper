@@ -3,7 +3,7 @@
     "baseline-current": {
       "case_count": 12,
       "error_count": 0,
-      "avg_latency_ms": 69.9541,
+      "avg_latency_ms": 84.42,
       "avg_expected_point_coverage": 0.2917,
       "missing_evidence_accuracy": null,
       "avg_candidate_recall": null,
@@ -17,12 +17,13 @@
       "avg_quote_support_recall": 0.1667,
       "reference_contamination_rate": 0.0,
       "avg_accepted_evidence_precision": null,
-      "avg_accepted_evidence_recall": null
+      "avg_accepted_evidence_recall": null,
+      "avg_citation_f1": 0.1882
     },
     "current-evidence": {
       "case_count": 12,
       "error_count": 0,
-      "avg_latency_ms": 64.8327,
+      "avg_latency_ms": 74.1146,
       "avg_expected_point_coverage": 0.3194,
       "missing_evidence_accuracy": null,
       "avg_candidate_recall": 1.0,
@@ -36,7 +37,8 @@
       "avg_quote_support_recall": 0.2222,
       "reference_contamination_rate": 0.0,
       "avg_accepted_evidence_precision": 0.125,
-      "avg_accepted_evidence_recall": 0.7917
+      "avg_accepted_evidence_recall": 0.7917,
+      "avg_citation_f1": 0.4269
     }
   },
   "by_category": {
@@ -44,7 +46,7 @@
       "baseline-current": {
         "case_count": 4,
         "error_count": 0,
-        "avg_latency_ms": 151.606,
+        "avg_latency_ms": 182.664,
         "avg_expected_point_coverage": 0.7917,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": null,
@@ -58,12 +60,13 @@
         "avg_quote_support_recall": 0.0,
         "reference_contamination_rate": 0.0,
         "avg_accepted_evidence_precision": null,
-        "avg_accepted_evidence_recall": null
+        "avg_accepted_evidence_recall": null,
+        "avg_citation_f1": 0.4615
       },
       "current-evidence": {
         "case_count": 4,
         "error_count": 0,
-        "avg_latency_ms": 112.4062,
+        "avg_latency_ms": 124.605,
         "avg_expected_point_coverage": 0.3333,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": 1.0,
@@ -77,14 +80,15 @@
         "avg_quote_support_recall": 0.0,
         "reference_contamination_rate": 0.0,
         "avg_accepted_evidence_precision": 0.125,
-        "avg_accepted_evidence_recall": 0.75
+        "avg_accepted_evidence_recall": 0.75,
+        "avg_citation_f1": 0.4615
       }
     },
     "method": {
       "baseline-current": {
         "case_count": 3,
         "error_count": 0,
-        "avg_latency_ms": 42.3537,
+        "avg_latency_ms": 54.7867,
         "avg_expected_point_coverage": 0.1111,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": null,
@@ -98,12 +102,13 @@
         "avg_quote_support_recall": 0.1111,
         "reference_contamination_rate": 0.0,
         "avg_accepted_evidence_precision": null,
-        "avg_accepted_evidence_recall": null
+        "avg_accepted_evidence_recall": null,
+        "avg_citation_f1": 0.0
       },
       "current-evidence": {
         "case_count": 3,
         "error_count": 0,
-        "avg_latency_ms": 63.6087,
+        "avg_latency_ms": 76.2907,
         "avg_expected_point_coverage": 0.2222,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": 1.0,
@@ -117,14 +122,15 @@
         "avg_quote_support_recall": 0.1111,
         "reference_contamination_rate": 0.0,
         "avg_accepted_evidence_precision": 0.125,
-        "avg_accepted_evidence_recall": 0.6667
+        "avg_accepted_evidence_recall": 0.6667,
+        "avg_citation_f1": 0.2666
       }
     },
     "paper-qa": {
       "baseline-current": {
         "case_count": 5,
         "error_count": 0,
-        "avg_latency_ms": 21.1928,
+        "avg_latency_ms": 23.6048,
         "avg_expected_point_coverage": 0.0,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": null,
@@ -138,12 +144,13 @@
         "avg_quote_support_recall": 0.3333,
         "reference_contamination_rate": 0.0,
         "avg_accepted_evidence_precision": null,
-        "avg_accepted_evidence_recall": null
+        "avg_accepted_evidence_recall": null,
+        "avg_citation_f1": 0.08
       },
       "current-evidence": {
         "case_count": 5,
         "error_count": 0,
-        "avg_latency_ms": 27.5082,
+        "avg_latency_ms": 32.4166,
         "avg_expected_point_coverage": 0.3667,
         "missing_evidence_accuracy": null,
         "avg_candidate_recall": 1.0,
@@ -157,7 +164,8 @@
         "avg_quote_support_recall": 0.4667,
         "reference_contamination_rate": 0.0,
         "avg_accepted_evidence_precision": 0.125,
-        "avg_accepted_evidence_recall": 0.9
+        "avg_accepted_evidence_recall": 0.9,
+        "avg_citation_f1": 0.4865
       }
     }
   }
