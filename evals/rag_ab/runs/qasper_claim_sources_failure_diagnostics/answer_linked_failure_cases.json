@@ -1,0 +1,1244 @@
+[
+  {
+    "mode": "answer_linked",
+    "case_id": "qasper-val-0004",
+    "question": "what language pairs are explored?",
+    "reason_for_failure": "claim_selector_missed_gold",
+    "supporting_chunk_ids": [
+      "paper_4989cdaf64974840_chunk_11"
+    ],
+    "supporting_quotes": [
+      "For MultiUN corpus, we use four languages: English (En) is set as the pivot language, which has parallel data with other three languages which do not have parallel data between each other. The three languages are Arabic (Ar), Spanish (Es), and Russian (Ru), and mutual translation between themselves constitutes six zero-shot translation direction for evaluation.",
+      "The statistics of Europarl and MultiUN corpora are summarized in Table TABREF18. For Europarl corpus, we evaluate on French-English-Spanish (Fr-En-Es), German-English-French (De-En-Fr) and Romanian-English-German (Ro-En-De), where English acts as the pivot language, its left side is the source language, and its right side is the target language.",
+      "For MultiUN corpus, we use four languages: English (En) is set as the pivot language, which has parallel data with other three languages which do not have parallel data between each other. The three languages are Arabic (Ar), Spanish (Es), and Russian (Ru), and mutual translation between themselves constitutes six zero-shot translation direction for evaluation. We use 80K BPE splits as the vocabulary. Note that all sentences are tokenized by the tokenize.perl script, and we lowercase all data to avoid a large vocabulary for the MultiUN corpus."
+    ],
+    "final_context_chunk_ids": [
+      "paper_4989cdaf64974840_chunk_2",
+      "paper_4989cdaf64974840_chunk_4",
+      "paper_4989cdaf64974840_chunk_6",
+      "paper_4989cdaf64974840_chunk_1",
+      "paper_4989cdaf64974840_chunk_7",
+      "paper_4989cdaf64974840_chunk_3",
+      "paper_4989cdaf64974840_chunk_11",
+      "paper_4989cdaf64974840_chunk_9"
+    ],
+    "answer_source_chunk_ids": [
+      "paper_4989cdaf64974840_chunk_2",
+      "paper_4989cdaf64974840_chunk_4",
+      "paper_4989cdaf64974840_chunk_6"
+    ],
+    "citation_chunk_ids": [
+      "paper_4989cdaf64974840_chunk_2",
+      "paper_4989cdaf64974840_chunk_4",
+      "paper_4989cdaf64974840_chunk_6"
+    ],
+    "gold_position_in_final_context": {
+      "paper_4989cdaf64974840_chunk_11": 7
+    },
+    "selected_claims": [
+      {
+        "text": "2018), NMT heavily relies on large-scale parallel data, resulting in poor performance on low-resource or zero-resource language pairs (Koehn and Knowles 2017).",
+        "chunk_id": "paper_4989cdaf64974840_chunk_2",
+        "citation_id": "C1"
+      },
+      {
+        "text": "\\- Multilingual NMT (MNMT) enables training a single model that supports translation from multiple source languages into multiple target languages, even those unseen language pairs (Firat, Cho, and Bengio 2016; Firat et al.",
+        "chunk_id": "paper_4989cdaf64974840_chunk_4",
+        "citation_id": "C2"
+      },
+      {
+        "text": "The BRLM extends MLM (Lample and Conneau 2019) to pairs of parallel sentences and leverages explicit alignment information obtained by external aligner tool or additional attention layer to encourage word representation alignment across different languages.",
+        "chunk_id": "paper_4989cdaf64974840_chunk_6",
+        "citation_id": "C3"
+      }
+    ],
+    "rejected_or_unselected_gold_chunk_text": [
+      {
+        "chunk_id": "paper_4989cdaf64974840_chunk_11",
+        "text_source": "run_metadata",
+        "in_final_context": true,
+        "in_answer_source_chunk_ids": false,
+        "in_citations": false,
+        "text": "# Setup\n\nWe evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance. In all experiments, we use BLEU as the automatic metric for translation evaluation. $^{1}$\n\nDatasets. The statistics of Europarl and MultiUN corpora are summarized in Table 1. For Europarl corpus, we evaluate on French-English-Spanish (Fr-En-Es), German-English-French (De-En-Fr) and Romanian-English-German (Ro-En-De), where English acts as the pivot language, its left side is the source language, and its right side is the target language. We remove the multi-parallel sentences between different training corpora to ensure zero-shot settings. We use the devtest2006 as the validation set and the test2006 as the test set for Fr→Es and De→Fr. For distant language pair Ro→De, we extract 1,000 overlapping sentences from newstest2016 as the test set and the 2,000 overlapping sentences split from the training set as the validation set since there is no official validation and test sets. For vocabulary, we use 60K sub-word tokens based on Byte Pair Encoding (BPE) (Sennrich, Haddow, and Birch 2015).\n\nFor MultiUN corpus, we use four languages: English (En) is set as the pivot language, which has parallel data with other three languages which do not have parallel data between each other. The three languages are Arabic (Ar), Spanish (Es), and Russian (Ru), and mutual translation between themselves constitutes six zero-shot translation direction for evaluation. We use 80K BPE splits as the vocabulary. Note that all sentences are tokenized by the tokenize.perl $^{2}$ script, and we lowercase all data to avoid a large vocabulary for the MultiUN corpus."
+      }
+    ],
+    "evidence_decisions_for_gold_chunks": [
+      {
+        "chunk_id": "paper_4989cdaf64974840_chunk_11",
+        "decision": {
+          "chunk_id": "paper_4989cdaf64974840_chunk_11",
+          "decision": "accept",
+          "reason": "Accepted by ranked fallback.",
+          "support_level": "partial",
+          "answerable_claims": [
+            "Setup: # Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance. In all experiments, we use BLEU as the automatic metric for translation evaluation. $^{1}$ Datasets. The statistics of Europarl and MultiUN corpora are summarized in Table 1. For Europarl corpus, we evaluate on..."
+          ],
+          "concise_summary": "Setup: # Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance. In all experiments, we use BLEU as the automatic metric for translation evaluation. $^{1}$ Datasets. The statistics of Europarl and MultiUN corpora are summarized in Table 1. For Europarl corpus, we evaluate on...",
+          "judge_source": "fallback_ranked"
+        }
+      }
+    ],
+    "sentence_scores_for_gold_chunk_candidate_sentences": {
+      "paper_4989cdaf64974840_chunk_11": [
+        {
+          "sentence_index": 1,
+          "sentence": "# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN (Eisele and Chen 2010), which contain multi-parallel evaluation data to assess the zero-shot performance.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 2,
+          "sentence": "In all experiments, we use BLEU as the automatic metric for translation evaluation.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 3,
+          "sentence": "$^{1}$ Datasets.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 4,
+          "sentence": "The statistics of Europarl and MultiUN corpora are summarized in Table 1.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 5,
+          "sentence": "For Europarl corpus, we evaluate on French-English-Spanish (Fr-En-Es), German-English-French (De-En-Fr) and Romanian-English-German (Ro-En-De), where English acts as the pivot language, its left side is the source language, and its right side is the target language.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.3333,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.3333,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 6,
+          "sentence": "We remove the multi-parallel sentences between different training corpora to ensure zero-shot settings.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 7,
+          "sentence": "We use the devtest2006 as the validation set and the test2006 as the test set for Fr→Es and De→Fr.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 8,
+          "sentence": "For distant language pair Ro→De, we extract 1,000 overlapping sentences from newstest2016 as the test set and the 2,000 overlapping sentences split from the training set as the validation set since there is no official validation and test sets.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.3333,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.3333,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 9,
+          "sentence": "For vocabulary, we use 60K sub-word tokens based on Byte Pair Encoding (BPE) (Sennrich, Haddow, and Birch 2015).",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 10,
+          "sentence": "For MultiUN corpus, we use four languages: English (En) is set as the pivot language, which has parallel data with other three languages which do not have parallel data between each other.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.3333,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.3333,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 11,
+          "sentence": "The three languages are Arabic (Ar), Spanish (Es), and Russian (Ru), and mutual translation between themselves constitutes six zero-shot translation direction for evaluation.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.3333,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.3333,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 12,
+          "sentence": "We use 80K BPE splits as the vocabulary.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 13,
+          "sentence": "Note that all sentences are tokenized by the tokenize.perl $^{2}$ script, and we lowercase all data to avoid a large vocabulary for the MultiUN corpus.",
+          "question_terms": [
+            "explored",
+            "language",
+            "pairs"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        }
+      ]
+    }
+  },
+  {
+    "mode": "answer_linked",
+    "case_id": "qasper-val-0011",
+    "question": "How do they match words before reordering them?",
+    "reason_for_failure": "claim_selector_missed_gold",
+    "supporting_chunk_ids": [
+      "paper_ee722d8eebe849f9_chunk_7"
+    ],
+    "supporting_quotes": [
+      "We use the CFILT-preorder system for reordering English sentences to match the Indian language word order. It contains two re-ordering systems: (1) generic rules that apply to all Indian languages BIBREF17 , and (2) hindi-tuned rules which improve the generic rules by incorporating improvements found through an error analysis of English-Hindi reordering BIBREF28 .",
+      "We use the CFILT-preorder system for reordering English sentences to match the Indian language word order. It contains two re-ordering systems: (1) generic rules that apply to all Indian languages BIBREF17 , and (2) hindi-tuned rules which improve the generic rules by incorporating improvements found through an error analysis of English-Hindi reordering BIBREF28 . These Hindi-tuned rules have been found to improve reordering for many English to Indian language pairs BIBREF29 ."
+    ],
+    "final_context_chunk_ids": [
+      "paper_ee722d8eebe849f9_chunk_4",
+      "paper_ee722d8eebe849f9_chunk_3",
+      "paper_ee722d8eebe849f9_chunk_2",
+      "paper_ee722d8eebe849f9_chunk_11",
+      "paper_ee722d8eebe849f9_chunk_7",
+      "paper_ee722d8eebe849f9_chunk_8",
+      "paper_ee722d8eebe849f9_chunk_1",
+      "paper_ee722d8eebe849f9_chunk_9"
+    ],
+    "answer_source_chunk_ids": [
+      "paper_ee722d8eebe849f9_chunk_4",
+      "paper_ee722d8eebe849f9_chunk_3",
+      "paper_ee722d8eebe849f9_chunk_2"
+    ],
+    "citation_chunk_ids": [
+      "paper_ee722d8eebe849f9_chunk_4",
+      "paper_ee722d8eebe849f9_chunk_3",
+      "paper_ee722d8eebe849f9_chunk_2"
+    ],
+    "gold_position_in_final_context": {
+      "paper_ee722d8eebe849f9_chunk_7": 5
+    },
+    "selected_claims": [
+      {
+        "text": "<table><tr><td>Before Reordering</td><td>After Reordering</td></tr><tr><td><img src=\"images/8b823142d78335bf9c31d193aa8ed12331a33d08101cf8ad6678553f7e1bb6e7.jpg\"/></td><td><img src=\"images/d492c8af2f577cc04d3200737b86afb2df7956f19c6de98af9ed683511e0a539.jpg\"/></td></tr><tr><td><img...",
+        "chunk_id": "paper_ee722d8eebe849f9_chunk_4",
+        "citation_id": "C1"
+      },
+      {
+        "text": "The approach does not show any significant improvements, possibly because the divergence has to be addressed before/during construction of the contextual embeddings in the Bi-LSTM layer.",
+        "chunk_id": "paper_ee722d8eebe849f9_chunk_3",
+        "citation_id": "C2"
+      },
+      {
+        "text": "To address the word order divergence, we propose to pre-order the assisting language sentences (SVO) to match the word order of the source language (SOV).",
+        "chunk_id": "paper_ee722d8eebe849f9_chunk_2",
+        "citation_id": "C3"
+      }
+    ],
+    "rejected_or_unselected_gold_chunk_text": [
+      {
+        "chunk_id": "paper_ee722d8eebe849f9_chunk_7",
+        "text_source": "run_metadata",
+        "in_final_context": true,
+        "in_answer_source_chunk_ids": false,
+        "in_citations": false,
+        "text": "Table 3: Number of UNK tokens generated by each model on the test set.\n\nPre-ordering: We use CFILT-preorder $^{3}$ for pre-reordering English sentences. It contains two pre-ordering configurations: (1) generic rules (G) that apply to all Indian languages (Ramanathan et al., 2008), and (2) hindi-tuned rules (HT) which improves generic rules by incorporating improvements found through error analysis of English-Hindi reordering (Patel et al., 2013). The Hindi-tuned rules improve translation for other English to Indian language pairs too (Kunchukuttan et al., 2014)."
+      }
+    ],
+    "evidence_decisions_for_gold_chunks": [
+      {
+        "chunk_id": "paper_ee722d8eebe849f9_chunk_7",
+        "decision": {
+          "chunk_id": "paper_ee722d8eebe849f9_chunk_7",
+          "decision": "accept",
+          "reason": "Accepted by ranked fallback.",
+          "support_level": "partial",
+          "answerable_claims": [
+            "Experimental Setup: Table 3: Number of UNK tokens generated by each model on the test set. Pre-ordering: We use CFILT-preorder $^{3}$ for pre-reordering English sentences. It contains two pre-ordering configurations: (1) generic rules (G) that apply to all Indian languages (Ramanathan et al., 2008), and (2) hindi-tuned rules (HT) which improves generic rules by incorporating improvements found through error analysis of English-Hindi reordering (Patel et al., 2013). The Hindi-tuned rules improve "
+          ],
+          "concise_summary": "Experimental Setup: Table 3: Number of UNK tokens generated by each model on the test set. Pre-ordering: We use CFILT-preorder $^{3}$ for pre-reordering English sentences. It contains two pre-ordering configurations: (1) generic rules (G) that apply to all Indian languages (Ramanathan et al., 2008), and (2) hindi-tuned rules (HT) which improves generic rules by incorporating improvements found through error analysis of English-Hindi reordering (Patel et al., 2013). The Hindi-tuned rules improve ",
+          "judge_source": "fallback_ranked"
+        }
+      }
+    ],
+    "sentence_scores_for_gold_chunk_candidate_sentences": {
+      "paper_ee722d8eebe849f9_chunk_7": [
+        {
+          "sentence_index": 1,
+          "sentence": "Table 3: Number of UNK tokens generated by each model on the test set.",
+          "question_terms": [
+            "before",
+            "match",
+            "reordering",
+            "them",
+            "words"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 2,
+          "sentence": "Pre-ordering: We use CFILT-preorder $^{3}$ for pre-reordering English sentences.",
+          "question_terms": [
+            "before",
+            "match",
+            "reordering",
+            "them",
+            "words"
+          ],
+          "text_score": 0.2,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.2,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 3,
+          "sentence": "It contains two pre-ordering configurations: (1) generic rules (G) that apply to all Indian languages (Ramanathan et al., 2008), and (2) hindi-tuned rules (HT) which improves generic rules by incorporating improvements found through error analysis of English-Hindi reordering (Patel et al., 2013).",
+          "question_terms": [
+            "before",
+            "match",
+            "reordering",
+            "them",
+            "words"
+          ],
+          "text_score": 0.2,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.2,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 4,
+          "sentence": "The Hindi-tuned rules improve translation for other English to Indian language pairs too (Kunchukuttan et al., 2014).",
+          "question_terms": [
+            "before",
+            "match",
+            "reordering",
+            "them",
+            "words"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 4,
+          "decision_boost": 40.0,
+          "total_score": 40.0,
+          "eligible_by_decision": true,
+          "selected_claim": false
+        }
+      ]
+    }
+  },
+  {
+    "mode": "answer_linked",
+    "case_id": "qasper-val-0022",
+    "question": "What are the other algorithms tested?",
+    "reason_for_failure": "final_context_missing_gold",
+    "supporting_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_12",
+      "paper_c23b8432b797410b_chunk_13"
+    ],
+    "supporting_quotes": [
+      "Conditional Random Fields (CRF) BIBREF15 have been extensively used for tasks of sequential nature. In this paper, we propose as one of the competitive baselines a CRF classifier trained with sklearn-crfsuite for Python 3.5 and the following configuration: algorithm = lbfgs; maximum iterations = 100; c1 = c2 = 0.1; all transitions = true; optimise = false.",
+      "spaCy is a widely used NLP library that implements state-of-the-art text processing pipelines, including a sequence-labelling pipeline similar to the one described by strubell2017fast. spaCy offers several pre-trained models in Spanish, which perform basic NLP tasks such as Named Entity Recognition (NER). In this paper, we have trained a new NER model to detect NUBes-PHI labels.",
+      "Conditional Random Fields (CRF) BIBREF15 have been extensively used for tasks of sequential nature. In this paper, we propose as one of the competitive baselines a CRF classifier trained with sklearn-crfsuite for Python 3.5 and the following configuration: algorithm = lbfgs; maximum iterations = 100; c1 = c2 = 0.1; all transitions = true; optimise = false. The features extracted from each token are as follows:"
+    ],
+    "final_context_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_5",
+      "paper_c23b8432b797410b_chunk_30",
+      "paper_c23b8432b797410b_chunk_4",
+      "paper_c23b8432b797410b_chunk_2",
+      "paper_c23b8432b797410b_chunk_1",
+      "paper_c23b8432b797410b_chunk_26",
+      "paper_c23b8432b797410b_chunk_19",
+      "paper_c23b8432b797410b_chunk_7"
+    ],
+    "answer_source_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_5",
+      "paper_c23b8432b797410b_chunk_30",
+      "paper_c23b8432b797410b_chunk_1"
+    ],
+    "citation_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_5",
+      "paper_c23b8432b797410b_chunk_30",
+      "paper_c23b8432b797410b_chunk_1"
+    ],
+    "gold_position_in_final_context": {
+      "paper_c23b8432b797410b_chunk_12": null,
+      "paper_c23b8432b797410b_chunk_13": null
+    },
+    "selected_claims": [
+      {
+        "text": "Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific task: sensitive data detection and classification in Spanish clinical free text.",
+        "chunk_id": "paper_c23b8432b797410b_chunk_5",
+        "citation_id": "C1"
+      },
+      {
+        "text": "We have compared this BERT-based sequence labelling against other methods and systems.",
+        "chunk_id": "paper_c23b8432b797410b_chunk_30",
+        "citation_id": "C2"
+      },
+      {
+        "text": "We also compare BERT to other algorithms.",
+        "chunk_id": "paper_c23b8432b797410b_chunk_1",
+        "citation_id": "C5"
+      }
+    ],
+    "rejected_or_unselected_gold_chunk_text": [
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_12",
+        "text_source": "run_metadata",
+        "in_final_context": false,
+        "in_answer_source_chunk_ids": false,
+        "in_citations": false,
+        "text": "# 3.2.2. CRF\n\nConditional Random Fields (CRF) (Lafferty et al., 2001) have been extensively used for tasks of sequential nature. In this paper, we propose as one of the competitive baselines a CRF classifier trained with sklearn-crfsuite $^{3}$ for Python 3.5 and the following configuration: algorithm = lbfgs; maximum iterations = 100; c1 = c2 = 0.1; all transitions = true; optimise = false. The features extracted from each token are as follows:\n\n- prefixes and suffixes of 2 and 3 characters;\n- the length of the token in characters and the length of the sentence in tokens;\n- whether the token is all-letters, a number, or a sequence of punctuation marks;\n- whether the token contains the character '@';\n- whether the token is the start or end of the sentence;\n- the token's casing and the ratio of uppercase characters, digits, and punctuation marks to its length;\n- and, the lemma, part-of-speech tag, and named-entity tag given by ixa-pipes $^{4}$ (Agerri et al., 2014) upon analysing the sentence the token belongs to.\n\nNoticeably, none of the features used to train the CRF classifier is domain-dependent. However, the latter group of features is language dependent."
+      },
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_13",
+        "text_source": "run_metadata",
+        "in_final_context": false,
+        "in_answer_source_chunk_ids": false,
+        "in_citations": false,
+        "text": "# 3.2.3. spaCy\n\nspaCy $^{5}$ is a widely used NLP library that implements state-of-the-art text processing pipelines, including a sequence-labelling pipeline similar to the one described by Strubell et al. (2017). spaCy offers several pre-trained models in Spanish, which perform basic NLP tasks such as Named Entity Recognition (NER). In this paper, we have trained a new NER model to detect NUBES-PHI labels. For this purpose, the new model uses all the labels of the training corpus coded with its context at sentence level. The network optimisation parameters and dropout values are the ones recommended in the documentation for small datasets $^{6}$ . Finally, the model is trained using batches of size 64. No more features are included, so the classifier is language-dependent but not domain-dependent."
+      }
+    ],
+    "evidence_decisions_for_gold_chunks": [
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_12",
+        "decision": {
+          "chunk_id": "paper_c23b8432b797410b_chunk_12",
+          "decision": "reject",
+          "reason": "Outside ranked fallback context.",
+          "support_level": "none",
+          "answerable_claims": [],
+          "concise_summary": "",
+          "judge_source": "fallback_ranked"
+        }
+      },
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_13",
+        "decision": {
+          "chunk_id": "paper_c23b8432b797410b_chunk_13",
+          "decision": "reject",
+          "reason": "Outside ranked fallback context.",
+          "support_level": "none",
+          "answerable_claims": [],
+          "concise_summary": "",
+          "judge_source": "fallback_ranked"
+        }
+      }
+    ],
+    "sentence_scores_for_gold_chunk_candidate_sentences": {
+      "paper_c23b8432b797410b_chunk_12": [
+        {
+          "sentence_index": 1,
+          "sentence": "# 3.2.2.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 2,
+          "sentence": "CRF Conditional Random Fields (CRF) (Lafferty et al., 2001) have been extensively used for tasks of sequential nature.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 3,
+          "sentence": "In this paper, we propose as one of the competitive baselines a CRF classifier trained with sklearn-crfsuite $^{3}$ for Python 3.5 and the following configuration: algorithm = lbfgs; maximum iterations = 100; c1 = c2 = 0.1; all transitions = true; optimise = false.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 4,
+          "sentence": "The features extracted from each token are as follows: - prefixes and suffixes of 2 and 3 characters",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 5,
+          "sentence": "the length of the token in characters and the length of the sentence in tokens",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 6,
+          "sentence": "whether the token is all-letters, a number, or a sequence of punctuation marks",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 7,
+          "sentence": "whether the token contains the character '@'",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 8,
+          "sentence": "whether the token is the start or end of the sentence",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 9,
+          "sentence": "the token's casing and the ratio of uppercase characters, digits, and punctuation marks to its length",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 10,
+          "sentence": "and, the lemma, part-of-speech tag, and named-entity tag given by ixa-pipes $^{4}$ (Agerri et al., 2014) upon analysing the sentence the token belongs to.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 11,
+          "sentence": "Noticeably, none of the features used to train the CRF classifier is domain-dependent.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 12,
+          "sentence": "However, the latter group of features is language dependent.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        }
+      ],
+      "paper_c23b8432b797410b_chunk_13": [
+        {
+          "sentence_index": 1,
+          "sentence": "# 3.2.3.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 2,
+          "sentence": "spaCy spaCy $^{5}$ is a widely used NLP library that implements state-of-the-art text processing pipelines, including a sequence-labelling pipeline similar to the one described by Strubell et al.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 3,
+          "sentence": "(2017).",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 4,
+          "sentence": "spaCy offers several pre-trained models in Spanish, which perform basic NLP tasks such as Named Entity Recognition (NER).",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 5,
+          "sentence": "In this paper, we have trained a new NER model to detect NUBES-PHI labels.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 6,
+          "sentence": "For this purpose, the new model uses all the labels of the training corpus coded with its context at sentence level.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 7,
+          "sentence": "The network optimisation parameters and dropout values are the ones recommended in the documentation for small datasets $^{6}$ .",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 8,
+          "sentence": "Finally, the model is trained using batches of size 64.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 9,
+          "sentence": "No more features are included, so the classifier is language-dependent but not domain-dependent.",
+          "question_terms": [
+            "algorithms",
+            "other",
+            "tested"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        }
+      ]
+    }
+  },
+  {
+    "mode": "answer_linked",
+    "case_id": "qasper-val-0024",
+    "question": "What are the clinical datasets used in the paper?",
+    "reason_for_failure": "final_context_missing_gold",
+    "supporting_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_6",
+      "paper_c23b8432b797410b_chunk_7"
+    ],
+    "supporting_quotes": [
+      "Two datasets are exploited in this article. Both datasets consist of plain text containing clinical narrative written in Spanish, and their respective manual annotations of sensitive information in BRAT BIBREF13 standoff format.",
+      "NUBes BIBREF4 is a corpus of around 7,000 real medical reports written in Spanish and annotated with negation and uncertainty information.",
+      "In order to avoid confusion between the two corpus versions, we henceforth refer to the version relevant in this paper as NUBes-PHI (from `NUBes with Personal Health Information')."
+    ],
+    "final_context_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_16",
+      "paper_c23b8432b797410b_chunk_17",
+      "paper_c23b8432b797410b_chunk_15",
+      "paper_c23b8432b797410b_chunk_0",
+      "paper_c23b8432b797410b_chunk_19",
+      "paper_c23b8432b797410b_chunk_26",
+      "paper_c23b8432b797410b_chunk_29",
+      "paper_c23b8432b797410b_chunk_20"
+    ],
+    "answer_source_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_16",
+      "paper_c23b8432b797410b_chunk_17",
+      "paper_c23b8432b797410b_chunk_15"
+    ],
+    "citation_chunk_ids": [
+      "paper_c23b8432b797410b_chunk_16",
+      "paper_c23b8432b797410b_chunk_17",
+      "paper_c23b8432b797410b_chunk_15"
+    ],
+    "gold_position_in_final_context": {
+      "paper_c23b8432b797410b_chunk_6": null,
+      "paper_c23b8432b797410b_chunk_7": null
+    },
+    "selected_claims": [
+      {
+        "text": "Detecting entity types correctly is important if a system is going to be used to replace sensitive data by fake data of the same type (e.g., random people names).",
+        "chunk_id": "paper_c23b8432b797410b_chunk_16",
+        "citation_id": "C1"
+      },
+      {
+        "text": "Experiment B: MEDDOCAN In this experiment set, our BERT implementation is compared to several systems that participated in the MEDDO-CAN challenge: a CRF classifier (Perez et al., 2019), a spaCy entity recogniser (Perez et al., 2019), and NLNDE (Lange et al., 2019), the winner of the shared task and current state of...",
+        "chunk_id": "paper_c23b8432b797410b_chunk_17",
+        "citation_id": "C2"
+      },
+      {
+        "text": "Experimental design We have conducted experiments with BERT in the two datasets of Spanish clinical narrative presented in Section 3.1.",
+        "chunk_id": "paper_c23b8432b797410b_chunk_15",
+        "citation_id": "C3"
+      }
+    ],
+    "rejected_or_unselected_gold_chunk_text": [
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_6",
+        "text_source": "run_metadata",
+        "in_final_context": false,
+        "in_answer_source_chunk_ids": false,
+        "in_citations": false,
+        "text": "# 3.1. Data\n\nTwo datasets are exploited in this article. Both datasets consist of plain text containing clinical narrative written in Spanish, and their respective manual annotations of sensitive information in BRAT (Stenetorp et al., 2012) standoff format $^{2}$ . In order to feed the data to the different algorithms presented in Section 3.2., these datasets were transformed to comply with the commonly used BIO sequence representation scheme (Ramshaw and Marcus, 1999)."
+      },
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_7",
+        "text_source": "run_metadata",
+        "in_final_context": false,
+        "in_answer_source_chunk_ids": false,
+        "in_citations": false,
+        "text": "# 3.1.1. NUBES-PHI\n\nNUBES (Lima et al., 2019) is a corpus of around 7,000 real medical reports written in Spanish and annotated with negation and uncertainty information. Before being published, sensitive information had to be manually annotated and replaced for the corpus to be safely shared. In this article, we work with the NUBES version prior to its anonymisation, that is, with the manual annotations of sensitive information. It follows that the version we work with is not publicly available and, due to contractual restrictions, we cannot reveal the provenance of the data. In order to avoid confusion between the two corpus versions, we henceforth refer to the version relevant in this paper as NUBES-PHI (from ‘NUBES with Personal Health Information’).\n\nNUBES-PHI consists of 32,055 sentences annotated for 11 different sensitive information categories. Overall, it contains 7,818 annotations. The corpus has been randomly split into train (72%), development (8%) and test (20%) sets to conduct the experiments described in this paper. The size of each split and the distribution of the annotations can be consulted in Tables 2 and 3, respectively.\n\n<table><tr><td></td><td>train</td><td>dev</td><td>test</td></tr><tr><td># sentences</td><td>23,079</td><td>2,565</td><td>6,411</td></tr><tr><td># tokens</td><td>379,401</td><td>41,936</td><td>107,024</td></tr><tr><td>vocabulary</td><td>25,304</td><td>7,483</td><td>12,750</td></tr><tr><td># annotations</td><td>5,562</td><td>677</td><td>1,579</td></tr></table>\n\nTable 2: Size of the NUBES-PHI corpus\n\nThe majority of sensitive information in NUBES-PHI are temporal expressions ('Date' and 'Time'), followed by healthcare facility mentions ('Hospital'), and the age of the patient. Mentions of people are not that frequent, with physician names ('Doctor') occurring much more often than patient names ('Patient'). The least frequent sensitive information types, which account for $\\sim 10\\%$ of the remaining annotations, consist of the patient's sex, job, and kinship, and locations other than healthcare facilities ('Location'). Finally, the tag 'Other' includes, for instance, mentions to institutions unrelated to healthcare and whether the patient is right- or left-handed. It occurs just 36 times."
+      }
+    ],
+    "evidence_decisions_for_gold_chunks": [
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_6",
+        "decision": {
+          "chunk_id": "paper_c23b8432b797410b_chunk_6",
+          "decision": "reject",
+          "reason": "Outside ranked fallback context.",
+          "support_level": "none",
+          "answerable_claims": [],
+          "concise_summary": "",
+          "judge_source": "fallback_ranked"
+        }
+      },
+      {
+        "chunk_id": "paper_c23b8432b797410b_chunk_7",
+        "decision": {
+          "chunk_id": "paper_c23b8432b797410b_chunk_7",
+          "decision": "reject",
+          "reason": "Outside ranked fallback context.",
+          "support_level": "none",
+          "answerable_claims": [],
+          "concise_summary": "",
+          "judge_source": "fallback_ranked"
+        }
+      }
+    ],
+    "sentence_scores_for_gold_chunk_candidate_sentences": {
+      "paper_c23b8432b797410b_chunk_6": [
+        {
+          "sentence_index": 1,
+          "sentence": "# 3.1.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 2,
+          "sentence": "Data Two datasets are exploited in this article.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.3333,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.3333,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 3,
+          "sentence": "Both datasets consist of plain text containing clinical narrative written in Spanish, and their respective manual annotations of sensitive information in BRAT (Stenetorp et al., 2012) standoff format $^{2}$ .",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.6667,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.6667,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 4,
+          "sentence": "In order to feed the data to the different algorithms presented in Section 3.2., these datasets were transformed to comply with the commonly used BIO sequence representation scheme (Ramshaw and Marcus, 1999).",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.6667,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.6667,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        }
+      ],
+      "paper_c23b8432b797410b_chunk_7": [
+        {
+          "sentence_index": 1,
+          "sentence": "# 3.1.1.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 2,
+          "sentence": "NUBES-PHI NUBES (Lima et al., 2019) is a corpus of around 7,000 real medical reports written in Spanish and annotated with negation and uncertainty information.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 3,
+          "sentence": "Before being published, sensitive information had to be manually annotated and replaced for the corpus to be safely shared.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 4,
+          "sentence": "In this article, we work with the NUBES version prior to its anonymisation, that is, with the manual annotations of sensitive information.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 5,
+          "sentence": "It follows that the version we work with is not publicly available and, due to contractual restrictions, we cannot reveal the provenance of the data.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 6,
+          "sentence": "In order to avoid confusion between the two corpus versions, we henceforth refer to the version relevant in this paper as NUBES-PHI (from ‘NUBES with Personal Health Information’).",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 7,
+          "sentence": "NUBES-PHI consists of 32,055 sentences annotated for 11 different sensitive information categories.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 8,
+          "sentence": "Overall, it contains 7,818 annotations.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 9,
+          "sentence": "The corpus has been randomly split into train (72%), development (8%) and test (20%) sets to conduct the experiments described in this paper.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 10,
+          "sentence": "The size of each split and the distribution of the annotations can be consulted in Tables 2 and 3, respectively.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 11,
+          "sentence": "<table><tr><td></td><td>train</td><td>dev</td><td>test</td></tr><tr><td># sentences</td><td>23,079</td><td>2,565</td><td>6,411</td></tr><tr><td># tokens</td><td>379,401</td><td>41,936</td><td>107,024</td></tr><tr><td>vocabulary</td><td>25,304</td><td>7,483</td><td>12,750</td></tr><tr><td># annotations</td><td>5,562</td><td>677</td><td>1,579</td></tr></table> Table 2: Size of the NUBES-PHI corpus The majority of sensitive information in NUBES-PHI are temporal expressions ('Date' and 'Time'), followed by healthcare facility mentions ('Hospital'), and the age of the patient.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 12,
+          "sentence": "Mentions of people are not that frequent, with physician names ('Doctor') occurring much more often than patient names ('Patient').",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 13,
+          "sentence": "The least frequent sensitive information types, which account for $\\sim 10\\%$ of the remaining annotations, consist of the patient's sex, job, and kinship, and locations other than healthcare facilities ('Location').",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 14,
+          "sentence": "Finally, the tag 'Other' includes, for instance, mentions to institutions unrelated to healthcare and whether the patient is right- or left-handed.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        },
+        {
+          "sentence_index": 15,
+          "sentence": "It occurs just 36 times.",
+          "question_terms": [
+            "clinical",
+            "datasets",
+            "used"
+          ],
+          "text_score": 0.0,
+          "decision_rank": 0,
+          "decision_boost": 0.0,
+          "total_score": 0.0,
+          "eligible_by_decision": false,
+          "selected_claim": false
+        }
+      ]
+    }
+  }
+]
