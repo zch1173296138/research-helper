@@ -64,6 +64,18 @@
         "paper_4989cdaf64974840_chunk_13",
         "paper_4989cdaf64974840_chunk_14"
       ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 1
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“which datasets did they experiment with?”可从以下证据开始分析：# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -94,6 +106,18 @@
         "paper_4989cdaf64974840_chunk_4",
         "paper_4989cdaf64974840_chunk_13"
       ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 1
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“which datasets did they experiment with?”可从以下证据开始分析：# Setup We evaluate our cross-lingual pre-training based transfer approach against several strong baselines on two public datasets, Europarl (Koehn 2005) and MultiUN...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -153,6 +177,16 @@
         "paper_4989cdaf64974840_chunk_4",
         "paper_4989cdaf64974840_chunk_6"
       ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 7
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what language pairs are explored?”可从以下证据开始分析：# Introduction Although Neural Machine Translation (NMT) has dominated recent research on translation tasks (Wu et al. 2016; Vaswani et al. 2017; Hassan et al. 2018), NMT...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -183,6 +217,16 @@
         "paper_4989cdaf64974840_chunk_4",
         "paper_4989cdaf64974840_chunk_6"
       ],
+      "gold_position_in_final_context": {
+        "paper_4989cdaf64974840_chunk_11": 7
+      },
+      "final_context_hit_ids": [
+        "paper_4989cdaf64974840_chunk_11"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what language pairs are explored?”可从以下证据开始分析：# Introduction Although Neural Machine Translation (NMT) has dominated recent research on translation tasks (Wu et al. 2016; Vaswani et al. 2017; Hassan et al. 2018), NMT...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -239,6 +283,18 @@
         "paper_18c9a8ee5ba54ec6_chunk_11",
         "paper_18c9a8ee5ba54ec6_chunk_7"
       ],
+      "gold_position_in_final_context": {
+        "paper_18c9a8ee5ba54ec6_chunk_9": 6,
+        "paper_18c9a8ee5ba54ec6_chunk_10": 8
+      },
+      "final_context_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what ner models were evaluated?”可从以下证据开始分析：# VI. DISCUSSION Table III shows the average scores of evaluated models. The highest F1 score was achieved by the recurrent model using a batch size of 8 and Adam optimizer with...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -270,6 +326,18 @@
         "paper_18c9a8ee5ba54ec6_chunk_11",
         "paper_18c9a8ee5ba54ec6_chunk_7"
       ],
+      "gold_position_in_final_context": {
+        "paper_18c9a8ee5ba54ec6_chunk_9": 6,
+        "paper_18c9a8ee5ba54ec6_chunk_10": 8
+      },
+      "final_context_hit_ids": [
+        "paper_18c9a8ee5ba54ec6_chunk_9",
+        "paper_18c9a8ee5ba54ec6_chunk_10"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what ner models were evaluated?”可从以下证据开始分析：# VI. DISCUSSION Table III shows the average scores of evaluated models. The highest F1 score was achieved by the recurrent model using a batch size of 8 and Adam optimizer with...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -327,6 +395,19 @@
         "paper_966b9c5490524541_chunk_3",
         "paper_966b9c5490524541_chunk_10"
       ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_3": 2,
+        "paper_966b9c5490524541_chunk_9": null
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "citation_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what are the topics pulled from Reddit?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -358,6 +439,19 @@
         "paper_966b9c5490524541_chunk_3",
         "paper_966b9c5490524541_chunk_10"
       ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_3": 2,
+        "paper_966b9c5490524541_chunk_9": null
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "citation_hit_ids": [
+        "paper_966b9c5490524541_chunk_3"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“what are the topics pulled from Reddit?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -415,6 +509,16 @@
         "paper_966b9c5490524541_chunk_13",
         "paper_966b9c5490524541_chunk_6"
       ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_8": 4
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What predictive model do they build?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -445,6 +549,16 @@
         "paper_966b9c5490524541_chunk_13",
         "paper_966b9c5490524541_chunk_6"
       ],
+      "gold_position_in_final_context": {
+        "paper_966b9c5490524541_chunk_8": 4
+      },
+      "final_context_hit_ids": [
+        "paper_966b9c5490524541_chunk_8"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What predictive model do they build?”可从以下证据开始分析：# 1 Introduction “I’m supposed to trust the opinion of a MS minion? The people that produced Windows ME, Vista and 8? They don’t even understand people, yet they think they...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -498,6 +612,16 @@
         "paper_ee722d8eebe849f9_chunk_3",
         "paper_ee722d8eebe849f9_chunk_2"
       ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_7": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they match words before reordering them?”可从以下证据开始分析：# 3 Proposed Solution Consider the task of translating for an extremely low-resource language pair. The parallel corpus between the two languages, if available...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -528,6 +652,16 @@
         "paper_ee722d8eebe849f9_chunk_3",
         "paper_ee722d8eebe849f9_chunk_2"
       ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_7": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_7"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they match words before reordering them?”可从以下证据开始分析：# 3 Proposed Solution Consider the task of translating for an extremely low-resource language pair. The parallel corpus between the two languages, if available...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -581,6 +715,18 @@
         "paper_ee722d8eebe849f9_chunk_8",
         "paper_ee722d8eebe849f9_chunk_6"
       ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_5": 1
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "citation_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“Which dataset(s) do they experiment with?”可从以下证据开始分析：# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. Languages: We...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -611,6 +757,18 @@
         "paper_ee722d8eebe849f9_chunk_8",
         "paper_ee722d8eebe849f9_chunk_6"
       ],
+      "gold_position_in_final_context": {
+        "paper_ee722d8eebe849f9_chunk_5": 1
+      },
+      "final_context_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "citation_hit_ids": [
+        "paper_ee722d8eebe849f9_chunk_5"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“Which dataset(s) do they experiment with?”可从以下证据开始分析：# 4 Experimental Setup In this section, we describe the languages experimented with, datasets used, the network hyperparameters used in our experiments. Languages: We...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -676,6 +834,21 @@
         "paper_ad6cad90ed1d41d6_chunk_19",
         "paper_ad6cad90ed1d41d6_chunk_18"
       ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_20": 1,
+        "paper_ad6cad90ed1d41d6_chunk_18": 3
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "citation_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“On which benchmarks they achieve the state of the art?”可从以下证据开始分析：# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -707,6 +880,20 @@
         "paper_ad6cad90ed1d41d6_chunk_3",
         "paper_ad6cad90ed1d41d6_chunk_4"
       ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_20": 1,
+        "paper_ad6cad90ed1d41d6_chunk_18": 7
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20",
+        "paper_ad6cad90ed1d41d6_chunk_18"
+      ],
+      "citation_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_20"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“On which benchmarks they achieve the state of the art?”可从以下证据开始分析：# 6.3 KBQA End-Task Results Table 3 compares our system with two published baselines (1) STAGG (Yih et al., 2015), the state-of-the-art on WebQSP $^{11}$...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -770,6 +957,16 @@
         "paper_ad6cad90ed1d41d6_chunk_20",
         "paper_ad6cad90ed1d41d6_chunk_3"
       ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_2": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What does KBQA abbreviate for”可从以下证据开始分析：# 4.2 Different Abstractions of Questions Representations From Table 1, we can see that different parts of a relation could match different contexts of question texts. Usually...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -800,6 +997,16 @@
         "paper_ad6cad90ed1d41d6_chunk_20",
         "paper_ad6cad90ed1d41d6_chunk_3"
       ],
+      "gold_position_in_final_context": {
+        "paper_ad6cad90ed1d41d6_chunk_2": 5
+      },
+      "final_context_hit_ids": [
+        "paper_ad6cad90ed1d41d6_chunk_2"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What does KBQA abbreviate for”可从以下证据开始分析：# 4.2 Different Abstractions of Questions Representations From Table 1, we can see that different parts of a relation could match different contexts of question texts. Usually...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -862,6 +1069,16 @@
         "paper_f34858cc477d48bb_chunk_4",
         "paper_f34858cc477d48bb_chunk_2"
       ],
+      "gold_position_in_final_context": {
+        "paper_f34858cc477d48bb_chunk_15": 5
+      },
+      "final_context_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they calculate a static embedding for each word?”可从以下证据开始分析：# 3.1 Contextualizing Models The contextualizing models we study in this paper are ELMo, BERT, and GPT-2 $^{1}$ . We choose the base cased version of BERT...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": true,
       "gold_in_final_context": true,
@@ -892,6 +1109,18 @@
         "paper_f34858cc477d48bb_chunk_3",
         "paper_f34858cc477d48bb_chunk_15"
       ],
+      "gold_position_in_final_context": {
+        "paper_f34858cc477d48bb_chunk_15": 3
+      },
+      "final_context_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "citation_hit_ids": [
+        "paper_f34858cc477d48bb_chunk_15"
+      ],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“How do they calculate a static embedding for each word?”可从以下证据开始分析：# 1 Introduction The application of deep learning methods to NLP is made possible by representing words as vectors in a low-dimensional continuous space....",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,
@@ -957,6 +1186,15 @@
         "paper_c23b8432b797410b_chunk_30",
         "paper_c23b8432b797410b_chunk_4"
       ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_12": null,
+        "paper_c23b8432b797410b_chunk_13": null
+      },
+      "final_context_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the other algorithms tested?”可从以下证据开始分析：# 3. Materials and Methods The aim of this paper is to evaluate BERT's multilingual model and compare it to other established machine-learning algorithms in a specific...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": false,
       "gold_in_final_context": false,
@@ -988,6 +1226,15 @@
         "paper_c23b8432b797410b_chunk_4",
         "paper_c23b8432b797410b_chunk_2"
       ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_12": null,
+        "paper_c23b8432b797410b_chunk_13": null
+      },
+      "final_context_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the other algorithms tested?”可从以下证据开始分析：# 5. Conclusions and Future Work In this work we have briefly introduced the problems related to data privacy protection in clinical domain. We have also described some of...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": false,
@@ -1053,6 +1300,15 @@
         "paper_c23b8432b797410b_chunk_17",
         "paper_c23b8432b797410b_chunk_15"
       ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_6": null,
+        "paper_c23b8432b797410b_chunk_7": null
+      },
+      "final_context_hit_ids": [],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the clinical datasets used in the paper?”可从以下证据开始分析：# 3.3.1. Experiment A: NUBES-PHI In this experiment set, we evaluate all the systems presented in Section 3.2., namely, the rule-based baseline, the CRF...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": true,
       "gold_in_accepted": false,
       "gold_in_final_context": false,
@@ -1084,6 +1340,17 @@
         "paper_c23b8432b797410b_chunk_2",
         "paper_c23b8432b797410b_chunk_1"
       ],
+      "gold_position_in_final_context": {
+        "paper_c23b8432b797410b_chunk_6": 6,
+        "paper_c23b8432b797410b_chunk_7": null
+      },
+      "final_context_hit_ids": [
+        "paper_c23b8432b797410b_chunk_6"
+      ],
+      "citation_hit_ids": [],
+      "answer_preview": "根据已导入文献中最相关的片段，问题“What are the clinical datasets used in the paper?”可从以下证据开始分析：# 5. Conclusions and Future Work In this work we have briefly introduced the problems related to data privacy protection in clinical domain. We have also...",
+      "citation_count": 3,
+      "final_context_count": 8,
       "gold_in_candidates": false,
       "gold_in_accepted": false,
       "gold_in_final_context": true,

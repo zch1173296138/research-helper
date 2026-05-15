@@ -42,6 +42,7 @@ def score_output(case: EvaluationCase, output: StrategyOutput, known_chunk_ids: 
     metrics.candidate_recall = recall(support_ids, candidate_ids) if support_ids and candidate_ids else None
     metrics.final_context_recall = recall(support_ids, final_ids) if support_ids and final_ids else None
     metrics.citation_recall = recall(support_ids, citation_ids) if support_ids and citation_ids else None
+    metrics.citation_precision = precision(citation_ids, support_ids) if support_ids and citation_ids else None
     metrics.quote_support_recall = quote_support_recall(case, output)
     metrics.reference_contamination = has_reference_contamination(output)
     if output.evidence_decisions:
@@ -67,6 +68,7 @@ def aggregate_metrics(results: list[dict[str, StrategyMetrics]]) -> dict[str, An
             "avg_candidate_recall": average_not_none([row.candidate_recall for row in rows]),
             "avg_final_context_recall": average_not_none([row.final_context_recall for row in rows]),
             "avg_citation_recall": average_not_none([row.citation_recall for row in rows]),
+            "avg_citation_precision": average_not_none([row.citation_precision for row in rows]),
             "avg_quote_support_recall": average_not_none([row.quote_support_recall for row in rows]),
             "reference_contamination_rate": average([1.0 if row.reference_contamination else 0.0 for row in rows]),
             "avg_accepted_evidence_precision": average_not_none([row.accepted_evidence_precision for row in rows]),

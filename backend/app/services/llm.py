@@ -222,8 +222,10 @@ class LLMService:
         citations = [self._citation_from_chunk(chunk, citation_id) for citation_id, chunk in citation_map.items()]
         if self.client is None:
             answer = self._extractive_answer(question, chunks)
-            cited_ids = " ".join(f"[C{index}]" for index in range(1, min(3, len(citations)) + 1))
-            return {"answer": f"{answer} {cited_ids}", "citations": citations[:3], "missing_evidence": False}
+            selected_ids = self._selected_evidence_citation_ids([], citation_map, decisions)
+            cited_ids = " ".join(f"[{citation_id}]" for citation_id in selected_ids[:3])
+            selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
+            return {"answer": f"{answer} {cited_ids}".strip(), "citations": selected, "missing_evidence": False}
 
         messages = self._build_evidence_answer_messages(
             question,
@@ -250,11 +252,47 @@ class LLMService:
             return {"answer": answer, "citations": [], "missing_evidence": True}
 
         used_ids = self._valid_citation_ids(answer, set(citation_map))
+        selected_ids = self._selected_evidence_citation_ids(used_ids, citation_map, decisions)
         if not used_ids:
-            answer = f"{self._extractive_answer(question, chunks)} [C1]"
-            used_ids = ["C1"]
-        selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in used_ids]
+            fallback_id = selected_ids[0] if selected_ids else next(iter(citation_map))
+            answer = f"{self._extractive_answer(question, chunks)} [{fallback_id}]"
+            selected_ids = self._selected_evidence_citation_ids([fallback_id], citation_map, decisions)
+        selected = [self._citation_from_chunk(citation_map[citation_id], citation_id) for citation_id in selected_ids]
         return {"answer": answer, "citations": selected, "missing_evidence": False}
+
+    def _selected_evidence_citation_ids(
+        self,
+        used_ids: list[str],
+        citation_map: dict[str, RetrievedChunk],
+        decisions: list[EvidenceDecision],
+        supplemental_limit: int = 3,
+    ) -> list[str]:
+        selected = [citation_id for citation_id in used_ids if citation_id in citation_map]
+        decision_by_chunk = {decision.chunk_id: decision for decision in decisions}
+        prioritized = self._citation_ids_by_support(citation_map, decision_by_chunk, {"direct", "partial"})
+        if not prioritized:
+            prioritized = self._citation_ids_by_support(citation_map, decision_by_chunk, {"background"})
+        if not prioritized:
+            prioritized = list(citation_map)[:supplemental_limit]
+        for citation_id in prioritized:
+            if citation_id not in selected:
+                selected.append(citation_id)
+            if len([item for item in selected if item in prioritized]) >= supplemental_limit:
+                break
+        return selected
+
+    def _citation_ids_by_support(
+        self,
+        citation_map: dict[str, RetrievedChunk],
+        decision_by_chunk: dict[str, EvidenceDecision],
+        support_levels: set[str],
+    ) -> list[str]:
+        result: list[str] = []
+        for citation_id, chunk in citation_map.items():
+            decision = decision_by_chunk.get(chunk.chunk_id)
+            if decision and decision.decision in {"accept", "maybe"} and decision.support_level in support_levels:
+                result.append(citation_id)
+        return result
 
     def _build_paper_chat_messages(
         self,

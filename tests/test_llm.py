@@ -211,6 +211,75 @@ def test_evidence_answer_fallback_returns_top_three_citations() -> None:
     assert [citation["citation_id"] for citation in result["citations"]] == ["C1", "C2", "C3"]
 
 
+def test_evidence_answer_keeps_used_citations_and_adds_high_confidence_citations() -> None:
+    class CitedAnswerCompletions:
+        def create(self, **_: object) -> object:
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="The answer cites one chunk. [C4]"))])
+
+    service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1))
+    service.client = SimpleNamespace(chat=SimpleNamespace(completions=CitedAnswerCompletions()))
+    chunks = [
+        RetrievedChunk(f"chunk-{index}", "paper-1", "paper.pdf", "Method", f"Evidence {index}.")
+        for index in range(1, 6)
+    ]
+    decisions = [
+        EvidenceDecision("chunk-1", "accept", support_level="direct"),
+        EvidenceDecision("chunk-2", "accept", support_level="partial"),
+        EvidenceDecision("chunk-3", "accept", support_level="background"),
+        EvidenceDecision("chunk-4", "accept", support_level="background"),
+        EvidenceDecision("chunk-5", "reject", support_level="direct"),
+    ]
+
+    result = service.answer_with_evidence("What is the method?", chunks, decisions)
+
+    assert result["answer"] == "The answer cites one chunk. [C4]"
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C4", "C1", "C2"]
+
+
+def test_evidence_answer_uses_background_only_when_no_direct_or_partial() -> None:
+    class CitedAnswerCompletions:
+        def create(self, **_: object) -> object:
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="Background-only answer. [C2]"))])
+
+    service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1))
+    service.client = SimpleNamespace(chat=SimpleNamespace(completions=CitedAnswerCompletions()))
+    chunks = [
+        RetrievedChunk("chunk-1", "paper-1", "paper.pdf", "Background", "Background evidence 1."),
+        RetrievedChunk("chunk-2", "paper-1", "paper.pdf", "Background", "Background evidence 2."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-1", "accept", support_level="background"),
+        EvidenceDecision("chunk-2", "accept", support_level="background"),
+    ]
+
+    result = service.answer_with_evidence("What background is available?", chunks, decisions)
+
+    assert result["answer"] == "Background-only answer. [C2]"
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C2", "C1"]
+
+
+def test_evidence_answer_without_used_citation_falls_back_to_first_high_confidence_id() -> None:
+    class UncitedAnswerCompletions:
+        def create(self, **_: object) -> object:
+            return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content="The answer has no citation."))])
+
+    service = LLMService(Settings(openai_api_key="test-key", llm_timeout_seconds=1))
+    service.client = SimpleNamespace(chat=SimpleNamespace(completions=UncitedAnswerCompletions()))
+    chunks = [
+        RetrievedChunk("chunk-background", "paper-1", "paper.pdf", "Background", "Background evidence."),
+        RetrievedChunk("chunk-direct", "paper-1", "paper.pdf", "Method", "Direct evidence."),
+    ]
+    decisions = [
+        EvidenceDecision("chunk-background", "accept", support_level="background"),
+        EvidenceDecision("chunk-direct", "accept", support_level="direct"),
+    ]
+
+    result = service.answer_with_evidence("What is the method?", chunks, decisions)
+
+    assert "[C2]" in result["answer"]
+    assert [citation["citation_id"] for citation in result["citations"]] == ["C2"]
+
+
 def test_paper_chat_invalid_model_citation_falls_back_to_valid_citation() -> None:
     class BadCompletions:
         def create(self, **_: object) -> object:

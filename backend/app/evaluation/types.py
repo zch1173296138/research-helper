@@ -63,6 +63,7 @@ class StrategyMetrics:
     candidate_recall: float | None = None
     final_context_recall: float | None = None
     citation_recall: float | None = None
+    citation_precision: float | None = None
     quote_support_recall: float | None = None
     reference_contamination: bool = False
     accepted_evidence_precision: float | None = None

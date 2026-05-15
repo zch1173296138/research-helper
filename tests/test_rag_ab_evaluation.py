@@ -217,6 +217,11 @@ def test_evidence_failure_analysis_writes_json_and_markdown(tmp_path: Path) -> N
     assert rows[0]["failure_stage"] == "evidence_rejected_gold"
     assert rows[0]["gold_in_candidates"] is True
     assert rows[0]["gold_in_accepted"] is False
+    assert rows[0]["gold_position_in_final_context"] == {"chunk-gold": None}
+    assert rows[0]["final_context_hit_ids"] == []
+    assert rows[0]["citation_hit_ids"] == []
+    assert rows[0]["citation_count"] == 1
+    assert rows[0]["final_context_count"] == 1
     assert "`evidence_rejected_gold`" in markdown_output.read_text(encoding="utf-8")
 
 
@@ -261,6 +266,7 @@ def test_score_output_marks_not_applicable_evidence_metrics_for_baseline() -> No
 
     assert metrics.expected_point_coverage == 1.0
     assert metrics.final_context_recall == 1.0
+    assert metrics.citation_precision == 1.0
     assert metrics.citation_validity == 1.0
     assert metrics.accepted_evidence_precision is None
     assert metrics.accepted_evidence_recall is None
@@ -287,6 +293,7 @@ def test_score_output_scores_current_evidence_and_reference_contamination() -> N
     metrics = score_output(case, output, {"chunk-1", "chunk-ref"})
 
     assert metrics.candidate_recall == 1.0
+    assert metrics.citation_precision == 0.0
     assert metrics.accepted_evidence_precision == 1.0
     assert metrics.accepted_evidence_recall == 1.0
     assert metrics.reference_contamination is True

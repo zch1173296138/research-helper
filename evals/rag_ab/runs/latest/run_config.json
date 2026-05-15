@@ -10,8 +10,8 @@
   "llm_judge": false,
   "top_k": 8,
   "case_filter": [],
-  "git_revision": "89d6a46d8ab1e28abb5623c8d3a1a2c5d020f017",
+  "git_revision": "1b226dcb0e543ad3955d03238965feb405565834",
   "case_file_sha256": "61cf3b1bcc5dcab8b69db7462b360b939a984e766cefa4870729045748d7f4a8",
-  "timestamp": "2026-05-14T14:23:02.596194+00:00",
+  "timestamp": "2026-05-14T14:58:34.623572+00:00",
   "notes": ""
 }

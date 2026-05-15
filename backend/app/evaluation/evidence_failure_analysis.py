@@ -74,6 +74,8 @@ def analyze_strategy(case: dict[str, Any], strategy: str, output: dict[str, Any]
     citation_ids = citation_chunk_ids(output)
 
     gold = set(supporting_chunk_ids)
+    final_context_hit_ids = ordered_hits(supporting_chunk_ids, final_context_chunk_ids)
+    citation_hit_ids = ordered_hits(supporting_chunk_ids, citation_ids)
     gold_in_candidates = intersects(gold, candidate_chunk_ids)
     gold_in_accepted = intersects(gold, accepted_chunk_ids)
     gold_in_final_context = intersects(gold, final_context_chunk_ids)
@@ -88,6 +90,12 @@ def analyze_strategy(case: dict[str, Any], strategy: str, output: dict[str, Any]
         "accepted_chunk_ids": accepted_chunk_ids,
         "final_context_chunk_ids": final_context_chunk_ids,
         "citation_chunk_ids": citation_ids,
+        "gold_position_in_final_context": gold_positions(supporting_chunk_ids, final_context_chunk_ids),
+        "final_context_hit_ids": final_context_hit_ids,
+        "citation_hit_ids": citation_hit_ids,
+        "answer_preview": answer_preview(output),
+        "citation_count": len(citation_ids),
+        "final_context_count": len(final_context_chunk_ids),
         "gold_in_candidates": gold_in_candidates,
         "gold_in_accepted": gold_in_accepted,
         "gold_in_final_context": gold_in_final_context,
@@ -167,6 +175,23 @@ def intersects(expected: set[str], observed: list[str]) -> bool:
     return bool(expected.intersection(observed))
 
 
+def ordered_hits(expected_ids: list[str], observed_ids: list[str]) -> list[str]:
+    expected = set(expected_ids)
+    return [chunk_id for chunk_id in observed_ids if chunk_id in expected]
+
+
+def gold_positions(expected_ids: list[str], final_context_ids: list[str]) -> dict[str, int | None]:
+    final_positions = {chunk_id: index for index, chunk_id in enumerate(final_context_ids, start=1)}
+    return {chunk_id: final_positions.get(chunk_id) for chunk_id in expected_ids}
+
+
+def answer_preview(output: dict[str, Any], limit: int = 240) -> str:
+    answer = " ".join(str(output.get("answer") or "").split())
+    if len(answer) <= limit:
+        return answer
+    return answer[:limit].rsplit(" ", 1)[0] + "..."
+
+
 def string_list(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
@@ -209,8 +234,8 @@ def write_markdown_report(analysis: list[dict[str, Any]], output_path: Path, inp
             "",
             "## Rows",
             "",
-            "| Case | Strategy | Stage | Gold | Candidate | Accepted | Final | Citations |",
-            "| --- | --- | --- | --- | --- | --- | --- | --- |",
+            "| Case | Strategy | Stage | Gold positions | Final hits | Citation hits | Final count | Citation count |",
+            "| --- | --- | --- | --- | --- | --- | ---: | ---: |",
         ]
     )
     for row in analysis:
@@ -221,11 +246,11 @@ def write_markdown_report(analysis: list[dict[str, Any]], output_path: Path, inp
                     f"`{row['case_id']}`",
                     f"`{row['strategy']}`",
                     f"`{row['failure_stage']}`",
-                    format_ids(row["supporting_chunk_ids"]),
-                    format_ids(row["candidate_chunk_ids"]),
-                    format_ids(row["accepted_chunk_ids"]),
-                    format_ids(row["final_context_chunk_ids"]),
-                    format_ids(row["citation_chunk_ids"]),
+                    format_positions(row["gold_position_in_final_context"]),
+                    format_ids(row["final_context_hit_ids"]),
+                    format_ids(row["citation_hit_ids"]),
+                    str(row["final_context_count"]),
+                    str(row["citation_count"]),
                 ]
             )
             + " |"
@@ -248,6 +273,12 @@ def format_ids(ids: list[str]) -> str:
         return ", ".join(f"`{item}`" for item in ids)
     preview = ", ".join(f"`{item}`" for item in ids[:3])
     return f"{preview}, +{len(ids) - 3}"
+
+
+def format_positions(positions: dict[str, int | None]) -> str:
+    if not positions:
+        return ""
+    return ", ".join(f"`{chunk_id}`={position or '-'}" for chunk_id, position in positions.items())
 
 
 if __name__ == "__main__":
