@@ -1,11 +1,65 @@
+# Keep the repository focused on project code and required config.
+# New top-level paths are ignored unless they are explicitly allowed below.
+/*
+
+# Project directories
+!/backend/
+!/backend/**
+!/evals/
+!/evals/rag_ab/
+!/evals/rag_ab/**
+!/frontend/
+!/frontend/**
+!/old_code
+!/old_code/
+!/old_code/**
+!/tests/
+!/tests/**
+
+# Project files
+!/.env.example
+!/.gitignore
+!/README.md
+!/alembic.ini
+!/pytest.ini
+!/requirements.txt
+
+# Local workspace files and process notes that should not be uploaded
+/.codex/
+/.idea/
+/openspec/
+/.tmp_old_code_no_env/
+/PROJECT_PROGRESS.md
+/paperqa-comparison.html
+
+# Local environment, cache, and runtime output
 .env
 .venv/
 __pycache__/
+**/__pycache__/
 *.py[cod]
 .pytest_cache/
 storage/
+logs/
+*.log
 
+# Frontend dependencies and build output
 frontend/node_modules/
 frontend/dist/
 frontend/tsconfig.tsbuildinfo
 
+# Historical snapshot: keep source/config, exclude local/process artifacts
+old_code/.env
+old_code/.venv/
+old_code/.pytest_cache/
+old_code/storage/
+old_code/logs/
+old_code/frontend/node_modules/
+old_code/frontend/dist/
+old_code/frontend/tsconfig.tsbuildinfo
+old_code/openspec/
+old_code/PROJECT_PROGRESS.md
+old_code/paperqa-comparison.html
+
+# Generated evaluation outputs
+evals/rag_ab/runs/

@@ -2,6 +2,8 @@
 
 This directory contains local JSONL datasets for comparing the previous hybrid RAG path with the current PaperQA-style evidence RAG path.
 
+Committed files in this directory should be reusable evaluation inputs and documentation. Generated run outputs belong under `evals/rag_ab/runs/`, which is ignored by the repository `.gitignore` because those reports are local experiment artifacts.
+
 ## Datasets
 
 - `starter_cases.jsonl`: small local smoke set for papers already imported in the development library.
@@ -91,6 +93,8 @@ Outputs:
 - `aggregate_metrics.json`: aggregate metrics by strategy.
 - `report.md`: human-readable comparison report.
 - `run_config.json`: reproducibility metadata.
+
+These outputs are intended for local analysis and should not be committed unless a specific report is deliberately promoted into documentation.
 
 ## Current Citation Mode
 
